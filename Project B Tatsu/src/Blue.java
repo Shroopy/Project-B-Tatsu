@@ -28,7 +28,7 @@ public class Blue extends Character {
 			vY -= 8;
 	}
 
-	public void act(ArrayList<Shape> obstacles) {
+	public void act() {
 		// FALL (and stop when a platform is hit)
 		if(grounded)
 			super.moveByAmount(vX, vY);
@@ -36,17 +36,13 @@ public class Blue extends Character {
 			super.moveByAmount(vX*0.6, vY);
 		
 		vY += grav;
-		for(Shape s : obstacles) 
-		{
-			if(this.intersects(s.getBounds2D())) 
-			{
-				vY = 0;
-				grounded = true;
-				break;
-			}
-			else
-				grounded = false;
+		if(this.getY() > 400)
+		{			
+			vY = 0;
+			grounded = true;
 		}
+		else
+			grounded = false;
 	}
 
 

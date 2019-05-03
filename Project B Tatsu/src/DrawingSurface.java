@@ -26,12 +26,6 @@ public class DrawingSurface extends PApplet {
 		assets = new ArrayList<PImage>();
 		keys = new ArrayList<Integer>();
 		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
-		obstacles = new ArrayList<Shape>();
-		obstacles.add(new Rectangle(200,400,400,50));
-		obstacles.add(new Rectangle(0,250,100,50));
-		obstacles.add(new Rectangle(700,250,100,50));
-		obstacles.add(new Rectangle(375,300,50,100));
-		obstacles.add(new Rectangle(300,250,200,50));
 	}
 
 
@@ -70,12 +64,6 @@ public class DrawingSurface extends PApplet {
 		scale(ratioX, ratioY);
 
 		fill(100);
-		for (Shape s : obstacles) {
-			if (s instanceof Rectangle) {
-				Rectangle r = (Rectangle)s;
-				rect(r.x,r.y,r.width,r.height);
-			}
-		}
 
 		blue.draw(this);
 
@@ -93,7 +81,7 @@ public class DrawingSurface extends PApplet {
 		if (isPressed(KeyEvent.VK_UP))
 			blue.jump();
 
-		blue.act(obstacles);
+		blue.act();
 
 		if (!screenRect.intersects(blue))
 			spawnNewBlue();
