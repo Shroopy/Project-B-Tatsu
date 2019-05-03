@@ -35,7 +35,7 @@ public abstract class Character extends Rectangle2D.Double {
 			vX = dir*5;
 	}
 	
-	public void jump(int dir) {
+	public void jump() {
 		if(state.equals("grounded"))
 			vY -= 5;
 	}
