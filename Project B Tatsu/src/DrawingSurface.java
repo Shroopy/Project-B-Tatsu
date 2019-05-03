@@ -14,7 +14,7 @@ public class DrawingSurface extends PApplet {
 
 	private Rectangle screenRect;
 
-	private Mario mario;
+	private Blue blue;
 	private ArrayList<Shape> obstacles;
 
 	private ArrayList<Integer> keys;
@@ -35,8 +35,8 @@ public class DrawingSurface extends PApplet {
 	}
 
 
-	public void spawnNewMario() {
-		mario = new Mario(assets.get(0), DRAWING_WIDTH/2-Mario.MARIO_WIDTH/2,50);
+	public void spawnNewBlue() {
+		blue = new Blue(/*assets.get(0), */DRAWING_WIDTH/2-Blue.WIDTH/2,50);
 	}
 	
 	public void runMe() {
@@ -47,9 +47,9 @@ public class DrawingSurface extends PApplet {
 	// execute once when the program begins
 	public void setup() {
 		//size(0,0,PApplet.P3D);
-		assets.add(loadImage("mario.png"));
+		/*assets.add(loadImage("mario.png"));*/
 		
-		spawnNewMario();
+		spawnNewBlue();
 	}
 
 	// The statements in draw() are executed until the 
@@ -77,7 +77,7 @@ public class DrawingSurface extends PApplet {
 			}
 		}
 
-		mario.draw(this);
+		blue.draw(this);
 
 		popMatrix();
 
@@ -85,18 +85,18 @@ public class DrawingSurface extends PApplet {
 		// modifying stuff
 
 		if (isPressed(KeyEvent.VK_LEFT))
-			mario.walk(-1);
+			blue.walk(-1);
 		else if (isPressed(KeyEvent.VK_RIGHT))
-			mario.walk(1);
+			blue.walk(1);
 		else
-			mario.walk(0);
+			blue.walk(0);
 		if (isPressed(KeyEvent.VK_UP))
-			mario.jump();
+			blue.jump();
 
-		mario.act(obstacles);
+		blue.act(obstacles);
 
-		if (!screenRect.intersects(mario))
-			spawnNewMario();
+		if (!screenRect.intersects(blue))
+			spawnNewBlue();
 	}
 
 

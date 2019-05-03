@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -9,15 +10,15 @@ import processing.core.PImage;
  * by: Shelby
  */
  
-public class Sprite extends Rectangle2D.Double {
+public class Character extends Rectangle2D.Double {
 	
 	// FIELDS
-	private PImage image;
+	private Color color;
 	
 	// CONSTRUCTORS
-	public Sprite(PImage img, int x, int y, int w, int h) {
+	public Character(Color color, int x, int y, int w, int h) {
 		super(x,y,w,h);
-		image = img;
+		this.color = color;
 	}
 	
 	
@@ -41,7 +42,10 @@ public class Sprite extends Rectangle2D.Double {
 	
 	
 	public void draw(PApplet g) {
-		g.image(image,(int)x,(int)y,(int)width,(int)height);
+		//g.image(image,(int)x,(int)y,(int)width,(int)height);
+		g.stroke(0);
+		g.fill(color.getRed(), color.getGreen(), color.getBlue());
+		g.rect((float)x, (float)y, (float)width, (float)height);
 	}
 	
 	
