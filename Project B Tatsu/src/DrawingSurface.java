@@ -66,8 +66,9 @@ public class DrawingSurface extends PApplet {
 
 		fill(100);
 
+		rect(0,395+Blue.HEIGHT,DRAWING_WIDTH, DRAWING_HEIGHT-395);
 		blue.draw(this);
-
+		
 		popMatrix();
 
 

@@ -26,7 +26,7 @@ public class Main {
 		processingCanvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
 		window = (JFrame) processingCanvas.getFrame();
 
-		window.setBounds(0, 0, 800, 600);
+		window.setBounds(0, 0, 1920, 1080);
 		window.setMinimumSize(new Dimension(100, 100));
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(true);

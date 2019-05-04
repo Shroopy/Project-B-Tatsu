@@ -15,6 +15,7 @@ public abstract class Character extends Sprite {
 	// FIELDS
 	protected boolean grounded = false;
 	protected boolean controllable = true;
+	protected boolean facingRight = true;
 	//protected String state;
 	
 	// CONSTRUCTORS
@@ -31,7 +32,7 @@ public abstract class Character extends Sprite {
 	
 	public void jump() {
 		if(controllable && grounded)
-			vY -= 5;
+			vY -= 10;
 	}
 	
 	

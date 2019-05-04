@@ -6,9 +6,9 @@ import processing.core.PImage;
 
 public class Blue extends Character {
 
-	public static final int WIDTH = 40;
-	public static final int HEIGHT = 60;
-	public static final double grav = 0.2;
+	public static final int WIDTH = 60;
+	public static final int HEIGHT = 80;
+	public static final double grav = 0.4;
 
 	public Blue(int x, int y) {
 		super(Color.BLUE, x, y, WIDTH, HEIGHT);
