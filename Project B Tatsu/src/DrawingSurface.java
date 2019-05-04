@@ -15,15 +15,15 @@ public class DrawingSurface extends PApplet {
 	private Rectangle screenRect;
 
 	private Blue blue;
-	private ArrayList<Shape> obstacles;
+	//private ArrayList<Shape> obstacles;
 
 	private ArrayList<Integer> keys;
 	
-	private ArrayList<PImage> assets;
+	//private ArrayList<PImage> assets;
 
 	public DrawingSurface() {
 		super();
-		assets = new ArrayList<PImage>();
+		//assets = new ArrayList<PImage>();
 		keys = new ArrayList<Integer>();
 		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
 	}

@@ -1,5 +1,4 @@
 
-
 import java.awt.*;
 import java.util.*;
 
@@ -19,34 +18,19 @@ public class Blue extends Character {
 
 	public void act() {
 		// FALL (and stop when a platform is hit)
-		if(state.equals("grounded"))
+		if (grounded)
 			moveByAmount(vX, vY);
 		else
-			moveByAmount(vX*0.6, vY);
-		
+			moveByAmount(vX * 0.6, vY);
+
 		vY += grav;
-<<<<<<< HEAD
-		if(this.getY() > 400)
-		{			
+
+		if (this.getY() > 400) {
 			vY = 0;
 			grounded = true;
-=======
-		for(Shape s : obstacles) 
-		{
-			if(this.intersects(s.getBounds2D())) 
-			{
-				vY = 0;
-				state = "grounded";
-				break;
-			}
-			else
-				state = "air";
->>>>>>> branch 'master' of https://github.com/Shroopy/Project-B-Tatsu.git
-		}
-		else
+
+		} else
 			grounded = false;
 	}
-	
-
 
 }

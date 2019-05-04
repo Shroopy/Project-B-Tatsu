@@ -15,7 +15,9 @@ public abstract class Character extends Rectangle2D.Double {
 	// FIELDS
 	private Color color;
 	protected double vX, vY, aX = 0;
-	protected String state = "grounded";
+	protected boolean grounded = false;
+	protected boolean controllable = true;
+	//protected String state;
 	
 	// CONSTRUCTORS
 	public Character(Color color, int x, int y, int w, int h) {
@@ -31,12 +33,12 @@ public abstract class Character extends Rectangle2D.Double {
 	}
 	
 	public void walk(int dir) {
-		if(state.equals("grounded"))
+		if(controllable && grounded)
 			vX = dir*5;
 	}
 	
 	public void jump() {
-		if(state.equals("grounded"))
+		if(controllable && grounded)
 			vY -= 5;
 	}
 	
