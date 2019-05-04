@@ -16,6 +16,7 @@ public abstract class Character extends Sprite {
 	protected boolean grounded = false;
 	protected boolean controllable = true;
 	protected ArrayList<Hitbox> hitboxes;
+	protected boolean facingRight = true;
 	//protected String state;
 	
 	// CONSTRUCTORS
@@ -33,7 +34,7 @@ public abstract class Character extends Sprite {
 	
 	public void jump() {
 		if(controllable && grounded)
-			vY -= 5;
+			vY -= 10;
 	}
 	
 	protected void updateHitboxes() {
