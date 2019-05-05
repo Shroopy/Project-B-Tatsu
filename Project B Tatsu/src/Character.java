@@ -16,7 +16,7 @@ public abstract class Character extends Sprite {
 	protected boolean grounded = false;
 	protected boolean controllable = true;
 	protected ArrayList<Hitbox> hitboxes;
-	protected boolean facingRight = true;
+	protected int facing = 1; //1 is right, -1 is left
 	//protected String state;
 	
 	// CONSTRUCTORS
