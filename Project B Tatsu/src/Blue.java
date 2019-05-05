@@ -8,7 +8,7 @@ public class Blue extends Character {
 
 	public static final int WIDTH = 60;
 	public static final int HEIGHT = 80;
-	public static final double grav = 0.4;
+	public static final double GRAV = 0.4;
 
 	public Blue(int x, int y) {
 		super(Color.BLUE, x, y, WIDTH, HEIGHT);
@@ -24,7 +24,7 @@ public class Blue extends Character {
 		else
 			moveByAmount(vX * 0.6, vY);
 
-		vY += grav;
+		vY += GRAV;
 
 		if (this.getY() > 400) {
 			vY = 0;
