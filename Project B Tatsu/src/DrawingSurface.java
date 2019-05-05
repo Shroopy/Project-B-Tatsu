@@ -11,7 +11,10 @@ public class DrawingSurface extends PApplet {
 
 	public static final int DRAWING_WIDTH = 800;
 	public static final int DRAWING_HEIGHT = 600;
-
+	public static int midscreen = 1200;
+	public static final int cornerL = 400;
+	public static final int cornerR = 2000; 
+	
 	private Rectangle screenRect;
 
 	private Blue blue;
@@ -67,7 +70,17 @@ public class DrawingSurface extends PApplet {
 		fill(100);
 
 		rect(0,395+Blue.HEIGHT,DRAWING_WIDTH, DRAWING_HEIGHT-395);
+		fill(255,0,0);
+		if(midscreen < 1200) 
+		{
+			rect(0, 395+Blue.HEIGHT, 1200-midscreen, DRAWING_HEIGHT-395);
+		}
+		else
+		{
+			rect(1600-midscreen, 395+Blue.HEIGHT, midscreen-1200, DRAWING_HEIGHT-395);
+		}
 		blue.draw(this);
+		
 		
 		popMatrix();
 

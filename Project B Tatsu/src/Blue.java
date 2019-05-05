@@ -12,7 +12,7 @@ public class Blue extends Character {
 
 	public Blue(int x, int y) {
 		super(Color.BLUE, x, y, WIDTH, HEIGHT);
-		//hitboxes.add(new Hitbox(25, 0, x, y, WIDTH, HEIGHT, 180, 180));
+		hitboxes.add(new Hitbox(25, 0, x, y, WIDTH, HEIGHT, 180, 180));
 	}
 
 	// METHODS

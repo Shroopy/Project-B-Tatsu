@@ -17,6 +17,9 @@ public abstract class Character extends Sprite {
 	protected boolean controllable = true;
 	protected ArrayList<Hitbox> hitboxes;
 	protected boolean facingRight = true;
+	
+	//absolute position of character on the stage
+	protected boolean absX;
 	//protected String state;
 	
 	// CONSTRUCTORS
