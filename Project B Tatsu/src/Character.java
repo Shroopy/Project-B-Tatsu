@@ -15,12 +15,14 @@ public abstract class Character extends Sprite {
 	// FIELDS
 	protected boolean grounded = false;
 	protected boolean controllable = true;
+	protected ArrayList<Hitbox> hitboxes;
 	protected boolean facingRight = true;
 	//protected String state;
 	
 	// CONSTRUCTORS
 	public Character(Color color, int x, int y, int w, int h) {
 		super(color,x,y,w,h);
+		hitboxes = new ArrayList<Hitbox>();
 	}
 	
 	
@@ -33,6 +35,22 @@ public abstract class Character extends Sprite {
 	public void jump() {
 		if(controllable && grounded)
 			vY -= 12;
+	}
+	
+	protected void updateHitboxes() {
+		for(int i = 0; i < hitboxes.size(); i++) {
+			hitboxes.get(i).adjustPosition((int)x, (int)y);
+			hitboxes.get(i).updateState();
+			if(hitboxes.get(i).getState().equals("inactive"))
+				hitboxes.remove(i);
+		}
+	}
+	
+	public void draw(PApplet g) {
+		super.draw(g);
+		for(Hitbox h : hitboxes) {
+			h.draw(g);
+		}
 	}
 	
 	

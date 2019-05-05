@@ -5,7 +5,7 @@ import processing.core.PApplet;
 
 public class Sprite extends Rectangle2D.Double {
 	
-	private Color color;
+	protected Color color;
 	protected double vX, vY, aX = 0;
 	
 	public Sprite(Color color, int x, int y, int w, int h) {
