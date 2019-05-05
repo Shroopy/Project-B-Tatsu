@@ -27,12 +27,12 @@ public abstract class Character extends Sprite {
 	// METHODS	
 	public void walk(int dir) {
 		if(controllable && grounded)
-			vX = dir*5;
+			vX = dir*4;
 	}
 	
 	public void jump() {
 		if(controllable && grounded)
-			vY -= 10;
+			vY -= 12;
 	}
 	
 	

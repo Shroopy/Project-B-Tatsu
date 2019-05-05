@@ -21,7 +21,7 @@ public class Blue extends Character {
 		if (grounded)
 			moveByAmount(vX, vY);
 		else
-			moveByAmount(vX * 0.6, vY);
+			moveByAmount(vX * 0.7, vY);
 
 		vY += grav;
 
