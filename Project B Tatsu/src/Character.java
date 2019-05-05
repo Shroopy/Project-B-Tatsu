@@ -53,6 +53,55 @@ public abstract class Character extends Sprite {
 		}
 	}
 	
+	public void act() {
+		// FALL (and stop when a platform is hit)
+		if (grounded)
+			moveByAmount(vX, vY);
+		else
+			moveByAmount(vX * 0.6, vY);
+		
+		fall();
+
+		if (this.getY() > 400) {
+			vY = 0;
+			grounded = true;
+
+		} else
+			grounded = false;
+		
+		if(hitboxes.size() > 0)
+			controllable = false;
+		else
+			controllable = true;
+		
+		updateHitboxes();
+	}
+	
+	public boolean isGrounded() {
+		return grounded;
+	}
+
+
+	public boolean isControllable() {
+		return controllable;
+	}
+
+
+	public ArrayList<Hitbox> getHitboxes() {
+		return hitboxes;
+	}
+
+
+	public int getFacing() {
+		return facing;
+	}
+	
+	public abstract void testAttack();
+
+
+	protected abstract void fall();
+	
+	
 	
 	
 //	public void applyWindowLimits(int windowWidth, int windowHeight) {
@@ -61,19 +110,5 @@ public abstract class Character extends Sprite {
 //		x = Math.max(0,x);
 //		y = Math.max(0,y);
 //	}
-	
-	
-	
-	
-	
+		
 }
-
-
-
-
-
-
-
-
-
-

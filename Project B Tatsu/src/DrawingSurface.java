@@ -13,7 +13,7 @@ public class DrawingSurface extends PApplet {
 
 	private Rectangle screenRect;
 
-	private Blue blue;
+	private Player player1, player2;
 	// private ArrayList<Shape> obstacles;
 
 	private ArrayList<Integer> keys;
@@ -27,8 +27,8 @@ public class DrawingSurface extends PApplet {
 		screenRect = new Rectangle(0, 0, DRAWING_WIDTH, DRAWING_HEIGHT);
 	}
 
-	public void spawnNewBlue() {
-		blue = new Blue(/* assets.get(0), */DRAWING_WIDTH / 2 - Blue.WIDTH / 2, 50);
+	public void spawnPlayers() {
+		player1 = new Player(1, new Blue(/* assets.get(0), */DRAWING_WIDTH / 2 - Blue.WIDTH / 2, 50));
 	}
 
 	public void runMe() {
@@ -42,7 +42,7 @@ public class DrawingSurface extends PApplet {
 		// size(0,0,PApplet.P3D);
 		/* assets.add(loadImage("mario.png")); */
 
-		spawnNewBlue();
+		spawnPlayers();
 	}
 
 	// The statements in draw() are executed until the
@@ -65,25 +65,16 @@ public class DrawingSurface extends PApplet {
 		fill(100);
 
 		rect(0, 395 + Blue.HEIGHT, DRAWING_WIDTH, DRAWING_HEIGHT - 395);
-		blue.draw(this);
+		player1.draw(this);
 
 		popMatrix();
 
 		// modifying stuff
 
-		if (isPressed(KeyEvent.VK_LEFT))
-			blue.walk(-1);
-		else if (isPressed(KeyEvent.VK_RIGHT))
-			blue.walk(1);
-		else
-			blue.walk(0);
-		if (isPressed(KeyEvent.VK_UP))
-			blue.jump();
+		player1.act(keys);
 
-		blue.act();
-
-		if (!screenRect.intersects(blue))
-			spawnNewBlue();
+		if (!screenRect.intersects(player1.getCharacter()))
+			spawnPlayers();
 	}
 
 	public void keyPressed() {

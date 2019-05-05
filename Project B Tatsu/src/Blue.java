@@ -12,34 +12,26 @@ public class Blue extends Character {
 
 	public Blue(int x, int y) {
 		super(Color.BLUE, x, y, WIDTH, HEIGHT);
-		hitboxes.add(new Hitbox(25, 0, x, y, WIDTH, HEIGHT, 180, 180, facing));
+		//hitboxes.add(new Hitbox(25, 0, x, y, WIDTH, HEIGHT, 180, 180, facing));
 	}
 
 	// METHODS
 
 	public void act() {
-		// FALL (and stop when a platform is hit)
-		if (grounded)
-			moveByAmount(vX, vY);
-		else
-			moveByAmount(vX * 0.6, vY);
-
-		vY += GRAV;
-
-		if (this.getY() > 400) {
-			vY = 0;
-			grounded = true;
-
-		} else
-			grounded = false;
-		
-		if(hitboxes.size() > 0)
-			controllable = false;
-		else
-			controllable = true;
-		
-		updateHitboxes();
+		super.act();
 	}
+
+	@Override
+	protected void fall() {
+		vY += GRAV;
+	}
+	
+	public void testAttack() {
+		if(controllable)
+			hitboxes.add(new Hitbox(25, 0, (int)x, (int)y, WIDTH, HEIGHT, 2, 1, facing));
+	}
+	
+	
 	
 
 }
