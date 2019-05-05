@@ -1,5 +1,4 @@
 
-
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.event.KeyEvent;
@@ -15,62 +14,60 @@ public class DrawingSurface extends PApplet {
 	private Rectangle screenRect;
 
 	private Blue blue;
-	//private ArrayList<Shape> obstacles;
+	// private ArrayList<Shape> obstacles;
 
 	private ArrayList<Integer> keys;
-	
-	//private ArrayList<PImage> assets;
+
+	// private ArrayList<PImage> assets;
 
 	public DrawingSurface() {
 		super();
-		//assets = new ArrayList<PImage>();
+		// assets = new ArrayList<PImage>();
 		keys = new ArrayList<Integer>();
-		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
+		screenRect = new Rectangle(0, 0, DRAWING_WIDTH, DRAWING_HEIGHT);
 	}
-
 
 	public void spawnNewBlue() {
-		blue = new Blue(/*assets.get(0), */DRAWING_WIDTH/2-Blue.WIDTH/2,50);
+		blue = new Blue(/* assets.get(0), */DRAWING_WIDTH / 2 - Blue.WIDTH / 2, 50);
 	}
-	
+
 	public void runMe() {
 		runSketch();
 	}
 
-	// The statements in the setup() function 
+	// The statements in the setup() function
 	// execute once when the program begins
 	public void setup() {
 		frameRate(60);
-		//size(0,0,PApplet.P3D);
-		/*assets.add(loadImage("mario.png"));*/
-		
+		// size(0,0,PApplet.P3D);
+		/* assets.add(loadImage("mario.png")); */
+
 		spawnNewBlue();
 	}
 
-	// The statements in draw() are executed until the 
-	// program is stopped. Each statement is executed in 
-	// sequence and after the last line is read, the first 
+	// The statements in draw() are executed until the
+	// program is stopped. Each statement is executed in
+	// sequence and after the last line is read, the first
 	// line is executed again.
 	public void draw() {
 
 		// drawing stuff
 
-		background(0,255,255);   
+		background(0, 255, 255);
 
 		pushMatrix();
 
-		float ratioX = (float)width/DRAWING_WIDTH;
-		float ratioY = (float)height/DRAWING_HEIGHT;
+		float ratioX = (float) width / DRAWING_WIDTH;
+		float ratioY = (float) height / DRAWING_HEIGHT;
 
 		scale(ratioX, ratioY);
 
 		fill(100);
 
-		rect(0,395+Blue.HEIGHT,DRAWING_WIDTH, DRAWING_HEIGHT-395);
+		rect(0, 395 + Blue.HEIGHT, DRAWING_WIDTH, DRAWING_HEIGHT - 395);
 		blue.draw(this);
-		
-		popMatrix();
 
+		popMatrix();
 
 		// modifying stuff
 
@@ -89,13 +86,12 @@ public class DrawingSurface extends PApplet {
 			spawnNewBlue();
 	}
 
-
 	public void keyPressed() {
 		keys.add(keyCode);
 	}
 
 	public void keyReleased() {
-		while(keys.contains(keyCode))
+		while (keys.contains(keyCode))
 			keys.remove(new Integer(keyCode));
 	}
 
@@ -103,6 +99,4 @@ public class DrawingSurface extends PApplet {
 		return keys.contains(code);
 	}
 
-
 }
-
