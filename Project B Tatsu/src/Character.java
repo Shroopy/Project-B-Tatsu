@@ -17,7 +17,7 @@ public abstract class Character extends Sprite {
 	protected boolean controllable = true;
 	protected ArrayList<Hitbox> hitboxes;
 	//absolute position of character on the stage
-	protected boolean absX;
+	protected int absX;
 
 	protected int facing = 1; //1 is right, -1 is left
 	//protected String state;
@@ -58,8 +58,10 @@ public abstract class Character extends Sprite {
 	
 	public void act() {
 		// FALL (and stop when a platform is hit)
-		if (grounded)
+		if (grounded) {
 			moveByAmount(vX, vY);
+			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
+		}
 		else
 			moveByAmount(vX * 0.6, vY);
 		
@@ -93,7 +95,11 @@ public abstract class Character extends Sprite {
 	public ArrayList<Hitbox> getHitboxes() {
 		return hitboxes;
 	}
-
+	
+	public int getAbsX() 
+	{
+		return absX;
+	}
 
 	public int getFacing() {
 		return facing;

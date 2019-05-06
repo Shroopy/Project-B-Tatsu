@@ -28,7 +28,7 @@ public class DrawingSurface extends PApplet {
 		super();
 		//assets = new ArrayList<PImage>();
 		keys = new ArrayList<Integer>();
-		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
+		screenRect = new Rectangle(Blue.WIDTH,0,DRAWING_WIDTH-2*Blue.WIDTH,DRAWING_HEIGHT);
 	}
 
 	public void spawnPlayers() {
@@ -88,8 +88,13 @@ public class DrawingSurface extends PApplet {
 
 		player1.act(keys);
 
-		if (!screenRect.intersects(player1.getCharacter()))
-			spawnPlayers();
+		if (!screenRect.intersects(player1.getCharacter())) 
+		{
+			midscreen = player1.getCharacter().getAbsX() + DRAWING_WIDTH/2 - Blue.WIDTH/2;
+			System.out.println("absX = " + player1.getCharacter().getAbsX());
+			System.out.println("midscreen = " + midscreen);
+		}
+			
 	}
 
 
