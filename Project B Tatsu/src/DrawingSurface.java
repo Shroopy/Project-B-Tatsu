@@ -32,7 +32,8 @@ public class DrawingSurface extends PApplet {
 	}
 
 	public void spawnPlayers() {
-		player1 = new Player(1, new Blue(/* assets.get(0), */DRAWING_WIDTH / 2 - Blue.WIDTH / 2, 50));
+		player1 = new Player(1, new Blue(/* assets.get(0), */DRAWING_WIDTH / 4 - Blue.WIDTH / 2, 50));
+		player2 = new Player(2, new Blue(/* assets.get(0), */DRAWING_WIDTH / 4 * 3 + Blue.WIDTH / 2, 50));
 	}
 
 	public void runMe() {
@@ -79,6 +80,7 @@ public class DrawingSurface extends PApplet {
 			rect(1600-midscreen, 395+Blue.HEIGHT, midscreen-1200, DRAWING_HEIGHT-395);
 		}
 		player1.draw(this);
+		player2.draw(this);
 		
 		
 		popMatrix();
@@ -87,6 +89,7 @@ public class DrawingSurface extends PApplet {
 		// modifying stuff
 
 		player1.act(keys);
+		player2.act(keys);
 
 		if (!screenRect.intersects(player1.getCharacter())) 
 		{
