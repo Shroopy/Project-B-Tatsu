@@ -90,6 +90,14 @@ public class DrawingSurface extends PApplet {
 
 		player1.act(keys);
 		player2.act(keys);
+		
+		Hitbox player1Hit = player2.getCharacter().hitboxesIntersect(player1.getCharacter());
+		Hitbox player2Hit = player1.getCharacter().hitboxesIntersect(player2.getCharacter());
+		
+		if(player1Hit != null)
+			player1.getCharacter().takeHit(player1Hit.getHitstun(), player1Hit.getxKB(), player1Hit.getyKB());
+		if(player2Hit != null)
+			player2.getCharacter().takeHit(player2Hit.getHitstun(), player2Hit.getxKB(), player2Hit.getyKB());
 
 		if (!screenRect.intersects(player1.getCharacter()))
 			spawnPlayers();

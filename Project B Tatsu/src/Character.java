@@ -22,7 +22,7 @@ public abstract class Character extends Sprite {
 	protected int hitstunLeft, recoveryLeft;
 	
 
-	protected int facing = 1; //1 is right, -1 is left
+	protected int facing = -1; //1 is right, -1 is left
 	//protected String state;
 	
 	// CONSTRUCTORS
@@ -40,25 +40,28 @@ public abstract class Character extends Sprite {
 	
 	public void jump() {
 		if(controlState.equals("controllable") && grounded)
-			vY -= 12;
+			vY = -12;
+	}
+	
+	public Hitbox hitboxesIntersect(Rectangle2D.Double rect) {
+		for(Hitbox h : hitboxes) {
+			if(h.intersects(rect))
+				return h;
+		}
+		return null;
 	}
 	
 	protected void updateHitboxes() {
 		for(int i = 0; i < hitboxes.size(); i++) {
-			hitboxes.get(i).adjustPosition((int)x, (int)y);
-			hitboxes.get(i).updateState();
-			if(hitboxes.get(i).getState().equals("inactive"))
+			Hitbox h = hitboxes.get(i);
+			h.adjustPosition((int)x, (int)y);
+			h.updateState();
+			if(h.getState().equals("inactive"))
 				hitboxes.remove(i);
-		}
-	}
-	
-	protected void updateHitstun() {
-		if(hitstunLeft > 0) {
-			hitstunLeft--;
-		}
-		else {
-			controlState = "controllable";
-			vX = 0;
+			if(hitboxes.size() == 0) {
+				controlState = "recovery";
+				recoveryLeft = h.getRecovery();
+			}
 		}
 	}
 	
@@ -85,12 +88,26 @@ public abstract class Character extends Sprite {
 		} else
 			grounded = false;
 		
-		if(hitboxes.size() > 0)
-			controlState = "attacking";
-		
 		updateHitboxes();
+		if(hitboxes.size() > 0) {
+			controlState = "attacking";
+			vX = 0;
+		}
+		else if(controlState.equals("attacking"))
+			controlState = "controllable";
+		
+		if(recoveryLeft > 0)
+			recoveryLeft--;
+		else if(controlState.equals("recovery")){
+			controlState = "controllable";
+		}
+		
 		if(hitstunLeft > 0)
-			updateHitstun();
+			hitstunLeft--;
+		else if(controlState.equals("hitstun")){
+			controlState = "controllable";
+			vX = 0;
+		}
 	}
 	
 	public boolean isGrounded() {
@@ -115,9 +132,9 @@ public abstract class Character extends Sprite {
 	public abstract void testAttack();
 	
 	public void takeHit(int hitstun, double xKB, double yKB) {
-		hitstunLeft += hitstun;
-		vX += xKB * -1;
-		vY -= yKB;
+		hitstunLeft = hitstun;
+		vX = xKB * -1;
+		vY = -yKB;
 		controlState = "hitstun";
 		hitboxes.clear();
 		recoveryLeft = 0;
