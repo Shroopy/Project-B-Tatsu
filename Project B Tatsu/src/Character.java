@@ -18,7 +18,7 @@ public abstract class Character extends Sprite {
 	protected boolean invincible = false;
 	protected ArrayList<Hitbox> hitboxes;
 	//absolute position of character on the stage
-	protected boolean absX;
+	protected int absX;
 	protected int hitstunLeft, recoveryLeft;
 	
 
@@ -74,11 +74,14 @@ public abstract class Character extends Sprite {
 	
 	public void act() {
 		// FALL (and stop when a platform is hit)
-		if (grounded)
+		if (grounded) {
 			moveByAmount(vX, vY);
-		else
+			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
+		}
+		else {
 			moveByAmount(vX * 0.6, vY);
-		
+			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
+		}
 		fall();
 
 		if (this.getY() > 400) {
@@ -123,7 +126,11 @@ public abstract class Character extends Sprite {
 	public ArrayList<Hitbox> getHitboxes() {
 		return hitboxes;
 	}
-
+	
+	public int getAbsX() 
+	{
+		return absX;
+	}
 
 	public int getFacing() {
 		return facing;
