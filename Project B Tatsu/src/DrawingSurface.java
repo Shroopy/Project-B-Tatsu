@@ -3,6 +3,8 @@
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -91,15 +93,37 @@ public class DrawingSurface extends PApplet {
 		player1.act(keys);
 		player2.act(keys);
 
-		if (!screenRect.intersects(player1.getCharacter())) 
-		{
-			midscreen = player1.getCharacter().getAbsX() + DRAWING_WIDTH/2 - Blue.WIDTH/2;
-			System.out.println("absX = " + player1.getCharacter().getAbsX());
-			System.out.println("midscreen = " + midscreen);
-		}
+		slideWorldToImage(player1);
 			
 	}
 
+	public void slideWorldToImage(Player img) {
+	  	Point2D.Double center = new Point2D.Double(img.getCharacter().getCenterX(), img.getCharacter().getCenterY());
+		if (!img.getCharacter().contains(center)) {
+			double newX = screenRect.getX();
+			double newY = screenRect.getY();
+			
+		  	if (center.getX() < img.getCharacter().getX()) {
+		  		newX -= (img.getCharacter().getX() - center.getX());
+		  	} else if (center.getX() > img.getCharacter().getX() + img.getCharacter().getWidth()) {
+		  		newX += (center.getX() - (img.getCharacter().getX() + img.getCharacter().getWidth()));
+		  	}
+		  	
+		  	if (center.getY() < img.getCharacter().getY()) {
+		  		newY -= (img.getCharacter().getY() - center.getY());
+		  	} else if (center.getY() > img.getCharacter().getY() + img.getCharacter().getHeight()) {
+		  		newY += (center.getY() - img.getCharacter().getY() - img.getCharacter().getHeight());
+		  	}
+		  	newX = Math.max(newX,0);
+		  	newY = Math.max(newY,0);
+		  	newX = Math.min(newX,DRAWING_WIDTH-screenRect.getWidth());
+		  	newY = Math.min(newY,DRAWING_HEIGHT-screenRect.getHeight());
+		  	
+		  	screenRect.setRect(newX,newY,screenRect.getWidth(),screenRect.getHeight());
+		  	
+		  	img.getCharacter().setRect(screenRect.getX()+screenRect.getWidth()/5,screenRect.getY()+screenRect.getHeight()/5,screenRect.getWidth()*3/5,screenRect.getHeight()*3/5);
+		}
+	  }
 
 	public void keyPressed() {
 		keys.add(keyCode);

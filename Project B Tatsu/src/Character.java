@@ -75,9 +75,10 @@ public abstract class Character extends Sprite {
 			moveByAmount(vX, vY);
 			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
 		}
-		else
+		else {
 			moveByAmount(vX * 0.6, vY);
-		
+			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
+		}
 		fall();
 
 		if (this.getY() > 400) {
