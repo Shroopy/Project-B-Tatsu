@@ -13,7 +13,7 @@ public class Main {
 
 	private JPanel cardPanel;
 
-	private OptionPanel panel1;
+	//private OptionPanel panel1;
 	private DrawingSurface panel2;
 
 	private PSurfaceAWT.SmoothCanvas processingCanvas;
@@ -37,10 +37,10 @@ public class Main {
 
 		window.getContentPane().removeAll();
 
-		panel1 = new OptionPanel(this);
+		//panel1 = new OptionPanel(this);
 		panel2 = new DrawingSurface();
 
-		cardPanel.add(panel1, "1");
+		//cardPanel.add(panel1, "1");
 		cardPanel.add(processingCanvas, "2");
 
 		window.setLayout(new BorderLayout());

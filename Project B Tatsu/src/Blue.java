@@ -28,7 +28,7 @@ public class Blue extends Character {
 	}
 	
 	public void testAttack() {
-		if(controllable)
+		if(controlState.equals("controllable"))
 			hitboxes.add(new Hitbox(25, 0, (int)x, (int)y, WIDTH, HEIGHT, 2, 1, facing));
 	}
 	

@@ -14,10 +14,13 @@ public abstract class Character extends Sprite {
 	
 	// FIELDS
 	protected boolean grounded = false;
-	protected boolean controllable = true;
+	protected String controlState = "controllable";
+	protected boolean invincible = false;
 	protected ArrayList<Hitbox> hitboxes;
 	//absolute position of character on the stage
 	protected boolean absX;
+	protected int hitstunLeft, recoveryLeft;
+	
 
 	protected int facing = 1; //1 is right, -1 is left
 	//protected String state;
@@ -31,12 +34,12 @@ public abstract class Character extends Sprite {
 	
 	// METHODS	
 	public void walk(int dir) {
-		if(controllable && grounded)
+		if(controlState.equals("controllable") && grounded)
 			vX = dir*4;
 	}
 	
 	public void jump() {
-		if(controllable && grounded)
+		if(controlState.equals("controllable") && grounded)
 			vY -= 12;
 	}
 	
@@ -46,6 +49,16 @@ public abstract class Character extends Sprite {
 			hitboxes.get(i).updateState();
 			if(hitboxes.get(i).getState().equals("inactive"))
 				hitboxes.remove(i);
+		}
+	}
+	
+	protected void updateHitstun() {
+		if(hitstunLeft > 0) {
+			hitstunLeft--;
+		}
+		else {
+			controlState = "controllable";
+			vX = 0;
 		}
 	}
 	
@@ -73,11 +86,11 @@ public abstract class Character extends Sprite {
 			grounded = false;
 		
 		if(hitboxes.size() > 0)
-			controllable = false;
-		else
-			controllable = true;
+			controlState = "attacking";
 		
 		updateHitboxes();
+		if(hitstunLeft > 0)
+			updateHitstun();
 	}
 	
 	public boolean isGrounded() {
@@ -85,8 +98,8 @@ public abstract class Character extends Sprite {
 	}
 
 
-	public boolean isControllable() {
-		return controllable;
+	public String getControlState() {
+		return controlState;
 	}
 
 
@@ -100,6 +113,15 @@ public abstract class Character extends Sprite {
 	}
 	
 	public abstract void testAttack();
+	
+	public void takeHit(int hitstun, double xKB, double yKB) {
+		hitstunLeft += hitstun;
+		vX += xKB * -1;
+		vY -= yKB;
+		controlState = "hitstun";
+		hitboxes.clear();
+		recoveryLeft = 0;
+	}
 
 
 	protected abstract void fall();
