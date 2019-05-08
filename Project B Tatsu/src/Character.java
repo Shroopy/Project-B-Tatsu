@@ -20,6 +20,7 @@ public abstract class Character extends Sprite {
 	//absolute position of character on the stage
 	protected int absX;
 	protected int hitstunLeft, recoveryLeft;
+	private int hitboxOffsetX;
 	
 
 	protected int facing; //1 is right, -1 is left
@@ -59,7 +60,12 @@ public abstract class Character extends Sprite {
 	protected void updateHitboxes() {
 		for(int i = 0; i < hitboxes.size(); i++) {
 			Hitbox h = hitboxes.get(i);
-			h.adjustPosition((int)x, (int)y);
+			assert facing == 1 || facing == -1;
+			if(facing == 1)
+				hitboxOffsetX = getCharWidth();
+			else
+				hitboxOffsetX = -1 * (int)h.getHitboxWidth();
+			h.adjustPosition((int)x + hitboxOffsetX, (int)y);
 			h.updateState();
 			if(h.getState().equals("inactive"))
 				hitboxes.remove(i);
@@ -100,8 +106,9 @@ public abstract class Character extends Sprite {
 		
 		updateHitboxes();
 		if(hitboxes.size() > 0) {
+			if(grounded)
+				vX = 0;
 			controlState = "attacking";
-			vX = 0;
 		}
 		else if(controlState.equals("attacking"))
 			controlState = "controllable";
@@ -147,22 +154,20 @@ public abstract class Character extends Sprite {
 	
 	public void takeHit(int hitstun, double xKB, double yKB) {
 		hitstunLeft = hitstun;
-		vX = xKB * -1;
+		vX = xKB * -1 * facing;
 		vY = -yKB;
 		controlState = "hitstun";
 		hitboxes.clear();
 		recoveryLeft = 0;
 	}
 	
-	protected void addHitbox(int xOffset, int yOffset, int width, int height, int startup, int active, int recovery, int hitstun, double xKB, double yKB) {
-		int hitboxOffsetX;
-		
+	protected void addHitbox(int xOffset, int yOffset, int width, int height, int startup, int active, int recovery, int hitstun, double xKB, double yKB, String blockHeight) {
 		assert facing == 1 || facing == -1;
 		if(facing == 1)
 			hitboxOffsetX = getCharWidth();
 		else
 			hitboxOffsetX = -width;
-		hitboxes.add(new Hitbox(xOffset, yOffset, (int)x + hitboxOffsetX, (int)y, width, height, startup, active, recovery, facing, hitstun, xKB, yKB));
+		hitboxes.add(new Hitbox(xOffset, yOffset, (int)x + hitboxOffsetX, (int)y, width, height, startup, active, recovery, facing, hitstun, xKB, yKB, blockHeight));
 	}
 
 
