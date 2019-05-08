@@ -22,13 +22,15 @@ public abstract class Character extends Sprite {
 	protected int hitstunLeft, recoveryLeft;
 	
 
-	protected int facing = -1; //1 is right, -1 is left
+	protected int facing; //1 is right, -1 is left
 	//protected String state;
 	
 	// CONSTRUCTORS
-	public Character(Color color, int x, int y, int w, int h) {
+	public Character(Color color, int x, int y, int w, int h, int facing) {
 		super(color,x,y,w,h);
 		hitboxes = new ArrayList<Hitbox>();
+		assert facing == 1 || facing == -1;
+		this.facing = facing;
 	}
 	
 	
@@ -50,6 +52,9 @@ public abstract class Character extends Sprite {
 		}
 		return null;
 	}
+	
+	public abstract int getCharWidth();
+	//public abstract int getCharHeight();
 	
 	protected void updateHitboxes() {
 		for(int i = 0; i < hitboxes.size(); i++) {
@@ -73,6 +78,8 @@ public abstract class Character extends Sprite {
 	}
 	
 	public void act() {
+		
+		
 		// FALL (and stop when a platform is hit)
 		if (grounded) {
 			moveByAmount(vX, vY);
@@ -145,6 +152,17 @@ public abstract class Character extends Sprite {
 		controlState = "hitstun";
 		hitboxes.clear();
 		recoveryLeft = 0;
+	}
+	
+	protected void addHitbox(int xOffset, int yOffset, int width, int height, int startup, int active, int recovery, int hitstun, double xKB, double yKB) {
+		int hitboxOffsetX;
+		
+		assert facing == 1 || facing == -1;
+		if(facing == 1)
+			hitboxOffsetX = getCharWidth();
+		else
+			hitboxOffsetX = -width;
+		hitboxes.add(new Hitbox(xOffset, yOffset, (int)x + hitboxOffsetX, (int)y, width, height, startup, active, recovery, facing, hitstun, xKB, yKB));
 	}
 
 
