@@ -109,7 +109,7 @@ public class DrawingSurface extends PApplet {
 	  	Point2D.Double center = new Point2D.Double(img.getCharacter().getCenterX(), img.getCharacter().getCenterY());
 	  	System.out.println(center.toString());
 	  	//System.out.println(!img.getCharacter().contains(center));
-		if (screenRect.contains(center)) {
+		if (!screenRect.contains(center)) {
 			double newX = screenRect.getX();
 			double newY = screenRect.getY();
 			
@@ -131,7 +131,7 @@ public class DrawingSurface extends PApplet {
 		  	
 		  	screenRect.setRect(newX,newY,screenRect.getWidth(),screenRect.getHeight());
 		  	
-		  	img.getCharacter().setRect(screenRect.getX()+screenRect.getWidth()/5,screenRect.getY()+screenRect.getHeight()/5,screenRect.getWidth()*3/5,screenRect.getHeight()*3/5);
+		  	img.getCharacter().setRect(screenRect.getX()+screenRect.getWidth()/5,screenRect.getY()+screenRect.getHeight()/5,img.getCharacter().getCharWidth(),img.getCharacter().getCharHeight());
 		}
 	  }
 

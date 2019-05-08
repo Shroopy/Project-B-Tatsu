@@ -34,6 +34,11 @@ public class Blue extends Character {
 	public int getCharWidth() {
 		return WIDTH;
 	}
+
+	@Override
+	public int getCharHeight() {
+		return HEIGHT;
+	}
 	
 
 }
