@@ -2,17 +2,13 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class Player {
-	
+
 	private Character character;
 	private final Integer MVLEFT, MVRIGHT, JUMP, CROUCH, A, B, C, ALTJUMP;
-	
-	public Character getCharacter() {
-		return character;
-	}
 
 	public Player(int playerNum, Character character) {
 		assert playerNum == 1 || playerNum == 2;
-		if(playerNum == 1) {
+		if (playerNum == 1) {
 			MVLEFT = KeyEvent.VK_A;
 			MVRIGHT = KeyEvent.VK_D;
 			JUMP = KeyEvent.VK_W;
@@ -21,8 +17,7 @@ public class Player {
 			B = KeyEvent.VK_I;
 			C = KeyEvent.VK_O;
 			ALTJUMP = KeyEvent.VK_J;
-		}
-		else {
+		} else {
 			MVLEFT = KeyEvent.VK_LEFT;
 			MVRIGHT = KeyEvent.VK_RIGHT;
 			JUMP = KeyEvent.VK_UP;
@@ -34,7 +29,7 @@ public class Player {
 		}
 		this.character = character;
 	}
-	
+
 	public void act(ArrayList<Integer> keys) {
 		if (keys.contains(MVLEFT))
 			character.walk(-1);
@@ -42,10 +37,10 @@ public class Player {
 			character.walk(1);
 		else
 			character.walk(0);
-		
+
 		if (keys.contains(JUMP) || keys.contains(ALTJUMP))
 			character.jump();
-		
+
 		if (keys.contains(A))
 			character.testAttack();
 
@@ -54,6 +49,10 @@ public class Player {
 
 	public void draw(DrawingSurface drawingSurface) {
 		character.draw(drawingSurface);
-		
+
+	}
+
+	public Character getCharacter() {
+		return character;
 	}
 }

@@ -24,10 +24,10 @@ public class Blue extends Character {
 	protected void fall() {
 		vY += GRAV;
 	}
-	
-	public void testAttack() {
-		if(controlState.equals("controllable"))
-			addHitbox(0, 0, 30, 80, 2, 1, 2, 8, 30/8, 0, "mid");
+
+	@Override
+	public int getCharHeight() {
+		return HEIGHT;
 	}
 
 	@Override
@@ -35,10 +35,9 @@ public class Blue extends Character {
 		return WIDTH;
 	}
 
-	@Override
-	public int getCharHeight() {
-		return HEIGHT;
+	public void testAttack() {
+		if (controlState.equals("controllable"))
+			addHitbox(0, 0, 30, 80, 2, 1, 2, 8, 30 / 8, 0, "mid");
 	}
-	
 
 }
