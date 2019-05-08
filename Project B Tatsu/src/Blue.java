@@ -12,8 +12,6 @@ public class Blue extends Character {
 
 	public Blue(int x, int y, int facing) {
 		super(Color.BLUE, x, y, WIDTH, HEIGHT, facing);
-		//hitboxes.add(new Hitbox(25, 0, x, y, WIDTH, HEIGHT, 180, 180));
-		//hitboxes.add(new Hitbox(25, 0, x, y, WIDTH, HEIGHT, 180, 180, facing));
 	}
 
 	// METHODS
@@ -29,7 +27,7 @@ public class Blue extends Character {
 	
 	public void testAttack() {
 		if(controlState.equals("controllable"))
-			addHitbox(0, 0, 30, 80, 2, 1, 2, 8, 30/8, 0);
+			addHitbox(0, 0, 30, 80, 2, 1, 2, 8, 30/8, 0, "mid");
 	}
 
 	@Override
