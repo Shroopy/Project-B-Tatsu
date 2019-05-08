@@ -107,7 +107,9 @@ public class DrawingSurface extends PApplet {
 
 	public void slideWorldToImage(Player img) {
 	  	Point2D.Double center = new Point2D.Double(img.getCharacter().getCenterX(), img.getCharacter().getCenterY());
-		if (!img.getCharacter().contains(center)) {
+	  	System.out.println(center.toString());
+	  	//System.out.println(!img.getCharacter().contains(center));
+		if (screenRect.contains(center)) {
 			double newX = screenRect.getX();
 			double newY = screenRect.getY();
 			
