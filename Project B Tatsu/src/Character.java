@@ -55,7 +55,7 @@ public abstract class Character extends Sprite {
 	}
 	
 	public abstract int getCharWidth();
-	//public abstract int getCharHeight();
+	public abstract int getCharHeight();
 	
 	protected void updateHitboxes() {
 		for(int i = 0; i < hitboxes.size(); i++) {
