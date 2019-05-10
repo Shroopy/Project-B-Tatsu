@@ -6,6 +6,11 @@ public class Player {
 	private Character character;
 	private final Integer MVLEFT, MVRIGHT, JUMP, CROUCH, A, B, C, ALTJUMP;
 
+	/**
+	 * Creates a Player object
+	 * @param playerNum: 1 for player one, 2 for player 2
+	 * @param character: The character the Player is playing
+	 */
 	public Player(int playerNum, Character character) {
 		assert playerNum == 1 || playerNum == 2;
 		if (playerNum == 1) {
@@ -30,6 +35,10 @@ public class Player {
 		this.character = character;
 	}
 
+	/**
+	 * Calls methods to influence the character based on which keys are pressed 
+	 * @param keys: An ArrayList of keys currently being pressed.
+	 */
 	public void act(ArrayList<Integer> keys) {
 		if (keys.contains(MVLEFT))
 			character.walk(-1);
@@ -47,6 +56,10 @@ public class Player {
 		character.act();
 	}
 
+	/**
+	 * Draws the Character on a PApplet
+	 * @param drawingSurface: The PApplet on which the Player's Character is drawn.
+	 */
 	public void draw(DrawingSurface drawingSurface) {
 		character.draw(drawingSurface);
 

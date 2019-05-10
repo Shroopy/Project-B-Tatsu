@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-/*
- * 
- */
+
 public abstract class Character extends Sprite {
 
 	// FIELDS
@@ -26,6 +24,15 @@ public abstract class Character extends Sprite {
 	// protected String state;
 
 	// CONSTRUCTORS
+	/**
+	 * Constructs an object of the Character class, using Sprite's super constructor
+	 * @param color: The color of the drawn character
+	 * @param x: The x value of the character
+	 * @param y: The y value of the character
+	 * @param w: The width of the character
+	 * @param h: The height of the character
+	 * @param facing: Which way the character is facing
+	 */
 	public Character(Color color, int x, int y, int w, int h, int facing) {
 		super(color, x, y, w, h);
 		hitboxes = new ArrayList<Hitbox>();
@@ -88,6 +95,20 @@ public abstract class Character extends Sprite {
 		}
 	}
 
+	/**
+	 * Adds a hitbox to the ArrayList of hitboxes attributed to this Character.
+	 * @param xOffset: The x at which the hitbox should be generated relative to the character
+	 * @param yOffset: The y at which the hitbox should be generated relative to the character
+	 * @param width: The width of the hitbox
+	 * @param height: The height of the hitbox
+	 * @param startup: How long the hitbox takes to become active
+	 * @param active: How long the hitbox remains active
+	 * @param recovery: How long the Character cannot move after the hitbox has stopped being active
+	 * @param hitstun: How long the opposing Character cannot move after struck by the hitbox
+	 * @param xKB: Horizontal movement of the opposing Character after struck by the hitbox
+	 * @param yKB: Vertical movement of the opposing Character after struck by the hitbox
+	 * @param blockHeight: unused presently
+	 */
 	protected void addHitbox(int xOffset, int yOffset, int width, int height, int startup, int active, int recovery,
 			int hitstun, double xKB, double yKB, String blockHeight) {
 		assert facing == 1 || facing == -1;
@@ -179,6 +200,9 @@ public abstract class Character extends Sprite {
 
 	public abstract void testAttack();
 
+	/**
+	 * Updates what hitboxes are on screen and which phase they are in(startup, active, recovery)
+	 */
 	protected void updateHitboxes() {
 		for (int i = 0; i < hitboxes.size(); i++) {
 			Hitbox h = hitboxes.get(i);
@@ -198,7 +222,10 @@ public abstract class Character extends Sprite {
 		}
 	}
 
-	// METHODS
+	/**
+	 * If on the ground, causes the character to move left or right.
+	 * @param dir: Input value of -1 or 1, determines whether character walks left or right.
+	 */
 	public void walk(int dir) {
 		if (controlState.equals("controllable") && grounded)
 			vX = dir * 4;

@@ -25,6 +25,9 @@ public class DrawingSurface extends PApplet {
 
 	// private ArrayList<PImage> assets;
 
+	/**
+	 * Calls PApplet's super constructor, initializes the keys ArrayList and the Rectangle representing the screen
+	 */
 	public DrawingSurface() {
 		super();
 		// assets = new ArrayList<PImage>();
@@ -36,6 +39,11 @@ public class DrawingSurface extends PApplet {
 	// program is stopped. Each statement is executed in
 	// sequence and after the last line is read, the first
 	// line is executed again.
+	/**
+	 * Draws the game window and both players.
+	 * Calls both players' acts based on which keys were inputted.
+	 * Scrolls the screen based on both players' positions. 
+	 */
 	public void draw() {
 
 		// drawing stuff
@@ -99,14 +107,24 @@ public class DrawingSurface extends PApplet {
 		}
 	}
 
+	/**
+	 * @param code: Code of a key to check if it was pressed
+	 * @return true if the key was pressed, false if not.
+	 */
 	public boolean isPressed(Integer code) {
 		return keys.contains(code);
 	}
 
+	/**
+	 * Adds a pressed key to an ArrayList of keys currently being pressed.
+	 */
 	public void keyPressed() {
 		keys.add(keyCode);
 	}
 
+	/**
+	 * Removes a released key from an ArrayList of keys currently being pressed.
+	 */
 	public void keyReleased() {
 		while (keys.contains(keyCode))
 			keys.remove(new Integer(keyCode));
@@ -124,13 +142,6 @@ public class DrawingSurface extends PApplet {
 		/* assets.add(loadImage("mario.png")); */
 
 		spawnPlayers();
-	}
-
-	public void adjustScreen() 
-	{
-		int dist = (int)(player1.getCharacter().getX() - player2.getCharacter().getX());
-		player1.getCharacter().setScreenX(DRAWING_WIDTH/2-dist/2);
-		player2.getCharacter().setScreenX(DRAWING_WIDTH/2+dist/2);
 	}
 	
 	public void spawnPlayers() {

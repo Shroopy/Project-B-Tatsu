@@ -8,6 +8,22 @@ public class Hitbox extends Sprite {
 	private String state;
 	private String blockHeight;
 
+	/**
+	 * Constructs a Hitbox object.
+	 * @param xOffset: The x at which the hitbox should be generated relative to the character
+	 * @param yOffset: The y at which the hitbox should be generated relative to the character
+	 * @param x: The x at which the hitbox is generated
+	 * @param y: The y at which the hitbox is generated
+	 * @param w: The width of the hitbox
+	 * @param h: The height of the hitbox
+	 * @param startup: How long the hitbox takes to become active
+	 * @param active: How long the hitbox remains active
+	 * @param recovery: How long the Character cannot move after the hitbox has stopped being active
+	 * @param hitstun: How long the opposing Character cannot move after struck by the hitbox
+	 * @param xKB: Horizontal movement of the opposing Character after struck by the hitbox
+	 * @param yKB: Vertical movement of the opposing Character after struck by the hitbox
+	 * @param blockHeight: unused presently
+	 */
 	public Hitbox(int xOffset, int yOffset, int x, int y, int w, int h, int startup, int active, int recovery,
 			int facing, int hitstun, double xKB, double yKB, String blockHeight) {
 		super(Color.YELLOW, x, y + yOffset, w, h);
@@ -26,6 +42,11 @@ public class Hitbox extends Sprite {
 		state = "startup";
 	}
 
+	/**
+	 * Moves the hitbox's location using Sprite's moveToLocation method
+	 * @param x: The x the hitbox should be moved 
+	 * @param y: The y the hitbox should be moved
+	 */
 	public void adjustPosition(int x, int y) {
 		moveToLocation(x + (xOffset * facing), y + yOffset);
 	}
@@ -78,6 +99,9 @@ public class Hitbox extends Sprite {
 		return yOffset;
 	}
 
+	/**
+	 * Decrements the frames a hitbox is in a certain state, updates state if necessary.
+	 */
 	public void updateState() {
 		if (startup > 0) {
 			startup--;
