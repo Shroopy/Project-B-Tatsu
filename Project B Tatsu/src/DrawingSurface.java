@@ -47,8 +47,6 @@ public class DrawingSurface extends PApplet {
 		float ratioX = (float) width / DRAWING_WIDTH;
 		float ratioY = (float) height / DRAWING_HEIGHT;
 		
-		//midscreen = (int)(midscreen - DRAWING_WIDTH/2 + (player2.getCharacter().getAbsX() - player1.getCharacter().getAbsX()));
-		//System.out.println(player1.getCharacter().getX() + ", " + player2.getCharacter().getX());
 		System.out.println(midscreen);
 		scale(ratioX, ratioY);
 
@@ -57,10 +55,10 @@ public class DrawingSurface extends PApplet {
 		fill(100);
 		rect(0, 395 + Blue.HEIGHT, DRAWING_WIDTH, DRAWING_HEIGHT - 395);
 		fill(255, 0, 0);
-		if (midscreen < 1200) {
-			rect(0, 395 + Blue.HEIGHT, 1200 - midscreen, DRAWING_HEIGHT - 395);
+		if (midscreen < 800) {
+			rect(0, 395 + Blue.HEIGHT, 800 - midscreen, DRAWING_HEIGHT - 395);
 		} else {
-			rect(2000 - midscreen, 395 + Blue.HEIGHT, midscreen - 1200, DRAWING_HEIGHT - 395);
+			rect(2400 - midscreen, 395 + Blue.HEIGHT, midscreen - 1200, DRAWING_HEIGHT - 395);
 		}
 		player1.draw(this);
 		player2.draw(this);
@@ -97,11 +95,8 @@ public class DrawingSurface extends PApplet {
 			if(prevX2 - prevX1 <= DRAWING_WIDTH - player2.getCharacter().getCharWidth()) {
 				player1.getCharacter().moveByAmount(-prevX2 - player2.getCharacter().getCharWidth() + DRAWING_WIDTH, 0);
 				midscreen += (prevX2 + player2.getCharacter().getCharWidth() - DRAWING_WIDTH);
-				//System.out.println("X2: " + prevX2);
 			}
 		}
-		//slideWorldToImage(player1);
-		//slideWorldToImage(player2);
 	}
 
 	public boolean isPressed(Integer code) {
