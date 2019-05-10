@@ -46,17 +46,21 @@ public class DrawingSurface extends PApplet {
 
 		float ratioX = (float) width / DRAWING_WIDTH;
 		float ratioY = (float) height / DRAWING_HEIGHT;
-
+		
+		//midscreen = (int)(midscreen - DRAWING_WIDTH/2 + (player2.getCharacter().getAbsX() - player1.getCharacter().getAbsX()));
+		//System.out.println(player1.getCharacter().getX() + ", " + player2.getCharacter().getX());
+		System.out.println(midscreen);
 		scale(ratioX, ratioY);
 
+		//fill(0,255,0);
+		//rect(Blue.WIDTH, 0, DRAWING_WIDTH - 2 * Blue.WIDTH, DRAWING_HEIGHT);
 		fill(100);
-
 		rect(0, 395 + Blue.HEIGHT, DRAWING_WIDTH, DRAWING_HEIGHT - 395);
 		fill(255, 0, 0);
 		if (midscreen < 1200) {
 			rect(0, 395 + Blue.HEIGHT, 1200 - midscreen, DRAWING_HEIGHT - 395);
 		} else {
-			rect(1600 - midscreen, 395 + Blue.HEIGHT, midscreen - 1200, DRAWING_HEIGHT - 395);
+			rect(2000 - midscreen, 395 + Blue.HEIGHT, midscreen - 1200, DRAWING_HEIGHT - 395);
 		}
 		player1.draw(this);
 		player2.draw(this);
@@ -76,8 +80,28 @@ public class DrawingSurface extends PApplet {
 		if (player2Hit != null)
 			player2.getCharacter().takeHit(player2Hit.getHitstun(), player2Hit.getxKB(), player2Hit.getyKB());
 
-		slideWorldToImage(player1);
-
+		int prevX1 = (int) player1.getCharacter().getX();
+		int prevX2 = (int) player2.getCharacter().getX();
+		if(!player1.getCharacter().intersects(screenRect)) 
+		{
+			player1.getCharacter().setScreenX(0);
+			if(prevX2 - prevX1 <= DRAWING_WIDTH - player1.getCharacter().getCharWidth()) {
+				player2.getCharacter().moveByAmount(-prevX1, 0);
+				midscreen += prevX1;
+				//System.out.println("X1: " + prevX1);
+			}
+		}
+		if(!player2.getCharacter().intersects(screenRect)) 
+		{
+			player2.getCharacter().setScreenX(DRAWING_WIDTH-player2.getCharacter().getCharWidth());
+			if(prevX2 - prevX1 <= DRAWING_WIDTH - player2.getCharacter().getCharWidth()) {
+				player1.getCharacter().moveByAmount(-prevX2 - player2.getCharacter().getCharWidth() + DRAWING_WIDTH, 0);
+				midscreen += (prevX2 + player2.getCharacter().getCharWidth() - DRAWING_WIDTH);
+				//System.out.println("X2: " + prevX2);
+			}
+		}
+		//slideWorldToImage(player1);
+		//slideWorldToImage(player2);
 	}
 
 	public boolean isPressed(Integer code) {
@@ -107,38 +131,13 @@ public class DrawingSurface extends PApplet {
 		spawnPlayers();
 	}
 
-	public void slideWorldToImage(Player img) {
-		Point2D.Double center = new Point2D.Double(img.getCharacter().getCenterX(), img.getCharacter().getCenterY());
-		System.out.println(center.toString());
-		// System.out.println(!img.getCharacter().contains(center));
-		if (!screenRect.contains(center)) {
-			double newX = screenRect.getX();
-			double newY = screenRect.getY();
-
-			if (center.getX() < img.getCharacter().getX()) {
-				newX -= (img.getCharacter().getX() - center.getX());
-			} else if (center.getX() > img.getCharacter().getX() + img.getCharacter().getWidth()) {
-				newX += (center.getX() - (img.getCharacter().getX() + img.getCharacter().getWidth()));
-			}
-
-			if (center.getY() < img.getCharacter().getY()) {
-				newY -= (img.getCharacter().getY() - center.getY());
-			} else if (center.getY() > img.getCharacter().getY() + img.getCharacter().getHeight()) {
-				newY += (center.getY() - img.getCharacter().getY() - img.getCharacter().getHeight());
-			}
-			newX = Math.max(newX, 0);
-			newY = Math.max(newY, 0);
-			newX = Math.min(newX, DRAWING_WIDTH - screenRect.getWidth());
-			newY = Math.min(newY, DRAWING_HEIGHT - screenRect.getHeight());
-
-			screenRect.setRect(newX, newY, screenRect.getWidth(), screenRect.getHeight());
-
-			img.getCharacter().setRect(screenRect.getX() + screenRect.getWidth() / 5,
-					screenRect.getY() + screenRect.getHeight() / 5, img.getCharacter().getCharWidth(),
-					img.getCharacter().getCharHeight());
-		}
+	public void adjustScreen() 
+	{
+		int dist = (int)(player1.getCharacter().getX() - player2.getCharacter().getX());
+		player1.getCharacter().setScreenX(DRAWING_WIDTH/2-dist/2);
+		player2.getCharacter().setScreenX(DRAWING_WIDTH/2+dist/2);
 	}
-
+	
 	public void spawnPlayers() {
 		player1 = new Player(1, new Blue(/* assets.get(0), */DRAWING_WIDTH / 4 - Blue.WIDTH / 2, 50, 1));
 		player2 = new Player(2, new Blue(/* assets.get(0), */DRAWING_WIDTH / 4 * 3 + Blue.WIDTH / 2, 50, -1));

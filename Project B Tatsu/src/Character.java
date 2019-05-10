@@ -39,6 +39,7 @@ public abstract class Character extends Sprite {
 		if (grounded) {
 			moveByAmount(vX, vY);
 			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
+			//System.out.println("absX: " + absX + " - screenX: " + super.x);
 		} else {
 			moveByAmount(vX * 0.6, vY);
 			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
@@ -98,6 +99,11 @@ public abstract class Character extends Sprite {
 		return absX;
 	}
 
+	public void setScreenX(double set) 
+	{
+		super.x = set;
+	}
+	
 	public abstract int getCharHeight();
 
 	public abstract int getCharWidth();
