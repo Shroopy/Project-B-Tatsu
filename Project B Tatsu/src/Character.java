@@ -32,7 +32,10 @@ public abstract class Character extends Sprite {
 		assert facing == 1 || facing == -1;
 		this.facing = facing;
 	}
-
+	
+	/**
+	 * This is the method that advances the game. Moves the characters based on the X and Y velocity and checks and sets state and Hitboxes.
+	 */
 	public void act() {
 
 		// FALL (and stop when a platform is hit)
@@ -96,6 +99,10 @@ public abstract class Character extends Sprite {
 				recovery, facing, hitstun, xKB, yKB, blockHeight));
 	}
 
+	/**
+	 * Draws the next frame of the game. Calls Sprite's version of draw.
+	 * @param g: The PApplet on which the game is drawn.
+	 */
 	public void draw(PApplet g) {
 		super.draw(g);
 		for (Hitbox h : hitboxes) {
@@ -130,6 +137,11 @@ public abstract class Character extends Sprite {
 		return hitboxes;
 	}
 
+	/**
+	 * 	Checks whether any of the hitboxes produced by this character touches the other character.
+	 * @param rect: The Rectangle2D.Double that represents the other character.
+	 * @return A hitbox that is touching the other character.
+	 */
 	public Hitbox hitboxesIntersect(Rectangle2D.Double rect) {
 		for (Hitbox h : hitboxes) {
 			if (h.intersects(rect))
@@ -142,11 +154,20 @@ public abstract class Character extends Sprite {
 		return grounded;
 	}
 
+	/**
+	 * Causes the character being controlled to jump.
+	 */
 	public void jump() {
 		if (controlState.equals("controllable") && grounded)
 			vY = -12;
 	}
 
+	/**
+	 * Called when a hitbox intersects this character, inflicts hitstun and knockback based on the attack the opponent has hit with. 
+	 * @param hitstun: Hitstun inflicted by the opposing attack.
+	 * @param xKB: Horizontal knockback inflicted by the opposing attack.
+	 * @param yKB: Vertical knockback inflicted by the opposing attack.
+	 */
 	public void takeHit(int hitstun, double xKB, double yKB) {
 		hitstunLeft = hitstun;
 		vX = xKB * -1 * facing;
