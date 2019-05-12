@@ -55,14 +55,18 @@ public class Player {
 		if (keys.contains(JUMP) || keys.contains(ALTJUMP))
 			character.jump();
 
-		if (keys.contains(A))
+		if (keys.contains(A)) {
 			character.fivea();
-		else if (keys.contains(B))
+		}
+		else if (keys.contains(B)) {
 			character.fiveb();
-		else if (keys.contains(C) && keys.contains(MVRIGHT))
-			character.sixc();
-		else if (keys.contains(C))
-			character.fivec();
+		}
+		else if (keys.contains(C)) {
+			if(keys.contains(MVRIGHT))
+				character.sixc();
+			else
+				character.fivec();
+		}
 
 		character.act();
 	}
