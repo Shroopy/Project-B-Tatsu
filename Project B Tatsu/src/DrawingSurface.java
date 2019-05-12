@@ -55,7 +55,7 @@ public class DrawingSurface extends PApplet {
 		float ratioX = (float) width / DRAWING_WIDTH;
 		float ratioY = (float) height / DRAWING_HEIGHT;
 		
-		System.out.println(midscreen);
+		//System.out.println(midscreen);
 		scale(ratioX, ratioY);
 
 		//fill(0,255,0);

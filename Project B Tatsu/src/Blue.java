@@ -40,6 +40,9 @@ public class Blue extends Character {
 
 	@Override
 	public int getCharHeight() {
+		if(crouching) {
+			return HEIGHT * 3 / 4;
+		}
 		return HEIGHT;
 	}
 
@@ -48,6 +51,9 @@ public class Blue extends Character {
 		return WIDTH;
 	}
 
+	//ATTACKS
+	//int xOffset, int yOffset, int width, int height, int startup, int active, int recovery,  int hitstun, double xKB, double yKB, String blockHeight
+	
 	/**
 	 * Produces a hitbox 30 pixels wide and 80 hitboxes tall
 	 * Has 2 startup, 1 active, 2 recovery, and hits mid
@@ -56,5 +62,32 @@ public class Blue extends Character {
 		if (controlState.equals("controllable"))
 			addHitbox(0, 0, 30, 80, 2, 1, 2, 8, 30 / 8, 0, "mid");
 	}
+
+	@Override
+	public void fivea() {
+		if (controlState.equals("controllable"))
+			addHitbox(0, 0, 60, 10, 2, 1, 2, 8, 60 / 8, 0, "mid");
+	}
+
+	@Override
+	public void fiveb() {
+		if (controlState.equals("controllable"))
+			addHitbox(0, 0, 60, 40, 4, 4, 10, 18, 90 / 18, 0, "mid");
+	}
+
+	@Override
+	public void fivec() {
+		if (controlState.equals("controllable"))
+			addHitbox(-30, -40, 90, 60, 9, 5, 16, 18, 120 / 18, 0, "mid");
+	}
+
+	@Override
+	public void sixc() {
+		if (controlState.equals("controllable"))
+			addHitbox(0, 20, 60, 40, 20, 8, 6, 17, 90 / 17, 0, "high");
+		
+	}
+	
+	
 
 }

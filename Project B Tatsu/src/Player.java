@@ -40,6 +40,11 @@ public class Player {
 	 * @param keys: An ArrayList of keys currently being pressed.
 	 */
 	public void act(ArrayList<Integer> keys) {
+		if(keys.contains(CROUCH) && character.isGrounded())
+			character.setCrouching(true);
+		else
+			character.setCrouching(false);
+		
 		if (keys.contains(MVLEFT))
 			character.walk(-1);
 		else if (keys.contains(MVRIGHT))
@@ -51,7 +56,13 @@ public class Player {
 			character.jump();
 
 		if (keys.contains(A))
-			character.testAttack();
+			character.fivea();
+		else if (keys.contains(B))
+			character.fiveb();
+		else if (keys.contains(C) && keys.contains(MVRIGHT))
+			character.sixc();
+		else if (keys.contains(C))
+			character.fivec();
 
 		character.act();
 	}
