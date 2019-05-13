@@ -159,23 +159,26 @@ public class DrawingSurface extends PApplet {
 		{
 			if(player1.getCharacter().isGrounded() == player2.getCharacter().isGrounded()) 
 			{
-				player1.getCharacter().moveByAmount(-Math.abs(diff - player1.getCharacter().getCharWidth() - diffv)/2, 0);
-				player2.getCharacter().moveByAmount(Math.abs(diff - player1.getCharacter().getCharWidth() + diffv)/2, 0);
+				player1.getCharacter().moveByAmount((-Math.abs(diff - player1.getCharacter().getCharWidth() - diffv))/2, 0);
+				player2.getCharacter().moveByAmount((Math.abs(diff - player1.getCharacter().getCharWidth() + diffv))/2, 0);
+				System.out.println(-Math.abs(diff - player1.getCharacter().getCharWidth() - diffv)/2);
+				System.out.println(Math.abs(diff - player1.getCharacter().getCharWidth() + diffv)/2);
 			}
 			else if (player1.getCharacter().isGrounded()) 
 			{
-				//System.out.println("diffv: " + diffv);
-				player1.getCharacter().moveByAmount(-Math.abs(diff - player1.getCharacter().getCharWidth() - diffv)/2, 0);
-				player2.getCharacter().moveByAmount(Math.abs(diff - player1.getCharacter().getCharWidth() + 0.6*diffv)/2, 0);
-				//System.out.println(player2.getCharacter().getVX());
+				player1.getCharacter().moveByAmount((-Math.abs(diff - player1.getCharacter().getCharWidth()) - diffv)/2, 0);
+				player2.getCharacter().moveByAmount((Math.abs(diff - player1.getCharacter().getCharWidth()) + 0.6*diffv)/2, 0);
+				
 			}
-			else 
+			else if (player2.getCharacter().isGrounded()) 
 			{
-				player1.getCharacter().moveByAmount(-Math.abs(diff - player1.getCharacter().getCharWidth() - 0.6*diffv)/2, 0);
-				player2.getCharacter().moveByAmount(Math.abs(diff - player1.getCharacter().getCharWidth() + diffv)/2, 0);
+				System.out.println("diffv: " + diffv);
+				player1.getCharacter().moveByAmount((-Math.abs(diff - player1.getCharacter().getCharWidth()) + 0.6*diffv)/2, 0);
+				player2.getCharacter().moveByAmount((Math.abs(diff - player1.getCharacter().getCharWidth()) - diffv)/2, 0);
+				System.out.println(player1.getCharacter().getVX());
+				System.out.println(-Math.abs(diff - player1.getCharacter().getCharWidth() - 0.6*diffv)/2);
+				System.out.println(Math.abs(diff - player1.getCharacter().getCharWidth() + diffv)/2);
 			}
-			//System.out.println(-Math.abs(diff - player1.getCharacter().getCharWidth() - diffv));
-			//System.out.println(Math.abs(diff - player1.getCharacter().getCharWidth() + diffv));
 			player1.getCharacter().zeroVX();
 			player2.getCharacter().zeroVX();
 			//System.out.println(player1.getCharacter().getVX());

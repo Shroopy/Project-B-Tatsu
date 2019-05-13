@@ -39,6 +39,7 @@ public abstract class Character extends Sprite {
 		hitboxes = new ArrayList<Hitbox>();
 		assert facing == 1 || facing == -1;
 		this.facing = facing;
+		absX = 800 + x;
 	}
 	
 	/**
@@ -52,20 +53,19 @@ public abstract class Character extends Sprite {
 		lastCrouching = crouching;
 		
 		// FALL (and stop when a platform is hit)
-		if (grounded) {
-			if(absX < 0) {
-				moveByAmount(1,0);
-				absX = (int) (DrawingSurface.midscreen - 400 + super.x);
-			}
-			else if(absX > 2400) {
-				moveByAmount(-1,0);
-				absX = (int) (DrawingSurface.midscreen - 400 + super.x);
-			}
-			else {
-				moveByAmount(vX, vY);
-				absX = (int) (DrawingSurface.midscreen - 400 + super.x);
-				//System.out.println("absX: " + absX + " - screenX: " + super.x);
-			}
+		
+		if(absX < 0) {
+			moveByAmount(1,vY);
+			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
+		}
+		else if(absX > 2400) {
+			moveByAmount(-1,vY);
+			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
+		}
+		else if (grounded) {
+			moveByAmount(vX, vY);
+			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
+			//System.out.println("absX: " + absX + " - screenX: " + super.x);
 		} else {
 			moveByAmount(vX * 0.6, vY);
 			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
