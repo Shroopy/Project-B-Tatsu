@@ -117,9 +117,9 @@ public class DrawingSurface extends PApplet {
 		Hitbox player1Hit = player2.getCharacter().hitboxesIntersect(player1.getCharacter());
 		Hitbox player2Hit = player1.getCharacter().hitboxesIntersect(player2.getCharacter());
 
-		if (player1Hit != null)
+		if (player1Hit != null && player1Hit.getState().equals("active") && !player1.getCharacter().isInvincible())
 			player1.getCharacter().takeHit(player1Hit.getHitstun(), player1Hit.getxKB(), player1Hit.getyKB());
-		if (player2Hit != null)
+		if (player2Hit != null && player2Hit.getState().equals("active") && !player2.getCharacter().isInvincible())
 			player2.getCharacter().takeHit(player2Hit.getHitstun(), player2Hit.getxKB(), player2Hit.getyKB());
 
 		checkPass();
@@ -219,7 +219,7 @@ public class DrawingSurface extends PApplet {
 		// size(0,0,PApplet.P3D);
 		/* assets.add(loadImage("mario.png")); */
 
-		background = loadImage("C:\\Users\\Kids\\Downloads\\close-up-concrete-dark-908286.jpg");
+		//background = loadImage("C:\\Users\\Kids\\Downloads\\close-up-concrete-dark-908286.jpg");
 		
 		spawnPlayers();
 	}

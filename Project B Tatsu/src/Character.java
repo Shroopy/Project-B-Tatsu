@@ -86,8 +86,10 @@ public abstract class Character extends Sprite {
 			if (grounded)
 				vX = 0;
 			controlState = "attacking";
-		} else if (controlState.equals("attacking"))
+		} else if (controlState.equals("attacking")) {
+			invincible = false;
 			controlState = "controllable";
+		}
 
 		if (recoveryLeft > 0)
 			recoveryLeft--;
@@ -117,14 +119,14 @@ public abstract class Character extends Sprite {
 	 * @param yKB: Vertical movement of the opposing Character after struck by the hitbox
 	 * @param blockHeight: unused presently
 	 */
-	protected void addHitbox(int xOffset, int yOffset, int width, int height, int startup, int active, int recovery,  int hitstun, double xKB, double yKB, String blockHeight) {
+	protected void addHitbox(int xOffset, int yOffset, int width, int height, int startup, int active, int recovery,  int hitstun, int blockstun, double xKB, double yKB, String blockHeight) {
 		assert facing == 1 || facing == -1;
 		if (facing == 1)
 			hitboxOffsetX = getCharWidth();
 		else
 			hitboxOffsetX = -width;
 		hitboxes.add(new Hitbox(xOffset, yOffset, (int) x + hitboxOffsetX, (int) y, width, height, startup, active,
-				recovery, facing, hitstun, xKB, yKB, blockHeight));
+				recovery, facing, hitstun, blockstun, xKB, yKB, blockHeight));
 	}
 
 	/**
@@ -161,6 +163,10 @@ public abstract class Character extends Sprite {
 		return absX;
 	}
 	
+	public boolean isInvincible() {
+		return invincible;
+	}
+
 	public abstract int getCharHeight();
 
 	public abstract int getCharWidth();
@@ -207,6 +213,7 @@ public abstract class Character extends Sprite {
 	}
 
 	public void setCrouching(boolean crouching) {
+		vX = 0;
 		this.crouching = crouching;
 	}
 
@@ -226,7 +233,12 @@ public abstract class Character extends Sprite {
 	 * @param yKB: Vertical knockback inflicted by the opposing attack.
 	 */
 	public void takeHit(int hitstun, double xKB, double yKB) {
-		hitstunLeft = hitstun;
+		if(hitstunLeft == 1001) {
+			hitstunLeft = 30;
+			invincible = true;
+		}
+		else
+			hitstunLeft = hitstun;
 		vX = xKB * -1 * facing;
 		vY = -yKB;
 		controlState = "hitstun";
@@ -234,7 +246,7 @@ public abstract class Character extends Sprite {
 		recoveryLeft = 0;
 	}
 
-	public abstract void testAttack();
+	//public abstract void testAttack();
 
 	/**
 	 * Updates what hitboxes are on screen and which phase they are in(startup, active, recovery)

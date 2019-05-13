@@ -58,55 +58,56 @@ public class Blue extends Character {
 	 * Produces a hitbox 30 pixels wide and 80 hitboxes tall
 	 * Has 2 startup, 1 active, 2 recovery, and hits mid
 	 */
-	public void testAttack() {
-		if (controlState.equals("controllable"))
-			addHitbox(0, 0, 30, 80, 2, 1, 2, 8, 30 / 8, 0, "mid");
-	}
+//	public void testAttack() {
+//		if (controlState.equals("controllable"))
+//			addHitbox(0, 0, 30, 80, 2, 1, 2, 8, 4, 30 / 8, 0, "mid");
+//	}
 
 	@Override
 	public void fivea() {
 		if (controlState.equals("controllable"))
-			addHitbox(0, 0, 60, 10, 2, 1, 2, 8, 60 / 8, 0, "mid");
+			addHitbox(0, 0, 60, 10, 2, 1, 2, 8, 4, 60 / 8, 0, "mid");
 	}
 
 	@Override
 	public void fiveb() {
 		if (controlState.equals("controllable")) {
 			moveByAmount(20 * facing, 0);
-			addHitbox(0, 0, 50, 40, 4, 4, 10, 18, 70 / 18, 0, "mid");
+			addHitbox(0, 0, 50, 40, 4, 4, 10, 20, 15, 70 / 20, 0, "mid");
 		}
 	}
 
 	@Override
 	public void fivec() {
 		if (controlState.equals("controllable"))
-			addHitbox(-30, -40, 90, 60, 9, 5, 16, 18, 120 / 18, 0, "mid");
+			addHitbox(-30, -40, 90, 60, 9, 5, 16, 18, 14, 120 / 18, 0, "mid");
 	}
 
 	@Override
 	public void sixc() {
 		if (controlState.equals("controllable"))
-			addHitbox(0, 20, 60, 40, 20, 8, 6, 17, 90 / 17, 0, "high");
+			addHitbox(0, 20, 60, 40, 20, 8, 6, 17, 14, 90 / 17, 0, "high");
 		
 	}
 
 	@Override
 	public void twoa() {
 		if (controlState.equals("controllable"))
-			addHitbox(0, (int)((getHeight() - 30)), 60, 30, 3, 2, 4, 10, 40 / 10, 0, "low");
+			addHitbox(0, (int)((getHeight() - 30)), 60, 30, 3, 2, 4, 10, 6, 40 / 10, 0, "low");
 		
 	}
 
 	@Override
 	public void twob() {
-		// TODO Auto-generated method stub
+		if (controlState.equals("controllable"))
+			addHitbox(0, (int)((getHeight() - 30)), 80, 30, 5, 4, 10, 18, 14, 60 / 18, 0, "low");
 		
 	}
 
 	@Override
 	public void twoc() {
-		// TODO Auto-generated method stub
-		
+		if (controlState.equals("controllable"))
+			addHitbox(0, (int)((getHeight() - 30)), 70, 30, 7, 3, 0, 1001, 19, 30/14, 3, "low");
 	}
 	
 	

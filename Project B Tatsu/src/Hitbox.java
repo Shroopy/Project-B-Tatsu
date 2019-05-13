@@ -2,7 +2,7 @@ import java.awt.Color;
 
 public class Hitbox extends Sprite {
 
-	private int xOffset, yOffset, startup, active, facing, hitstun, recovery, width; // startup is frames before first
+	private int xOffset, yOffset, startup, active, facing, hitstun, recovery, width, blockstun; // startup is frames before first
 																						// active frame
 	double xKB, yKB;
 	private String state;
@@ -25,7 +25,7 @@ public class Hitbox extends Sprite {
 	 * @param blockHeight: unused presently
 	 */
 	public Hitbox(int xOffset, int yOffset, int x, int y, int w, int h, int startup, int active, int recovery,
-			int facing, int hitstun, double xKB, double yKB, String blockHeight) {
+			int facing, int hitstun, int blockstun, double xKB, double yKB, String blockHeight) {
 		super(Color.YELLOW, x, y + yOffset, w, h);
 		assert facing == -1 || facing == 1;
 		this.xOffset = xOffset;
@@ -37,9 +37,14 @@ public class Hitbox extends Sprite {
 		this.hitstun = hitstun;
 		this.recovery = recovery;
 		this.xKB = xKB;
+		this.blockstun = blockstun;
 		this.yKB = yKB;
 		this.blockHeight = blockHeight;
 		state = "startup";
+	}
+
+	public int getBlockstun() {
+		return blockstun;
 	}
 
 	/**

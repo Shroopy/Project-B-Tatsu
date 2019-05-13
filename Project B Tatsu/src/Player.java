@@ -46,7 +46,7 @@ public class Player {
 		else
 			facing = MVLEFT;
 		
-		if(keys.contains(CROUCH) && character.isGrounded())
+		if(keys.contains(CROUCH) && character.isGrounded() && character.getControlState().equals("controllable"))
 			character.setCrouching(true);
 		else
 			character.setCrouching(false);
@@ -68,10 +68,15 @@ public class Player {
 				character.fivea();
 		}
 		else if (keys.contains(B)) {
-			character.fiveb();
+			if(keys.contains(CROUCH))
+				character.twob();
+			else
+				character.fiveb();
 		}
 		else if (keys.contains(C)) {
-			if(keys.contains(facing))
+			if(keys.contains(CROUCH))
+				character.twoc();
+			else if(keys.contains(facing))
 				character.sixc();
 			else
 				character.fivec();
