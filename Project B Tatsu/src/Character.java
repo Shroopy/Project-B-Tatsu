@@ -19,7 +19,7 @@ public abstract class Character extends Sprite {
 	protected int absX;
 	protected int hitstunLeft, recoveryLeft;
 	private int hitboxOffsetX;
-
+	
 	protected int facing; // 1 is right, -1 is left
 	// protected String state;
 
@@ -58,7 +58,7 @@ public abstract class Character extends Sprite {
 			else {
 				moveByAmount(vX, vY);
 				absX = (int) (DrawingSurface.midscreen - 400 + super.x);
-				System.out.println("absX: " + absX + " - screenX: " + super.x);
+				//System.out.println("absX: " + absX + " - screenX: " + super.x);
 			}
 		} else {
 			moveByAmount(vX * 0.6, vY);
@@ -131,12 +131,29 @@ public abstract class Character extends Sprite {
 		}
 	}
 
+	/**
+	 * 
+	 */
+	public void changeState(int input) 
+	{
+		assert input == 0 || input == 1;
+		if(input == 0) {
+			controlState = "";
+			vX = 0;
+			vY = 0;
+			aX = 0;
+		}	
+		else 
+			controlState = "controllable";
+			
+	}
+	
 	protected abstract void fall();
 
 	public int getAbsX() {
 		return absX;
 	}
-
+	
 	public void setScreenX(double set) 
 	{
 		super.x = set;
@@ -221,7 +238,7 @@ public abstract class Character extends Sprite {
 			}
 		}
 	}
-
+	
 	/**
 	 * If on the ground, causes the character to move left or right.
 	 * @param dir: Input value of -1 or 1, determines whether character walks left or right.
@@ -230,7 +247,6 @@ public abstract class Character extends Sprite {
 		if (controlState.equals("controllable") && grounded)
 			vX = dir * 4;
 	}
-
 	// public void applyWindowLimits(int windowWidth, int windowHeight) {
 	// x = Math.min(x,windowWidth-width);
 	// y = Math.min(y,windowHeight-height);
