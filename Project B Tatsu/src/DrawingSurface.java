@@ -154,12 +154,31 @@ public class DrawingSurface extends PApplet {
 		double v2 = player2.getCharacter().getVX();
 		double diff = p2x-p1x;
 		double diffv = v1+v2;
+		
 		if(diff < player1.getCharacter().getCharWidth()) 
 		{
-			player1.getCharacter().moveByAmount(-Math.abs(diff - player1.getCharacter().getCharWidth() - diffv)/2, 0);
-			player2.getCharacter().moveByAmount(Math.abs(diff - player1.getCharacter().getCharWidth() + diffv)/2, 0);
+			if(player1.getCharacter().isGrounded() == player2.getCharacter().isGrounded()) 
+			{
+				player1.getCharacter().moveByAmount(-Math.abs(diff - player1.getCharacter().getCharWidth() - diffv)/2, 0);
+				player2.getCharacter().moveByAmount(Math.abs(diff - player1.getCharacter().getCharWidth() + diffv)/2, 0);
+			}
+			else if (player1.getCharacter().isGrounded()) 
+			{
+				System.out.println("diffv: " + diffv);
+				player1.getCharacter().moveByAmount(-Math.abs(diff - player1.getCharacter().getCharWidth() - diffv)/2, 0);
+				player2.getCharacter().moveByAmount(Math.abs(diff - player1.getCharacter().getCharWidth() + 0.6*diffv)/2, 0);
+				System.out.println(player2.getCharacter().getVX());
+			}
+			else 
+			{
+				player1.getCharacter().moveByAmount(-Math.abs(diff - player1.getCharacter().getCharWidth() - 0.6*diffv)/2, 0);
+				player2.getCharacter().moveByAmount(Math.abs(diff - player1.getCharacter().getCharWidth() + diffv)/2, 0);
+			}
+			System.out.println(-Math.abs(diff - player1.getCharacter().getCharWidth() - diffv));
+			System.out.println(Math.abs(diff - player1.getCharacter().getCharWidth() + diffv));
 			player1.getCharacter().zeroVX();
 			player2.getCharacter().zeroVX();
+			//System.out.println(player1.getCharacter().getVX());
 		}
 	}
 	
