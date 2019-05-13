@@ -69,8 +69,8 @@ public class DrawingSurface extends PApplet {
 		//fill(0,255,0);
 		//rect(Blue.WIDTH, 0, DRAWING_WIDTH - 2 * Blue.WIDTH, DRAWING_HEIGHT);
 		fill(100);
-		//rect(0, 395 + Blue.HEIGHT, DRAWING_WIDTH, DRAWING_HEIGHT - 395);
-		image(background.get(midscreen-800, 0, DRAWING_WIDTH, DRAWING_HEIGHT - 395), 0, 395 + Blue.HEIGHT, DRAWING_WIDTH, DRAWING_HEIGHT - 395);
+		rect(0, 395 + Blue.HEIGHT, DRAWING_WIDTH, DRAWING_HEIGHT - 395);
+		//image(background.get(midscreen-800, 0, DRAWING_WIDTH+200, DRAWING_HEIGHT - 395), 0, 395 + Blue.HEIGHT, DRAWING_WIDTH+200, DRAWING_HEIGHT - 395);
 		fill(255, 0, 0);
 		if (midscreen < 800) {
 			rect(0, 395 + Blue.HEIGHT, 800 - midscreen, DRAWING_HEIGHT - 395);
