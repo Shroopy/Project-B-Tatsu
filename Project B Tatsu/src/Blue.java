@@ -72,7 +72,7 @@ public class Blue extends Character {
 	@Override
 	public void fiveb() {
 		if (controlState.equals("controllable")) {
-			moveByAmount(20, 0);
+			moveByAmount(20 * facing, 0);
 			addHitbox(0, 0, 50, 40, 4, 4, 10, 18, 70 / 18, 0, "mid");
 		}
 	}

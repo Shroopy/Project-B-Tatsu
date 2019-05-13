@@ -15,7 +15,8 @@ public class DrawingSurface extends PApplet {
 	public static int midscreen = 1200;
 	public static final int cornerL = 400;
 	public static final int cornerR = 2000;
-
+	private int p1r, p2r;
+	
 	private Rectangle screenRect;
 
 	private Player player1, player2;
@@ -58,6 +59,12 @@ public class DrawingSurface extends PApplet {
 		//System.out.println(midscreen);
 		scale(ratioX, ratioY);
 
+		fill(0);
+		textSize(100);
+		text("" + (60 - frameCount/60),325,100);
+		textSize(20);
+		text("P1 Rounds: " + p1r,50,50);
+		text("P2 Rounds: " + p2r,600,50);
 		//fill(0,255,0);
 		//rect(Blue.WIDTH, 0, DRAWING_WIDTH - 2 * Blue.WIDTH, DRAWING_HEIGHT);
 		fill(100);
@@ -70,7 +77,34 @@ public class DrawingSurface extends PApplet {
 		}
 		player1.draw(this);
 		player2.draw(this);
-
+		if(frameCount == 3600) 
+		{
+			player1.getCharacter().changeState(0);
+			player2.getCharacter().changeState(0);
+		}
+		if(frameCount > 3600 && frameCount < 3840) 
+		{
+			textSize(60);
+			fill(255,0,0);
+			text("ROUND OVER", 220, 250);
+			if((2400-player2.getCharacter().getAbsX()) == player1.getCharacter().getAbsX()) 
+				text("TIE", 350, 400);
+			else if((2400-player2.getCharacter().getAbsX()) < player1.getCharacter().getAbsX()) 
+				text("Player One WINS", 180, 350);
+			else 
+				text("Player Two WINS", 180, 350);
+		}
+		if(frameCount == 3840) 
+		{
+			if((2400-player2.getCharacter().getAbsX()) < player1.getCharacter().getAbsX()) 
+				p1r++;
+			else if((2400-player2.getCharacter().getAbsX()) > player1.getCharacter().getAbsX()) 
+				p2r++;
+			
+			frameCount = 0;
+			spawnPlayers();
+		}
+		
 		popMatrix();
 
 		// modifying stuff
@@ -86,6 +120,8 @@ public class DrawingSurface extends PApplet {
 		if (player2Hit != null)
 			player2.getCharacter().takeHit(player2Hit.getHitstun(), player2Hit.getxKB(), player2Hit.getyKB());
 
+		checkPass();
+		
 		int prevX1 = (int) player1.getCharacter().getX();
 		int prevX2 = (int) player2.getCharacter().getX();
 		if(!player1.getCharacter().intersects(screenRect)) 
@@ -105,8 +141,26 @@ public class DrawingSurface extends PApplet {
 				midscreen += (prevX2 + player2.getCharacter().getCharWidth() - DRAWING_WIDTH);
 			}
 		}
+		
 	}
 
+	public void checkPass() 
+	{
+		double p1x = player1.getCharacter().getX();
+		double p2x = player2.getCharacter().getX();
+		double v1 = player1.getCharacter().getVX();
+		double v2 = player2.getCharacter().getVX();
+		double diff = p2x-p1x;
+		double diffv = v1+v2;
+		if(diff < player1.getCharacter().getCharWidth()) 
+		{
+			player1.getCharacter().moveByAmount(-Math.abs(diff - player1.getCharacter().getCharWidth() - diffv)/2, 0);
+			player2.getCharacter().moveByAmount(Math.abs(diff - player1.getCharacter().getCharWidth() + diffv)/2, 0);
+			player1.getCharacter().zeroVX();
+			player2.getCharacter().zeroVX();
+		}
+	}
+	
 	/**
 	 * @param code: Code of a key to check if it was pressed
 	 * @return true if the key was pressed, false if not.

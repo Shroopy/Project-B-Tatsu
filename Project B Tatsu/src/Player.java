@@ -40,6 +40,12 @@ public class Player {
 	 * @param keys: An ArrayList of keys currently being pressed.
 	 */
 	public void act(ArrayList<Integer> keys) {
+		Integer facing;
+		if(character.facing == 1)
+			facing = MVRIGHT;
+		else
+			facing = MVLEFT;
+		
 		if(keys.contains(CROUCH) && character.isGrounded())
 			character.setCrouching(true);
 		else
@@ -65,7 +71,7 @@ public class Player {
 			character.fiveb();
 		}
 		else if (keys.contains(C)) {
-			if(keys.contains(MVRIGHT))
+			if(keys.contains(facing))
 				character.sixc();
 			else
 				character.fivec();

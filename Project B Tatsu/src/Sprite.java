@@ -51,5 +51,15 @@ public class Sprite extends Rectangle2D.Double {
 		super.x = x;
 		super.y = y;
 	}
+	
+	public double getVX() 
+	{
+		return vX;
+	}
+	
+	public void zeroVX() 
+	{
+		vX = 0;
+	}
 
 }
