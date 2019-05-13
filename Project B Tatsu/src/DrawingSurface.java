@@ -16,6 +16,7 @@ public class DrawingSurface extends PApplet {
 	public static final int cornerL = 400;
 	public static final int cornerR = 2000;
 	private int p1r, p2r;
+	private PImage background;
 	
 	private Rectangle screenRect;
 
@@ -56,9 +57,9 @@ public class DrawingSurface extends PApplet {
 		float ratioX = (float) width / DRAWING_WIDTH;
 		float ratioY = (float) height / DRAWING_HEIGHT;
 		
-		//System.out.println(midscreen);
+		System.out.println(midscreen);
 		scale(ratioX, ratioY);
-
+		
 		fill(0);
 		textSize(100);
 		text("" + (60 - frameCount/60),325,100);
@@ -68,7 +69,8 @@ public class DrawingSurface extends PApplet {
 		//fill(0,255,0);
 		//rect(Blue.WIDTH, 0, DRAWING_WIDTH - 2 * Blue.WIDTH, DRAWING_HEIGHT);
 		fill(100);
-		rect(0, 395 + Blue.HEIGHT, DRAWING_WIDTH, DRAWING_HEIGHT - 395);
+		//rect(0, 395 + Blue.HEIGHT, DRAWING_WIDTH, DRAWING_HEIGHT - 395);
+		image(background.get(midscreen-800, 0, DRAWING_WIDTH, DRAWING_HEIGHT - 395), 0, 395 + Blue.HEIGHT, DRAWING_WIDTH, DRAWING_HEIGHT - 395);
 		fill(255, 0, 0);
 		if (midscreen < 800) {
 			rect(0, 395 + Blue.HEIGHT, 800 - midscreen, DRAWING_HEIGHT - 395);
@@ -195,6 +197,8 @@ public class DrawingSurface extends PApplet {
 		// size(0,0,PApplet.P3D);
 		/* assets.add(loadImage("mario.png")); */
 
+		background = loadImage("C:\\Users\\Kids\\Downloads\\close-up-concrete-dark-908286.jpg");
+		
 		spawnPlayers();
 	}
 	
