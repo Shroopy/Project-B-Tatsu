@@ -56,7 +56,10 @@ public class Player {
 			character.jump();
 
 		if (keys.contains(A)) {
-			character.fivea();
+			if(keys.contains(CROUCH))
+				character.twoa();
+			else
+				character.fivea();
 		}
 		else if (keys.contains(B)) {
 			character.fiveb();

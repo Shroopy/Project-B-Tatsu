@@ -71,8 +71,10 @@ public class Blue extends Character {
 
 	@Override
 	public void fiveb() {
-		if (controlState.equals("controllable"))
-			addHitbox(0, 0, 60, 40, 4, 4, 10, 18, 90 / 18, 0, "mid");
+		if (controlState.equals("controllable")) {
+			moveByAmount(20, 0);
+			addHitbox(0, 0, 50, 40, 4, 4, 10, 18, 70 / 18, 0, "mid");
+		}
 	}
 
 	@Override
@@ -85,6 +87,25 @@ public class Blue extends Character {
 	public void sixc() {
 		if (controlState.equals("controllable"))
 			addHitbox(0, 20, 60, 40, 20, 8, 6, 17, 90 / 17, 0, "high");
+		
+	}
+
+	@Override
+	public void twoa() {
+		if (controlState.equals("controllable"))
+			addHitbox(0, (int)((getHeight() - 30)), 60, 30, 3, 2, 4, 10, 40 / 10, 0, "low");
+		
+	}
+
+	@Override
+	public void twob() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void twoc() {
+		// TODO Auto-generated method stub
 		
 	}
 	

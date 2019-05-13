@@ -253,5 +253,8 @@ public abstract class Character extends Sprite {
 	public abstract void fiveb();
 	public abstract void fivec();
 	public abstract void sixc();
+	public abstract void twoa();
+	public abstract void twob();
+	public abstract void twoc();
 
 }
