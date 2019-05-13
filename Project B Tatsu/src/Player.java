@@ -46,8 +46,10 @@ public class Player {
 		else
 			facing = MVLEFT;
 		
-		if(keys.contains(CROUCH) && character.isGrounded() && character.getControlState().equals("controllable"))
-			character.setCrouching(true);
+		if(keys.contains(CROUCH) && character.isGrounded()) {
+			if(character.getControlState().equals("controllable"));
+				character.setCrouching(true);
+		}
 		else
 			character.setCrouching(false);
 		

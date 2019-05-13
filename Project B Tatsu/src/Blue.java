@@ -52,7 +52,7 @@ public class Blue extends Character {
 	}
 
 	//ATTACKS
-	//int xOffset, int yOffset, int width, int height, int startup, int active, int recovery,  int hitstun, double xKB, double yKB, String blockHeight
+	//int xOffset, int yOffset, int width, int height, int startup, int active, int recovery,  int hitstun, int blockstun, double xKB, double yKB, String blockHeight
 	
 	/**
 	 * Produces a hitbox 30 pixels wide and 80 hitboxes tall

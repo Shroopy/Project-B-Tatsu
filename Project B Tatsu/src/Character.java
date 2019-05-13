@@ -233,7 +233,7 @@ public abstract class Character extends Sprite {
 	 * @param yKB: Vertical knockback inflicted by the opposing attack.
 	 */
 	public void takeHit(int hitstun, double xKB, double yKB) {
-		if(hitstunLeft == 1001) {
+		if(hitstun == 1001) {
 			hitstunLeft = 30;
 			invincible = true;
 		}
