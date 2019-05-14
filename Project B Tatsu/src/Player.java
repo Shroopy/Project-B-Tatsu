@@ -40,16 +40,19 @@ public class Player {
 	 * @param keys: An ArrayList of keys currently being pressed.
 	 */
 	public void act(ArrayList<Integer> keys) {
-		Integer facing;
-		if (character.facing == 1)
-			facing = MVRIGHT;
-		else
-			facing = MVLEFT;
+		Integer front, back;
+		if (character.facing == 1) {
+			front = MVRIGHT;
+			back = MVLEFT;
+		}
+		else {
+			front = MVLEFT;
+			back = MVRIGHT;
+		}
 
 		if (keys.contains(CROUCH) && character.isGrounded()) {
 			if (character.getControlState().equals("controllable"))
-				;
-			character.setCrouching(true);
+				character.setCrouching(true);
 		} else
 			character.setCrouching(false);
 
@@ -59,24 +62,39 @@ public class Player {
 			character.walk(1);
 		else
 			character.walk(0);
+		
+		if(keys.contains(back) && character.controlState.equals("controllable") && character.isGrounded()) {
+			if(keys.contains(CROUCH))
+				character.setBlocking("low");
+			else
+				character.setBlocking("high");
+		}
+		else
+			character.setBlocking("not");
 
 		if (keys.contains(JUMP) || keys.contains(ALTJUMP))
 			character.jump();
 
 		if (keys.contains(A)) {
-			if (keys.contains(CROUCH))
+			if (!character.isGrounded())
+				character.ja();
+			else if (keys.contains(CROUCH))
 				character.twoa();
 			else
 				character.fivea();
 		} else if (keys.contains(B)) {
-			if (keys.contains(CROUCH))
+			if (!character.isGrounded())
+				character.jb();
+			else if (keys.contains(CROUCH))
 				character.twob();
 			else
 				character.fiveb();
 		} else if (keys.contains(C)) {
-			if (keys.contains(CROUCH))
+			if (!character.isGrounded())
+				character.jc();
+			else if (keys.contains(CROUCH))
 				character.twoc();
-			else if (keys.contains(facing))
+			else if (keys.contains(front))
 				character.sixc();
 			else
 				character.fivec();

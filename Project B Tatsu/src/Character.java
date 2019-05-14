@@ -18,6 +18,15 @@ public abstract class Character extends Sprite {
 	protected int absX;
 	protected int hitstunLeft, recoveryLeft;
 	private int hitboxOffsetX;
+	protected String blocking = "not";
+
+	public String getBlocking() {
+		return blocking;
+	}
+
+	public void setBlocking(String blocking) {
+		this.blocking = blocking;
+	}
 
 	protected int facing; // 1 is right, -1 is left
 	// protected String state;
@@ -70,6 +79,14 @@ public abstract class Character extends Sprite {
 
 		if (this.getY() > 400) {
 			vY = 0;
+			if(!grounded && hitboxes.size() > 0) {
+				controlState = "recovery";
+				recoveryLeft = hitboxes.get(hitboxes.size() - 1).getRecovery();
+				hitboxes.clear();
+			}
+			if(!grounded && recoveryLeft > 0) {
+				vX = 0;
+			}
 			grounded = true;
 
 		} else {
@@ -133,6 +150,15 @@ public abstract class Character extends Sprite {
 		for (Hitbox h : hitboxes) {
 			h.draw(g);
 		}
+		if(hitstunLeft > 0 || recoveryLeft > 0) {
+			g.noFill();
+			g.ellipseMode(g.CENTER);
+			g.ellipse(width/2 + x, height/2 + y, width/4, height/4);
+		}
+		if(!blocking.equals("not")) {
+			g.fill(0);
+			g.triangle(x, y, x + width, y, x + width / 2, y + height / 2);
+		}
 	}
 
 	/**
@@ -181,7 +207,7 @@ public abstract class Character extends Sprite {
 	 * @param rect: The Rectangle2D.Double that represents the other character.
 	 * @return A hitbox that is touching the other character.
 	 */
-	public Hitbox hitboxesIntersect(Rectangle2D.Double rect) {
+	public Hitbox hitboxesIntersect(Rectangle2D.Float rect) {
 		for (Hitbox h : hitboxes) {
 			if (h.intersects(rect))
 				return h;
@@ -206,7 +232,8 @@ public abstract class Character extends Sprite {
 	}
 
 	public void setCrouching(boolean crouching) {
-		vX = 0;
+		if(crouching)
+			vX = 0;
 		this.crouching = crouching;
 	}
 
@@ -214,7 +241,7 @@ public abstract class Character extends Sprite {
 		this.grounded = grounded;
 	}
 
-	public void setScreenX(double set) {
+	public void setScreenX(float set) {
 		super.x = set;
 	}
 
@@ -231,7 +258,23 @@ public abstract class Character extends Sprite {
 		} else
 			hitstunLeft = hitstun;
 		vX = xKB * -1 * facing;
+		if(!blocking.equals("not"))
+			vX = vX * 3 / 4;
 		vY = -yKB;
+		controlState = "hitstun";
+		hitboxes.clear();
+		recoveryLeft = 0;
+	}
+	
+	/**
+	 * Called when a hitbox intersects this character while it is blocking, inflicts hitstun and knockback based on the attack the opponent has hit with.
+	 * @param hitstun: Hitstun inflicted by the opposing attack on block.
+	 * @param xKB: Horizontal knockback inflicted by the opposing attack normally.
+	 */
+	public void blockHit(int hitstun, double xKB) {
+		hitstunLeft = hitstun;
+		vX = xKB * -1 * facing;
+		//vX = vX * 3 / 4;
 		controlState = "hitstun";
 		hitboxes.clear();
 		recoveryLeft = 0;
@@ -284,5 +327,11 @@ public abstract class Character extends Sprite {
 	public abstract void twob();
 
 	public abstract void twoc();
+	
+	public abstract void ja();
+	
+	public abstract void jb();
+	
+	public abstract void jc();
 
 }

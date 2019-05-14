@@ -3,7 +3,7 @@ import java.awt.geom.Rectangle2D;
 
 import processing.core.PApplet;
 
-public class Sprite extends Rectangle2D.Double {
+public class Sprite extends Rectangle2D.Float {
 
 	protected Color color;
 	protected double vX, vY, aX = 0;
@@ -47,7 +47,7 @@ public class Sprite extends Rectangle2D.Double {
 	 * @param x: Sprite's new x 
 	 * @param y: Sprite's new y 
 	 */
-	public void moveToLocation(double x, double y) {
+	public void moveToLocation(float x, float y) {
 		super.x = x;
 		super.y = y;
 	}

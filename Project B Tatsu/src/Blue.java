@@ -51,9 +51,7 @@ public class Blue extends Character {
 	}
 
 	// ATTACKS
-	// int xOffset, int yOffset, int width, int height, int startup, int active, int
-	// recovery, int hitstun, int blockstun, double xKB, double yKB, String
-	// blockHeight
+	// int xOffset, int yOffset, int width, int height, int startup, int active, int recovery, int hitstun, int blockstun, double xKB, double yKB, String blockHeight
 
 //	/**
 //	 * Produces a hitbox 30 pixels wide and 80 hitboxes tall Has 2 startup, 1 active, 2 recovery, and hits mid
@@ -66,14 +64,14 @@ public class Blue extends Character {
 	@Override
 	public void fivea() {
 		if (controlState.equals("controllable"))
-			addHitbox(0, 0, 60, 10, 2, 1, 2, 8, 4, 60 / 8, 0, "mid");
+			addHitbox(0, 20, 60, 10, 2, 1, 2, 8, 4, 60 / 8, 0, "mid");
 	}
 
 	@Override
 	public void fiveb() {
 		if (controlState.equals("controllable")) {
 			moveByAmount(20 * facing, 0);
-			addHitbox(0, 0, 50, 40, 4, 4, 10, 20, 15, 70 / 20, 0, "mid");
+			addHitbox(0, 20, 50, 40, 4, 4, 10, 20, 15, 70 / 20, 0, "mid");
 		}
 	}
 
@@ -107,7 +105,30 @@ public class Blue extends Character {
 	@Override
 	public void twoc() {
 		if (controlState.equals("controllable"))
-			addHitbox(0, (int) ((getHeight() - 30)), 70, 30, 7, 3, 0, 1001, 19, 30 / 14, 3, "low");
+			addHitbox(0, (int) ((getHeight() - 30)), 70, 30, 7, 3, 25, 1001, 19, 30 / 14, 3, "low");
+	}
+
+	@Override
+	public void ja() {
+		if (controlState.equals("controllable"))
+			addHitbox(0, (int)(getHeight()), 30, 30, 3, 1001, 2, 9, 7, 30 / 9, 0, "high");
+		
+	}
+
+	@Override
+	public void jb() {
+		if (controlState.equals("controllable")) {
+			addHitbox(0, -40, 30, 60, 9, 3, 10, 9, 7, 30 / 18, 0, "high"); //second
+			addHitbox(0, 10, 60, 40, 5, 3, 0, 11, 9, 80 / 18, 0, "high"); //first
+		}
+		
+	}
+
+	@Override
+	public void jc() {
+		if (controlState.equals("controllable"))
+			addHitbox(0, (int) ((getHeight() - 30)), 80, 40, 9, 8, 18, 16, 14, 30 / 16, 0, "high");
+		
 	}
 
 }
