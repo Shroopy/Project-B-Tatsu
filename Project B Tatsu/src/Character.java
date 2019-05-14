@@ -100,7 +100,6 @@ public abstract class Character extends Sprite {
 				vX = 0;
 			controlState = "attacking";
 		} else if (controlState.equals("attacking")) {
-			invincible = false;
 			controlState = "controllable";
 		}
 
@@ -113,6 +112,7 @@ public abstract class Character extends Sprite {
 		if (hitstunLeft > 0)
 			hitstunLeft--;
 		else if (controlState.equals("hitstun")) {
+			invincible = false;
 			controlState = "controllable";
 			vX = 0;
 		}
