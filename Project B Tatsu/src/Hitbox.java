@@ -2,8 +2,7 @@ import java.awt.Color;
 
 public class Hitbox extends Sprite {
 
-	private int xOffset, yOffset, startup, active, facing, hitstun, recovery, width, blockstun; // startup is frames before first
-																						// active frame
+	private int xOffset, yOffset, startup, active, facing, hitstun, recovery, width, blockstun; // startup is frames before first active frame
 	double xKB, yKB;
 	private String state;
 	private String blockHeight;
@@ -24,8 +23,7 @@ public class Hitbox extends Sprite {
 	 * @param yKB: Vertical movement of the opposing Character after struck by the hitbox
 	 * @param blockHeight: unused presently
 	 */
-	public Hitbox(int xOffset, int yOffset, int x, int y, int w, int h, int startup, int active, int recovery,
-			int facing, int hitstun, int blockstun, double xKB, double yKB, String blockHeight) {
+	public Hitbox(int xOffset, int yOffset, int x, int y, int w, int h, int startup, int active, int recovery, int facing, int hitstun, int blockstun, double xKB, double yKB, String blockHeight) {
 		super(Color.YELLOW, x, y + yOffset, w, h);
 		assert facing == -1 || facing == 1;
 		this.xOffset = xOffset;
@@ -49,7 +47,7 @@ public class Hitbox extends Sprite {
 
 	/**
 	 * Moves the hitbox's location using Sprite's moveToLocation method
-	 * @param x: The x the hitbox should be moved 
+	 * @param x: The x the hitbox should be moved
 	 * @param y: The y the hitbox should be moved
 	 */
 	public void adjustPosition(int x, int y) {

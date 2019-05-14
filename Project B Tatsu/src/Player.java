@@ -36,23 +36,23 @@ public class Player {
 	}
 
 	/**
-	 * Calls methods to influence the character based on which keys are pressed 
+	 * Calls methods to influence the character based on which keys are pressed
 	 * @param keys: An ArrayList of keys currently being pressed.
 	 */
 	public void act(ArrayList<Integer> keys) {
 		Integer facing;
-		if(character.facing == 1)
+		if (character.facing == 1)
 			facing = MVRIGHT;
 		else
 			facing = MVLEFT;
-		
-		if(keys.contains(CROUCH) && character.isGrounded()) {
-			if(character.getControlState().equals("controllable"));
-				character.setCrouching(true);
-		}
-		else
+
+		if (keys.contains(CROUCH) && character.isGrounded()) {
+			if (character.getControlState().equals("controllable"))
+				;
+			character.setCrouching(true);
+		} else
 			character.setCrouching(false);
-		
+
 		if (keys.contains(MVLEFT))
 			character.walk(-1);
 		else if (keys.contains(MVRIGHT))
@@ -64,21 +64,19 @@ public class Player {
 			character.jump();
 
 		if (keys.contains(A)) {
-			if(keys.contains(CROUCH))
+			if (keys.contains(CROUCH))
 				character.twoa();
 			else
 				character.fivea();
-		}
-		else if (keys.contains(B)) {
-			if(keys.contains(CROUCH))
+		} else if (keys.contains(B)) {
+			if (keys.contains(CROUCH))
 				character.twob();
 			else
 				character.fiveb();
-		}
-		else if (keys.contains(C)) {
-			if(keys.contains(CROUCH))
+		} else if (keys.contains(C)) {
+			if (keys.contains(CROUCH))
 				character.twoc();
-			else if(keys.contains(facing))
+			else if (keys.contains(facing))
 				character.sixc();
 			else
 				character.fivec();
