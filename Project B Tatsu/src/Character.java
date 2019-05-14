@@ -3,10 +3,8 @@ import java.awt.Color;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-
 import processing.core.PApplet;
 import processing.core.PImage;
-
 
 public abstract class Character extends Sprite {
 
@@ -20,7 +18,7 @@ public abstract class Character extends Sprite {
 	protected int absX;
 	protected int hitstunLeft, recoveryLeft;
 	private int hitboxOffsetX;
-	
+
 	protected int facing; // 1 is right, -1 is left
 	// protected String state;
 
@@ -41,31 +39,29 @@ public abstract class Character extends Sprite {
 		this.facing = facing;
 		absX = 800 + x;
 	}
-	
+
 	/**
 	 * This is the method that advances the game. Moves the characters based on the X and Y velocity and checks and sets state and Hitboxes.
 	 */
 	public void act() {
-		
-		if(crouching != lastCrouching)
+
+		if (crouching != lastCrouching)
 			y += height - getCharHeight();
 		height = getCharHeight();
 		lastCrouching = crouching;
-		
+
 		// FALL (and stop when a platform is hit)
-		
-		if(absX < 0) {
-			moveByAmount(1,vY);
+
+		if (absX < 0) {
+			moveByAmount(1, vY);
 			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
-		}
-		else if(absX > 2400) {
-			moveByAmount(-1,vY);
+		} else if (absX > 2400) {
+			moveByAmount(-1, vY);
 			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
-		}
-		else if (grounded) {
+		} else if (grounded) {
 			moveByAmount(vX, vY);
 			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
-			//System.out.println("absX: " + absX + " - screenX: " + super.x);
+			// System.out.println("absX: " + absX + " - screenX: " + super.x);
 		} else {
 			moveByAmount(vX * 0.6, vY);
 			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
@@ -119,14 +115,13 @@ public abstract class Character extends Sprite {
 	 * @param yKB: Vertical movement of the opposing Character after struck by the hitbox
 	 * @param blockHeight: unused presently
 	 */
-	protected void addHitbox(int xOffset, int yOffset, int width, int height, int startup, int active, int recovery,  int hitstun, int blockstun, double xKB, double yKB, String blockHeight) {
+	protected void addHitbox(int xOffset, int yOffset, int width, int height, int startup, int active, int recovery, int hitstun, int blockstun, double xKB, double yKB, String blockHeight) {
 		assert facing == 1 || facing == -1;
 		if (facing == 1)
 			hitboxOffsetX = getCharWidth();
 		else
 			hitboxOffsetX = -width;
-		hitboxes.add(new Hitbox(xOffset, yOffset, (int) x + hitboxOffsetX, (int) y, width, height, startup, active,
-				recovery, facing, hitstun, blockstun, xKB, yKB, blockHeight));
+		hitboxes.add(new Hitbox(xOffset, yOffset, (int) x + hitboxOffsetX, (int) y, width, height, startup, active, recovery, facing, hitstun, blockstun, xKB, yKB, blockHeight));
 	}
 
 	/**
@@ -143,26 +138,24 @@ public abstract class Character extends Sprite {
 	/**
 	 * 
 	 */
-	public void changeState(int input) 
-	{
+	public void changeState(int input) {
 		assert input == 0 || input == 1;
-		if(input == 0) {
+		if (input == 0) {
 			controlState = "";
 			vX = 0;
 			vY = 0;
 			aX = 0;
-		}	
-		else 
+		} else
 			controlState = "controllable";
-			
+
 	}
-	
+
 	protected abstract void fall();
 
 	public int getAbsX() {
 		return absX;
 	}
-	
+
 	public boolean isInvincible() {
 		return invincible;
 	}
@@ -184,7 +177,7 @@ public abstract class Character extends Sprite {
 	}
 
 	/**
-	 * 	Checks whether any of the hitboxes produced by this character touches the other character.
+	 * Checks whether any of the hitboxes produced by this character touches the other character.
 	 * @param rect: The Rectangle2D.Double that represents the other character.
 	 * @return A hitbox that is touching the other character.
 	 */
@@ -221,23 +214,21 @@ public abstract class Character extends Sprite {
 		this.grounded = grounded;
 	}
 
-	public void setScreenX(double set) 
-	{
+	public void setScreenX(double set) {
 		super.x = set;
 	}
-	
+
 	/**
-	 * Called when a hitbox intersects this character, inflicts hitstun and knockback based on the attack the opponent has hit with. 
+	 * Called when a hitbox intersects this character, inflicts hitstun and knockback based on the attack the opponent has hit with.
 	 * @param hitstun: Hitstun inflicted by the opposing attack.
 	 * @param xKB: Horizontal knockback inflicted by the opposing attack.
 	 * @param yKB: Vertical knockback inflicted by the opposing attack.
 	 */
 	public void takeHit(int hitstun, double xKB, double yKB) {
-		if(hitstun == 1001) {
+		if (hitstun == 1001) {
 			hitstunLeft = 30;
 			invincible = true;
-		}
-		else
+		} else
 			hitstunLeft = hitstun;
 		vX = xKB * -1 * facing;
 		vY = -yKB;
@@ -246,7 +237,7 @@ public abstract class Character extends Sprite {
 		recoveryLeft = 0;
 	}
 
-	//public abstract void testAttack();
+	// public abstract void testAttack();
 
 	/**
 	 * Updates what hitboxes are on screen and which phase they are in(startup, active, recovery)
@@ -278,16 +269,20 @@ public abstract class Character extends Sprite {
 		if (controlState.equals("controllable") && grounded && !crouching)
 			vX = dir * 4;
 	}
-	
-	
-	
+
 	// ATTACKS
 	public abstract void fivea();
+
 	public abstract void fiveb();
+
 	public abstract void fivec();
+
 	public abstract void sixc();
+
 	public abstract void twoa();
+
 	public abstract void twob();
+
 	public abstract void twoc();
 
 }

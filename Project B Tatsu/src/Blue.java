@@ -1,5 +1,4 @@
 
-
 import java.awt.*;
 import java.util.*;
 
@@ -40,7 +39,7 @@ public class Blue extends Character {
 
 	@Override
 	public int getCharHeight() {
-		if(crouching) {
+		if (crouching) {
 			return HEIGHT * 3 / 4;
 		}
 		return HEIGHT;
@@ -51,13 +50,14 @@ public class Blue extends Character {
 		return WIDTH;
 	}
 
-	//ATTACKS
-	//int xOffset, int yOffset, int width, int height, int startup, int active, int recovery,  int hitstun, int blockstun, double xKB, double yKB, String blockHeight
-	
-	/**
-	 * Produces a hitbox 30 pixels wide and 80 hitboxes tall
-	 * Has 2 startup, 1 active, 2 recovery, and hits mid
-	 */
+	// ATTACKS
+	// int xOffset, int yOffset, int width, int height, int startup, int active, int
+	// recovery, int hitstun, int blockstun, double xKB, double yKB, String
+	// blockHeight
+
+//	/**
+//	 * Produces a hitbox 30 pixels wide and 80 hitboxes tall Has 2 startup, 1 active, 2 recovery, and hits mid
+//	 */
 //	public void testAttack() {
 //		if (controlState.equals("controllable"))
 //			addHitbox(0, 0, 30, 80, 2, 1, 2, 8, 4, 30 / 8, 0, "mid");
@@ -87,29 +87,27 @@ public class Blue extends Character {
 	public void sixc() {
 		if (controlState.equals("controllable"))
 			addHitbox(0, 20, 60, 40, 20, 8, 6, 17, 14, 90 / 17, 0, "high");
-		
+
 	}
 
 	@Override
 	public void twoa() {
 		if (controlState.equals("controllable"))
-			addHitbox(0, (int)((getHeight() - 30)), 60, 30, 3, 2, 4, 10, 6, 40 / 10, 0, "low");
-		
+			addHitbox(0, (int) ((getHeight() - 30)), 60, 30, 3, 2, 4, 10, 6, 40 / 10, 0, "low");
+
 	}
 
 	@Override
 	public void twob() {
 		if (controlState.equals("controllable"))
-			addHitbox(0, (int)((getHeight() - 30)), 80, 30, 5, 4, 10, 18, 14, 60 / 18, 0, "low");
-		
+			addHitbox(0, (int) ((getHeight() - 30)), 80, 30, 5, 4, 10, 18, 14, 60 / 18, 0, "low");
+
 	}
 
 	@Override
 	public void twoc() {
 		if (controlState.equals("controllable"))
-			addHitbox(0, (int)((getHeight() - 30)), 70, 30, 7, 3, 0, 1001, 19, 30/14, 3, "low");
+			addHitbox(0, (int) ((getHeight() - 30)), 70, 30, 7, 3, 0, 1001, 19, 30 / 14, 3, "low");
 	}
-	
-	
 
 }
