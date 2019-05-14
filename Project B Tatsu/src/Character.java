@@ -274,7 +274,7 @@ public abstract class Character extends Sprite {
 	public void blockHit(int hitstun, double xKB) {
 		hitstunLeft = hitstun;
 		vX = xKB * -1 * facing;
-		//vX = vX * 3 / 4;
+		vX = vX * 3 / 4;
 		controlState = "hitstun";
 		hitboxes.clear();
 		recoveryLeft = 0;
@@ -333,5 +333,7 @@ public abstract class Character extends Sprite {
 	public abstract void jb();
 	
 	public abstract void jc();
+	
+	public abstract void dpa();
 
 }

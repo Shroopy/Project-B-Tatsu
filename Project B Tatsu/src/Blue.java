@@ -130,5 +130,13 @@ public class Blue extends Character {
 			addHitbox(0, (int) ((getHeight() - 30)), 80, 40, 9, 8, 18, 16, 14, 30 / 16, 0, "high");
 		
 	}
+	
+	@Override
+	public void dpa() {
+		if (controlState.equals("controllable")) {
+			vY -= 8;
+			addHitbox(0, 0, 60, 80, 3, 10, 26, 1001, 10, 120 / 30, 12, "mid");
+		}
+	}
 
 }

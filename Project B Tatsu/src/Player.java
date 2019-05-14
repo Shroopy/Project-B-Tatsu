@@ -4,7 +4,8 @@ import java.util.ArrayList;
 public class Player {
 
 	private Character character;
-	private final Integer MVLEFT, MVRIGHT, JUMP, CROUCH, A, B, C, ALTJUMP;
+	private final Integer MVLEFT, MVRIGHT, JUMP, CROUCH, A, B, C, ALTJUMP, FRONT, BACK;
+	private ArrayList<ArrayList<Integer>> commandKeys;
 
 	/**
 	 * Creates a Player object
@@ -13,6 +14,7 @@ public class Player {
 	 */
 	public Player(int playerNum, Character character) {
 		assert playerNum == 1 || playerNum == 2;
+		commandKeys = new ArrayList<ArrayList<Integer>>();
 		if (playerNum == 1) {
 			MVLEFT = KeyEvent.VK_A;
 			MVRIGHT = KeyEvent.VK_D;
@@ -22,6 +24,8 @@ public class Player {
 			B = KeyEvent.VK_I;
 			C = KeyEvent.VK_O;
 			ALTJUMP = KeyEvent.VK_J;
+			FRONT = MVRIGHT;
+			BACK = MVLEFT;
 		} else {
 			MVLEFT = KeyEvent.VK_LEFT;
 			MVRIGHT = KeyEvent.VK_RIGHT;
@@ -31,6 +35,8 @@ public class Player {
 			B = KeyEvent.VK_NUMPAD8;
 			C = KeyEvent.VK_NUMPAD9;
 			ALTJUMP = KeyEvent.VK_NUMPAD4;
+			FRONT = MVLEFT;
+			BACK = MVRIGHT;
 		}
 		this.character = character;
 	}
@@ -40,15 +46,13 @@ public class Player {
 	 * @param keys: An ArrayList of keys currently being pressed.
 	 */
 	public void act(ArrayList<Integer> keys) {
-		Integer front, back;
-		if (character.facing == 1) {
-			front = MVRIGHT;
-			back = MVLEFT;
-		}
+		if(commandKeys.size() < 60)
+			commandKeys.add(keys);
 		else {
-			front = MVLEFT;
-			back = MVRIGHT;
+			commandKeys.remove(0);
+			commandKeys.add(keys);
 		}
+		
 
 		if (keys.contains(CROUCH) && character.isGrounded()) {
 			if (character.getControlState().equals("controllable"))
@@ -63,7 +67,7 @@ public class Player {
 		else
 			character.walk(0);
 		
-		if(keys.contains(back) && character.controlState.equals("controllable") && character.isGrounded()) {
+		if(keys.contains(BACK) && character.controlState.equals("controllable") && character.isGrounded()) {
 			if(keys.contains(CROUCH))
 				character.setBlocking("low");
 			else
@@ -76,7 +80,9 @@ public class Player {
 			character.jump();
 
 		if (keys.contains(A)) {
-			if (!character.isGrounded())
+			if(character.isGrounded() && checkDP())
+				character.dpa();
+			else if (!character.isGrounded())
 				character.ja();
 			else if (keys.contains(CROUCH))
 				character.twoa();
@@ -94,7 +100,7 @@ public class Player {
 				character.jc();
 			else if (keys.contains(CROUCH))
 				character.twoc();
-			else if (keys.contains(front))
+			else if (keys.contains(FRONT))
 				character.sixc();
 			else
 				character.fivec();
@@ -114,5 +120,17 @@ public class Player {
 
 	public Character getCharacter() {
 		return character;
+	}
+	
+	private boolean checkDP() {
+		int i = commandKeys.indexOf(FRONT);
+		if(i > -1) {
+			for(;i > -1; i--)
+				commandKeys.remove(0);
+			i = commandKeys.indexOf(FRONT);
+			if(i > -1)
+				return true;
+		}
+		return false;
 	}
 }
