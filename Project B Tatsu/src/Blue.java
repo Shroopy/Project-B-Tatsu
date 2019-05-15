@@ -136,6 +136,7 @@ public class Blue extends Character {
 		if (controlState.equals("controllable")) {
 			vY -= 8;
 			addHitbox(0, 0, 60, 80, 3, 10, 26, 1001, 10, 120 / 30, 12, "mid");
+			this.giveMeter(10);
 		}
 	}
 

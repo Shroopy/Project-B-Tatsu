@@ -128,16 +128,44 @@ public class Player {
 	}
 	
 	private boolean checkDP() {
-		int i = commandKeys.indexOf(FRONT);
-		if(i > -1) {
-			for(;i > -1; i--)
+		boolean firstF = false;
+		int i = 0;
+		int j = 0;
+		for(; i < commandKeys.size(); i++) 
+		{
+			for(; j < commandKeys.get(i).size(); j++) 
+			{
+				if(commandKeys.get(i).get(j) == FRONT) 
+				{
+					firstF = true;
+					break;
+				}
+			}
+			if(firstF)
+				break;
+		}
+		if(firstF) 
+		{
+			while(i > 0) 
+			{
 				commandKeys.remove(0);
-			i = commandKeys.indexOf(FRONT);
-			if(i > -1)
-				return true;
+				i--;
+			}
+			j = 0;
+			for(; i < commandKeys.size(); i++) 
+			{
+				for(; j < commandKeys.get(i).size(); j++) 
+				{
+					if(commandKeys.get(i).get(j) == FRONT) 
+					{
+						return true;
+					}
+				}
+			}
 		}
 		return false;
 	}
+	
 	
 	public boolean checkHmm() {
 		return hmm > 60 * 10;

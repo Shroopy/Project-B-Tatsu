@@ -74,13 +74,22 @@ public class DrawingSurface extends PApplet {
 		fill(100);
 		rect(0, 395 + Blue.HEIGHT, DRAWING_WIDTH, DRAWING_HEIGHT - 395);
 		// image(background.get(midscreen-800, 0, DRAWING_WIDTH+200, DRAWING_HEIGHT -
-		// 395), 0, 395 + Blue.HEIGHT, DRAWING_WIDTH+200, DRAWING_HEIGHT - 395);
+		// 395), 0, 395 + Blue.HEIGHT, DRAWING_WIDTH+200, DRAWING_HEIGHT - 395);		
+		
 		fill(255, 0, 0);
 		if (midscreen < 800) {
 			rect(0, 395 + Blue.HEIGHT, 800 - midscreen, DRAWING_HEIGHT - 395);
 		} else {
 			rect(2400 - midscreen, 395 + Blue.HEIGHT, midscreen - 1200, DRAWING_HEIGHT - 395);
 		}
+		
+		fill(255,255,0);
+		rect(120, 500, player1char.getMeter()*2,50);
+		textSize(50);
+		text(player1char.getMeter(),20,545);
+		rect(650-(player2char.getMeter()*2), 500, player2char.getMeter()*2,50);
+		text(player2char.getMeter(),670,545);
+		
 		player1.draw(this);
 		player2.draw(this);
 		if (frameCount == 3600) {
@@ -166,19 +175,19 @@ public class DrawingSurface extends PApplet {
 			if (player1char.isGrounded() == player2char.isGrounded()) {
 				player1char.moveByAmount((-Math.abs(diff - player1char.getCharWidth() - diffv)) / 2, 0);
 				player2char.moveByAmount((Math.abs(diff - player1char.getCharWidth() + diffv)) / 2, 0);
-				System.out.println(-Math.abs(diff - player1char.getCharWidth() - diffv) / 2);
-				System.out.println(Math.abs(diff - player1char.getCharWidth() + diffv) / 2);
+				//System.out.println(-Math.abs(diff - player1char.getCharWidth() - diffv) / 2);
+				//System.out.println(Math.abs(diff - player1char.getCharWidth() + diffv) / 2);
 			} else if (player1char.isGrounded()) {
 				player1char.moveByAmount((-Math.abs(diff - player1char.getCharWidth()) - diffv) / 2, 0);
 				player2char.moveByAmount((Math.abs(diff - player1char.getCharWidth()) + 0.6 * diffv) / 2, 0);
 
 			} else if (player2char.isGrounded()) {
-				System.out.println("diffv: " + diffv);
+				//System.out.println("diffv: " + diffv);
 				player1char.moveByAmount((-Math.abs(diff - player1char.getCharWidth()) + 0.6 * diffv) / 2, 0);
 				player2char.moveByAmount((Math.abs(diff - player1char.getCharWidth()) - diffv) / 2, 0);
-				System.out.println(player1char.getVX());
-				System.out.println(-Math.abs(diff - player1char.getCharWidth() - 0.6 * diffv) / 2);
-				System.out.println(Math.abs(diff - player1char.getCharWidth() + diffv) / 2);
+				//System.out.println(player1char.getVX());
+				//System.out.println(-Math.abs(diff - player1char.getCharWidth() - 0.6 * diffv) / 2);
+				//System.out.println(Math.abs(diff - player1char.getCharWidth() + diffv) / 2);
 			}
 			player1char.zeroVX();
 			player2char.zeroVX();
@@ -230,6 +239,7 @@ public class DrawingSurface extends PApplet {
 		player2char = new Blue(/* assets.get(0), */DRAWING_WIDTH / 4 * 3 + Blue.WIDTH / 2, 50, -1);
 		player1 = new Player(1, player1char);
 		player2 = new Player(2, player2char);
+		midscreen = 1200;
 	}
 
 }

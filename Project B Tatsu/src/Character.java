@@ -19,7 +19,8 @@ public abstract class Character extends Sprite {
 	protected int hitstunLeft, recoveryLeft;
 	private int hitboxOffsetX;
 	protected String blocking = "not";
-
+	protected int meter;
+	
 	public String getBlocking() {
 		return blocking;
 	}
@@ -47,6 +48,7 @@ public abstract class Character extends Sprite {
 		assert facing == 1 || facing == -1;
 		this.facing = facing;
 		absX = 800 + x;
+		meter = 0;
 	}
 
 	/**
@@ -59,6 +61,8 @@ public abstract class Character extends Sprite {
 		height = getCharHeight();
 		lastCrouching = crouching;
 
+		if(meter > 100)
+			meter = 100;
 		// FALL (and stop when a platform is hit)
 
 		if (absX < 0) {
@@ -198,6 +202,15 @@ public abstract class Character extends Sprite {
 		return facing;
 	}
 
+	public int getMeter() 
+	{
+		return meter;
+	}
+	public void giveMeter(int m) 
+	{
+		meter += m;
+	}
+	
 	public ArrayList<Hitbox> getHitboxes() {
 		return hitboxes;
 	}
@@ -252,6 +265,7 @@ public abstract class Character extends Sprite {
 	 * @param yKB: Vertical knockback inflicted by the opposing attack.
 	 */
 	public void takeHit(int hitstun, double xKB, double yKB) {
+		meter += xKB * 0.5;
 		if (hitstun == 1001) {
 			hitstunLeft = 30;
 			invincible = true;
@@ -272,6 +286,7 @@ public abstract class Character extends Sprite {
 	 * @param xKB: Horizontal knockback inflicted by the opposing attack normally.
 	 */
 	public void blockHit(int hitstun, double xKB) {
+		meter += xKB * 0.25;
 		hitstunLeft = hitstun;
 		vX = xKB * -1 * facing;
 		vX = vX * 3 / 4;
