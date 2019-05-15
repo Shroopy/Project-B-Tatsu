@@ -102,7 +102,11 @@ public class Player {
 			else
 				character.fiveb();
 		} else if (keys.contains(C)) {
-			if (!character.isGrounded())
+			if(character.isGrounded() && checkDP() && character.getMeter() >= 25) {
+				character.dpc();
+				character.giveMeter(-25);
+			}	
+			else if (!character.isGrounded())
 				character.jc();
 			else if (keys.contains(CROUCH))
 				character.twoc();
@@ -144,22 +148,43 @@ public class Player {
 			}
 			if(firstF)
 				break;
-		}
+		}		
+		System.out.println(commandKeys.toString());
 		if(firstF) 
 		{
+			boolean neutral = false;
 			while(i > 0) 
 			{
 				commandKeys.remove(0);
 				i--;
 			}
+			System.out.println(commandKeys.toString());
 			j = 0;
 			for(; i < commandKeys.size(); i++) 
 			{
-				for(; j < commandKeys.get(i).size(); j++) 
-				{
-					if(commandKeys.get(i).get(j) == FRONT) 
+				if(commandKeys.get(i).size() == 1) 
 					{
-						return true;
+						neutral = true;
+						break;
+					}
+			}
+			if(neutral) 
+			{
+				System.out.println("check2");
+				while(i > 0) 
+				{
+					commandKeys.remove(0);
+					i--;
+				}
+				for(; i < commandKeys.size(); i++) 
+				{
+					for(; j < commandKeys.get(i).size(); j++) 
+					{
+						if(commandKeys.get(i).get(j) == FRONT) 
+						{
+							firstF = true;
+							return true;
+						}
 					}
 				}
 			}

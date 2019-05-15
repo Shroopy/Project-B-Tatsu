@@ -150,5 +150,13 @@ public class Blue extends Character {
 			this.giveMeter(10);
 		}
 	}
+	
+	public void dpc() {
+		if (controlState.equals("controllable") || (controlState.equals("recovery") && attackHit)) {
+			vY -= 12;
+			vX = 1;
+			addHitbox(0, 0, 60, 80, 1, 15, 33, 1001, 10, 120 / 30, 12, "mid");
+		}
+	}
 
 }
