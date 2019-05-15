@@ -5,6 +5,7 @@ public class Player {
 
 	private Character character;
 	private final Integer MVLEFT, MVRIGHT, JUMP, CROUCH, A, B, C, ALTJUMP, FRONT, BACK;
+	private int hmm;
 	private ArrayList<ArrayList<Integer>> commandKeys;
 
 	/**
@@ -55,10 +56,14 @@ public class Player {
 		
 
 		if (keys.contains(CROUCH) && character.isGrounded()) {
-			if (character.getControlState().equals("controllable"))
+			if (character.getControlState().equals("controllable")) {
 				character.setCrouching(true);
-		} else
+				hmm++;
+			}
+		} else {
 			character.setCrouching(false);
+			hmm = 0;
+		}
 
 		if (keys.contains(MVLEFT))
 			character.walk(-1);
@@ -132,5 +137,9 @@ public class Player {
 				return true;
 		}
 		return false;
+	}
+	
+	public boolean checkHmm() {
+		return hmm > 60 * 10;
 	}
 }
