@@ -134,6 +134,7 @@ public class Blue extends Character {
 	@Override
 	public void dpa() {
 		if (controlState.equals("controllable") || (controlState.equals("recovery") && attackHit)) {
+			vX = 0;
 			vY -= 6;
 			addHitbox(0, 0, 60, 80, 3, 10, 26, 1001, 10, 120 / 30, 6, "mid");
 			this.giveMeter(10);
@@ -145,7 +146,8 @@ public class Blue extends Character {
 		if (controlState.equals("controllable") || (controlState.equals("recovery") && attackHit)) {
 			vY -= 12;
 			vX = 1;
-			addHitbox(0, 0, 60, 80, 7, 15, 33, 1001, 10, 120 / 30, 12, "mid");
+			addHitbox(0, 0, 60, 80, 6, 15, 33, 1001, 10, 120 / 30, 12, "mid");
+			this.giveMeter(10);
 		}
 	}
 

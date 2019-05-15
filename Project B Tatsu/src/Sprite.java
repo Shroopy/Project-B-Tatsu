@@ -52,14 +52,37 @@ public class Sprite extends Rectangle2D.Float {
 		super.y = y;
 	}
 	
-	public double getVX() 
-	{
-		return vX;
-	}
-	
 	public void zeroVX() 
 	{
 		vX = 0;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public double getvX() {
+		return vX;
+	}
+
+	public double getvY() {
+		return vY;
+	}
+
+	public double getaX() {
+		return aX;
+	}
+
+	public void setvX(double vX) {
+		this.vX = vX;
+	}
+
+	public void setvY(double vY) {
+		this.vY = vY;
+	}
+
+	public void setaX(double aX) {
+		this.aX = aX;
 	}
 
 }

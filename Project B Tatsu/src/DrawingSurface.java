@@ -133,6 +133,7 @@ public class DrawingSurface extends PApplet {
 			else	
 				player1char.takeHit(player1Hit.getHitstun(), player1Hit.getxKB(), player1Hit.getyKB());
 			
+			player2char.setvX(player2char.getFacing() * -1 * player1char.getKbFromEdge());
 			player2char.setAttackHit(true);
 		}
 		if (player2Hit != null && player2Hit.getState().equals("active") && !player2char.isInvincible()) {
@@ -141,6 +142,7 @@ public class DrawingSurface extends PApplet {
 			else	
 				player2char.takeHit(player2Hit.getHitstun(), player2Hit.getxKB(), player2Hit.getyKB());
 			
+			player1char.setvX(player1char.getFacing() * -1 * player2char.getKbFromEdge());
 			player1char.setAttackHit(true);
 		}
 
@@ -170,8 +172,8 @@ public class DrawingSurface extends PApplet {
 	public void checkPass() {
 		double p1x = player1char.getX();
 		double p2x = player2char.getX();
-		double v1 = player1char.getVX();
-		double v2 = player2char.getVX();
+		double v1 = player1char.getvX();
+		double v2 = player2char.getvX();
 		double diff = p2x - p1x;
 		double diffv = v1 + v2;
 

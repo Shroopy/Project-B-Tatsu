@@ -18,6 +18,7 @@ public abstract class Character extends Sprite {
 	private int hitboxOffsetX;
 	protected String blocking = "not";
 	protected int meter;
+	private double kbFromEdge;
 	
 	public String getBlocking() {
 		return blocking;
@@ -300,13 +301,28 @@ public abstract class Character extends Sprite {
 			knockedDown = true;
 		} else
 			hitstunLeft = hitstun;
-		vX = xKB * -1 * facing;
-		if (!blocking.equals("not"))
-			vX = vX * 3 / 4;
+		
+		double newXKB;
+		if (absX - hitstun * xKB < 0) {
+			newXKB = absX / hitstun;
+			kbFromEdge = xKB - newXKB;
+		} else if (absX + hitstun * xKB > 2400) {
+			newXKB = (2400 - absX) / hitstun;
+			kbFromEdge = xKB - newXKB;
+		} else
+			newXKB = xKB;
+		vX = newXKB * -1 * facing;
+		
 		vY = -yKB;
 		controlState = "hitstun";
 		hitboxes.clear();
 		recoveryLeft = 0;
+		
+		if (absX - hitstun * xKB < 0) {
+			moveByAmount(1, vY);
+		} else if (absX + hitstun * xKB > 2400) {
+			moveByAmount(-1, vY);
+		}
 	}
 
 	/**
@@ -319,7 +335,18 @@ public abstract class Character extends Sprite {
 	public void blockHit(int hitstun, double xKB) {
 		meter += xKB * 0.25;
 		hitstunLeft = hitstun;
-		vX = xKB * -1 * facing;
+		
+		double newXKB;
+		if (absX - hitstun * xKB < 0) {
+			newXKB = absX / hitstun;
+			kbFromEdge = xKB - newXKB;
+		} else if (absX + hitstun * xKB > 2400) {
+			newXKB = (2400 - absX) / hitstun;
+			kbFromEdge = xKB - newXKB;
+		} else
+			newXKB = xKB;
+		vX = newXKB * -1 * facing;
+		
 		vX = vX / 2;
 		controlState = "hitstun";
 		hitboxes.clear();
@@ -389,6 +416,10 @@ public abstract class Character extends Sprite {
 
 	public void setAttackHit(boolean attackHit) {
 		this.attackHit = attackHit;
+	}
+
+	public double getKbFromEdge() {
+		return kbFromEdge;
 	}
 
 }

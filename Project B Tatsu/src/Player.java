@@ -93,7 +93,9 @@ public class Player {
 			else
 				character.fivea();
 		} else if (keys.contains(B)) {
-			if (!character.isGrounded())
+			if(character.isGrounded() && checkDP())
+				character.dpb();
+			else if (!character.isGrounded())
 				character.jb();
 			else if (keys.contains(CROUCH))
 				character.twob();
