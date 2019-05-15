@@ -9,14 +9,12 @@ import processing.core.PImage;
 public abstract class Character extends Sprite {
 
 	// FIELDS
-	protected boolean grounded = false;
+	protected boolean grounded = false, invincible = false, crouching, lastCrouching, knockedDown, attackHit;
 	protected String controlState = "controllable";
-	protected boolean invincible = false;
-	protected boolean crouching, lastCrouching;
 	protected ArrayList<Hitbox> hitboxes;
 	// absolute position of character on the stage
 	protected int absX;
-	protected int hitstunLeft, recoveryLeft;
+	protected int hitstunLeft, recoveryLeft, invincibleLeft, invincibleStartupLeft;
 	private int hitboxOffsetX;
 	protected String blocking = "not";
 
@@ -34,6 +32,7 @@ public abstract class Character extends Sprite {
 	// CONSTRUCTORS
 	/**
 	 * Constructs an object of the Character class, using Sprite's super constructor
+	 * 
 	 * @param color: The color of the drawn character
 	 * @param x: The x value of the character
 	 * @param y: The y value of the character
@@ -50,7 +49,8 @@ public abstract class Character extends Sprite {
 	}
 
 	/**
-	 * This is the method that advances the game. Moves the characters based on the X and Y velocity and checks and sets state and Hitboxes.
+	 * This is the method that advances the game. Moves the characters based on the
+	 * X and Y velocity and checks and sets state and Hitboxes.
 	 */
 	public void act() {
 
@@ -79,16 +79,21 @@ public abstract class Character extends Sprite {
 
 		if (this.getY() > 400) {
 			vY = 0;
-			if(!grounded && hitboxes.size() > 0) {
-				controlState = "recovery";
-				recoveryLeft = hitboxes.get(hitboxes.size() - 1).getRecovery();
-				hitboxes.clear();
-			}
-			if(!grounded && recoveryLeft > 0) {
-				vX = 0;
-			}
-			grounded = true;
+			if (!grounded) {
+				if (hitboxes.size() > 0) {
+					controlState = "recovery";
+					recoveryLeft = hitboxes.get(hitboxes.size() - 1).getRecovery();
+					hitboxes.clear();
+				}
+				if (recoveryLeft > 0)
+					vX = 0;
+				if (knockedDown) {
+					knockedDown = false;
+					vX = 0;
+				}
 
+				grounded = true;
+			}
 		} else {
 			grounded = false;
 			crouching = false;
@@ -107,29 +112,47 @@ public abstract class Character extends Sprite {
 			recoveryLeft--;
 		else if (controlState.equals("recovery")) {
 			controlState = "controllable";
+			attackHit = false;
 		}
 
-		if (hitstunLeft > 0)
-			hitstunLeft--;
-		else if (controlState.equals("hitstun")) {
+		if (hitstunLeft > 0) {
+			if (!knockedDown)
+				hitstunLeft--;
+		} else if (controlState.equals("hitstun")) {
 			invincible = false;
 			controlState = "controllable";
 			vX = 0;
 		}
+
+		if (invincibleStartupLeft > 0) {
+			invincibleStartupLeft--;
+		} else if (invincibleLeft > 0) {
+			invincibleLeft--;
+		} else {
+			invincible = false;
+		}
+
 	}
 
 	/**
 	 * Adds a hitbox to the ArrayList of hitboxes attributed to this Character.
-	 * @param xOffset: The x at which the hitbox should be generated relative to the character
-	 * @param yOffset: The y at which the hitbox should be generated relative to the character
+	 * 
+	 * @param xOffset: The x at which the hitbox should be generated relative to the
+	 *        character
+	 * @param yOffset: The y at which the hitbox should be generated relative to the
+	 *        character
 	 * @param width: The width of the hitbox
 	 * @param height: The height of the hitbox
 	 * @param startup: How long the hitbox takes to become active
 	 * @param active: How long the hitbox remains active
-	 * @param recovery: How long the Character cannot move after the hitbox has stopped being active
-	 * @param hitstun: How long the opposing Character cannot move after struck by the hitbox
-	 * @param xKB: Horizontal movement of the opposing Character after struck by the hitbox
-	 * @param yKB: Vertical movement of the opposing Character after struck by the hitbox
+	 * @param recovery: How long the Character cannot move after the hitbox has
+	 *        stopped being active
+	 * @param hitstun: How long the opposing Character cannot move after struck by
+	 *        the hitbox
+	 * @param xKB: Horizontal movement of the opposing Character after struck by the
+	 *        hitbox
+	 * @param yKB: Vertical movement of the opposing Character after struck by the
+	 *        hitbox
 	 * @param blockHeight: unused presently
 	 */
 	protected void addHitbox(int xOffset, int yOffset, int width, int height, int startup, int active, int recovery, int hitstun, int blockstun, double xKB, double yKB, String blockHeight) {
@@ -143,6 +166,7 @@ public abstract class Character extends Sprite {
 
 	/**
 	 * Draws the next frame of the game. Calls Sprite's version of draw.
+	 * 
 	 * @param g: The PApplet on which the game is drawn.
 	 */
 	public void draw(PApplet g) {
@@ -150,12 +174,12 @@ public abstract class Character extends Sprite {
 		for (Hitbox h : hitboxes) {
 			h.draw(g);
 		}
-		if(hitstunLeft > 0 || recoveryLeft > 0) {
+		if (hitstunLeft > 0 || recoveryLeft > 0) {
 			g.noFill();
 			g.ellipseMode(g.CENTER);
-			g.ellipse(width/2 + x, height/2 + y, width/4, height/4);
+			g.ellipse(width / 2 + x, height / 2 + y, width / 4, height / 4);
 		}
-		if(!blocking.equals("not")) {
+		if (!blocking.equals("not")) {
 			g.fill(0);
 			g.triangle(x, y, x + width, y, x + width / 2, y + height / 2);
 		}
@@ -203,7 +227,9 @@ public abstract class Character extends Sprite {
 	}
 
 	/**
-	 * Checks whether any of the hitboxes produced by this character touches the other character.
+	 * Checks whether any of the hitboxes produced by this character touches the
+	 * other character.
+	 * 
 	 * @param rect: The Rectangle2D.Double that represents the other character.
 	 * @return A hitbox that is touching the other character.
 	 */
@@ -232,7 +258,7 @@ public abstract class Character extends Sprite {
 	}
 
 	public void setCrouching(boolean crouching) {
-		if(crouching)
+		if (crouching)
 			vX = 0;
 		this.crouching = crouching;
 	}
@@ -246,7 +272,9 @@ public abstract class Character extends Sprite {
 	}
 
 	/**
-	 * Called when a hitbox intersects this character, inflicts hitstun and knockback based on the attack the opponent has hit with.
+	 * Called when a hitbox intersects this character, inflicts hitstun and
+	 * knockback based on the attack the opponent has hit with.
+	 * 
 	 * @param hitstun: Hitstun inflicted by the opposing attack.
 	 * @param xKB: Horizontal knockback inflicted by the opposing attack.
 	 * @param yKB: Vertical knockback inflicted by the opposing attack.
@@ -255,26 +283,29 @@ public abstract class Character extends Sprite {
 		if (hitstun == 1001) {
 			hitstunLeft = 30;
 			invincible = true;
+			knockedDown = true;
 		} else
 			hitstunLeft = hitstun;
 		vX = xKB * -1 * facing;
-		if(!blocking.equals("not"))
+		if (!blocking.equals("not"))
 			vX = vX * 3 / 4;
 		vY = -yKB;
 		controlState = "hitstun";
 		hitboxes.clear();
 		recoveryLeft = 0;
 	}
-	
+
 	/**
-	 * Called when a hitbox intersects this character while it is blocking, inflicts hitstun and knockback based on the attack the opponent has hit with.
+	 * Called when a hitbox intersects this character while it is blocking, inflicts
+	 * hitstun and knockback based on the attack the opponent has hit with.
+	 * 
 	 * @param hitstun: Hitstun inflicted by the opposing attack on block.
 	 * @param xKB: Horizontal knockback inflicted by the opposing attack normally.
 	 */
 	public void blockHit(int hitstun, double xKB) {
 		hitstunLeft = hitstun;
 		vX = xKB * -1 * facing;
-		vX = vX * 3 / 4;
+		vX = vX / 2;
 		controlState = "hitstun";
 		hitboxes.clear();
 		recoveryLeft = 0;
@@ -283,7 +314,8 @@ public abstract class Character extends Sprite {
 	// public abstract void testAttack();
 
 	/**
-	 * Updates what hitboxes are on screen and which phase they are in(startup, active, recovery)
+	 * Updates what hitboxes are on screen and which phase they are in(startup,
+	 * active, recovery)
 	 */
 	protected void updateHitboxes() {
 		for (int i = 0; i < hitboxes.size(); i++) {
@@ -306,7 +338,9 @@ public abstract class Character extends Sprite {
 
 	/**
 	 * If on the ground, causes the character to move left or right.
-	 * @param dir: Input value of -1 or 1, determines whether character walks left or right.
+	 * 
+	 * @param dir: Input value of -1 or 1, determines whether character walks left
+	 *        or right.
 	 */
 	public void walk(int dir) {
 		if (controlState.equals("controllable") && grounded && !crouching)
@@ -327,13 +361,19 @@ public abstract class Character extends Sprite {
 	public abstract void twob();
 
 	public abstract void twoc();
-	
+
 	public abstract void ja();
-	
+
 	public abstract void jb();
-	
+
 	public abstract void jc();
-	
+
 	public abstract void dpa();
+
+	public abstract void dpb();
+
+	public void setAttackHit(boolean attackHit) {
+		this.attackHit = attackHit;
+	}
 
 }

@@ -123,12 +123,16 @@ public class DrawingSurface extends PApplet {
 				player1char.blockHit(player1Hit.getBlockstun(), player1Hit.getxKB());
 			else	
 				player1char.takeHit(player1Hit.getHitstun(), player1Hit.getxKB(), player1Hit.getyKB());
+			
+			player2char.setAttackHit(true);
 		}
 		if (player2Hit != null && player2Hit.getState().equals("active") && !player2char.isInvincible()) {
 			if(player2Hit.getBlockHeight().equals(player2char.getBlocking()) || (player2Hit.getBlockHeight().equals("mid") && !player2char.getBlocking().equals("not")))
 				player2char.blockHit(player2Hit.getBlockstun(), player2Hit.getxKB());
 			else	
 				player2char.takeHit(player2Hit.getHitstun(), player2Hit.getxKB(), player2Hit.getyKB());
+			
+			player1char.setAttackHit(true);
 		}
 
 		checkPass();

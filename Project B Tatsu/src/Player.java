@@ -54,7 +54,6 @@ public class Player {
 			commandKeys.add(keys);
 		}
 		
-
 		if (keys.contains(CROUCH) && character.isGrounded()) {
 			if (character.getControlState().equals("controllable")) {
 				character.setCrouching(true);
