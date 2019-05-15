@@ -23,6 +23,7 @@ public class DrawingSurface extends PApplet {
 	private Player player1, player2;
 	private Character player1char, player2char;
 	// private ArrayList<Shape> obstacles;
+	private PImage image;
 
 	private ArrayList<Integer> keys;
 
@@ -48,8 +49,11 @@ public class DrawingSurface extends PApplet {
 	public void draw() {
 
 		// drawing stuff
-
-		background(0, 255, 255);
+		
+		if(player2.checkHmm() && player2char.x <= 800)
+			image(image, 0, 0, width, 600);
+		else
+			background(0, 255, 255);
 
 		pushMatrix();
 
@@ -216,8 +220,7 @@ public class DrawingSurface extends PApplet {
 		// size(0,0,PApplet.P3D);
 		/* assets.add(loadImage("mario.png")); */
 
-		// background =
-		// loadImage("C:\\Users\\Kids\\Downloads\\close-up-concrete-dark-908286.jpg");
+		image = loadImage("lib/hmm.png");
 
 		spawnPlayers();
 	}
