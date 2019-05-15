@@ -50,7 +50,7 @@ public class DrawingSurface extends PApplet {
 
 		// drawing stuff
 		
-		if(player2.checkHmm() && player2char.x <= 800)
+		if(player2.checkHmm())
 			image(image, 0, 0, width, 600);
 		else
 			background(0, 255, 255);
