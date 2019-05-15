@@ -386,6 +386,8 @@ public abstract class Character extends Sprite {
 	public abstract void dpa();
 
 	public abstract void dpb();
+	
+	public abstract void dpc();
 
 	public void setAttackHit(boolean attackHit) {
 		this.attackHit = attackHit;
