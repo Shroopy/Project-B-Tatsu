@@ -71,7 +71,7 @@ public class Blue extends Character {
 	public void fiveb() {
 		if (controlState.equals("controllable")) {
 			moveByAmount(20 * facing, 0);
-			addHitbox(0, 20, 50, 40, 4, 4, 10, 20, 15, 80 / 20, 0, "mid");
+			addHitbox(0, 20, 50, 40, 4, 4, 10, 20, 15, 70 / 20, 0, "mid");
 		}
 	}
 
@@ -136,6 +136,7 @@ public class Blue extends Character {
 		if (controlState.equals("controllable") || (controlState.equals("recovery") && attackHit)) {
 			vY -= 6;
 			addHitbox(0, 0, 60, 80, 3, 10, 26, 1001, 10, 120 / 30, 6, "mid");
+			this.giveMeter(10);
 		}
 	}
 	
