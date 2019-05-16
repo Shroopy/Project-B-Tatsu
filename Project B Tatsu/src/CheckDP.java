@@ -38,6 +38,7 @@ public class CheckDP {
 				
 			case AFTERFORWARD1:
 				if (keys.contains(player.FRONT)) {
+					// XXX: Do you need to reset frames to 0 here? or call reset()?
 					state = State.INITIAL;
 				} else {
 					state = State.AFTERNEUTRAL;
