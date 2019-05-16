@@ -13,8 +13,8 @@ public class DrawingSurface extends PApplet {
 	public static final int DRAWING_WIDTH = 800;
 	public static final int DRAWING_HEIGHT = 600;
 	public static int midscreen = 1200;
-	public static final int cornerL = 400;
-	public static final int cornerR = 2000;
+	public static final int CORNERL = 400;
+	public static final int CORNERR = 2000;
 	private int p1r, p2r;
 	private PImage background;
 
@@ -69,12 +69,8 @@ public class DrawingSurface extends PApplet {
 		textSize(20);
 		text("P1 Rounds: " + p1r, 50, 50);
 		text("P2 Rounds: " + p2r, 600, 50);
-		// fill(0,255,0);
-		// rect(Blue.WIDTH, 0, DRAWING_WIDTH - 2 * Blue.WIDTH, DRAWING_HEIGHT);
 		fill(100);
-		rect(0, 395 + Blue.HEIGHT, DRAWING_WIDTH, DRAWING_HEIGHT - 395);
-		// image(background.get(midscreen-800, 0, DRAWING_WIDTH+200, DRAWING_HEIGHT -
-		// 395), 0, 395 + Blue.HEIGHT, DRAWING_WIDTH+200, DRAWING_HEIGHT - 395);		
+		rect(0, 395 + Blue.HEIGHT, DRAWING_WIDTH, DRAWING_HEIGHT - 395);	
 		
 		fill(255, 0, 0);
 		if (midscreen < 800) {

@@ -140,7 +140,7 @@ public class Player {
 		{
 			for(; j < commandKeys.get(i).size(); j++) 
 			{
-				if(commandKeys.get(i).get(j) == FRONT) 
+				if(commandKeys.get(i).get(j) == FRONT)
 				{
 					firstF = true;
 					break;
