@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Player {
 
 	private Character character;
-	private final Integer MVLEFT, MVRIGHT, JUMP, CROUCH, A, B, C, ALTJUMP, FRONT, BACK;
+	public final Integer MVLEFT, MVRIGHT, JUMP, CROUCH, A, B, C, ALTJUMP, FRONT, BACK;
 	private int hmm;
 	private ArrayList<ArrayList<Integer>> commandKeys;
 
