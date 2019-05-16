@@ -5,6 +5,7 @@ public class Player {
 
 	private Character character;
 	public final Integer MVLEFT, MVRIGHT, JUMP, CROUCH, A, B, C, ALTJUMP, FRONT, BACK;
+	private CheckDP checkDP;
 	private int hmm;
 	private ArrayList<ArrayList<Integer>> commandKeys;
 
@@ -16,6 +17,7 @@ public class Player {
 	public Player(int playerNum, Character character) {
 		assert playerNum == 1 || playerNum == 2;
 		commandKeys = new ArrayList<ArrayList<Integer>>();
+		checkDP = new CheckDP(this);
 		if (playerNum == 1) {
 			MVLEFT = KeyEvent.VK_A;
 			MVRIGHT = KeyEvent.VK_D;
@@ -47,6 +49,8 @@ public class Player {
 	 * @param keys: An ArrayList of keys currently being pressed.
 	 */
 	public void act(ArrayList<Integer> keys) {
+		checkDP.run(keys);
+		
 		if(commandKeys.size() < 60)
 			commandKeys.add(keys);
 		else {
@@ -84,7 +88,7 @@ public class Player {
 			character.jump();
 
 		if (keys.contains(A)) {
-			if(character.isGrounded() && checkDP())
+			if(character.isGrounded() && checkDP.isReady())
 				character.dpa();
 			else if (!character.isGrounded())
 				character.ja();
@@ -93,7 +97,7 @@ public class Player {
 			else
 				character.fivea();
 		} else if (keys.contains(B)) {
-			if(character.isGrounded() && checkDP())
+			if(character.isGrounded() && checkDP.isReady())
 				character.dpb();
 			else if (!character.isGrounded())
 				character.jb();
@@ -102,7 +106,7 @@ public class Player {
 			else
 				character.fiveb();
 		} else if (keys.contains(C)) {
-			if(character.isGrounded() && checkDP() && character.getMeter() >= 25) {
+			if(character.isGrounded() && checkDP.isReady() && character.getMeter() >= 25) {
 				character.dpc();
 				character.giveMeter(-25);
 			}	
@@ -131,67 +135,6 @@ public class Player {
 	public Character getCharacter() {
 		return character;
 	}
-	
-	private boolean checkDP() {
-		boolean firstF = false;
-		int i = 0;
-		int j = 0;
-		for(; i < commandKeys.size(); i++) 
-		{
-			for(; j < commandKeys.get(i).size(); j++) 
-			{
-				if(commandKeys.get(i).get(j) == FRONT)
-				{
-					firstF = true;
-					break;
-				}
-			}
-			if(firstF)
-				break;
-		}		
-		System.out.println(commandKeys.toString());
-		if(firstF) 
-		{
-			boolean neutral = false;
-			while(i > 0) 
-			{
-				commandKeys.remove(0);
-				i--;
-			}
-			System.out.println(commandKeys.toString());
-			j = 0;
-			for(; i < commandKeys.size(); i++) 
-			{
-				if(commandKeys.get(i).size() == 1) 
-					{
-						neutral = true;
-						break;
-					}
-			}
-			if(neutral) 
-			{
-				System.out.println("check2");
-				while(i > 0) 
-				{
-					commandKeys.remove(0);
-					i--;
-				}
-				for(; i < commandKeys.size(); i++) 
-				{
-					for(; j < commandKeys.get(i).size(); j++) 
-					{
-						if(commandKeys.get(i).get(j) == FRONT) 
-						{
-							firstF = true;
-							return true;
-						}
-					}
-				}
-			}
-		}
-		return false;
-	}
-	
 	
 	public boolean checkHmm() {
 		return hmm > 60 * 10;

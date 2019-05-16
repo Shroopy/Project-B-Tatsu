@@ -26,7 +26,7 @@ public class CheckDP {
 
 	public void run(ArrayList<Integer> keys) {
 		frames++;
-		if (frames > 20 || keys.contains(player.BACK))
+		if (frames > 60 || keys.contains(player.BACK))
 			reset();
 
 		switch (state) {
@@ -37,11 +37,7 @@ public class CheckDP {
 				break;
 				
 			case AFTERFORWARD1:
-				if (keys.contains(player.FRONT)) {
-					reset();
-					// XXX: Do you need to reset frames to 0 here? or call reset()?
-					// state = State.INITIAL;
-				} else {
+				if (!keys.contains(player.FRONT)) {
 					state = State.AFTERNEUTRAL;
 				}
 				break;

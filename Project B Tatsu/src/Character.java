@@ -82,9 +82,11 @@ public abstract class Character extends Sprite {
 		}
 		fall();
 
-		if (this.getY() > 400) {
+		if (this.getY() >= 415) {
 			vY = 0;
 			if (!grounded) {
+				y = 335 + (float)getHeight();
+				
 				if (hitboxes.size() > 0) {
 					controlState = "recovery";
 					recoveryLeft = hitboxes.get(hitboxes.size() - 1).getRecovery();
@@ -296,6 +298,7 @@ public abstract class Character extends Sprite {
 	public void takeHit(int hitstun, double xKB, double yKB) {
 		meter += xKB * 0.5;
 		if (hitstun == 1001) {
+			hitstun = 30;
 			hitstunLeft = 30;
 			invincible = true;
 			knockedDown = true;
@@ -336,6 +339,7 @@ public abstract class Character extends Sprite {
 		meter += xKB * 0.25;
 		hitstunLeft = hitstun;
 		
+		xKB = xKB * 3 / 4;
 		double newXKB;
 		if (absX - hitstun * xKB < 0) {
 			newXKB = absX / hitstun;
@@ -347,7 +351,6 @@ public abstract class Character extends Sprite {
 			newXKB = xKB;
 		vX = newXKB * -1 * facing;
 		
-		vX = vX / 2;
 		controlState = "hitstun";
 		hitboxes.clear();
 		recoveryLeft = 0;
