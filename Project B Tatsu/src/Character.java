@@ -4,6 +4,7 @@ import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PImage;
 
 public abstract class Character extends Sprite {
@@ -12,19 +13,20 @@ public abstract class Character extends Sprite {
 	protected boolean grounded = false, invincible = false, crouching, lastCrouching, knockedDown, attackHit;
 	protected String controlState = "controllable";
 	protected ArrayList<Hitbox> hitboxes;
+	protected ArrayList<Projectile> projectiles;
 	// absolute position of character on the stage
 	protected int absX;
 	protected int hitstunLeft, recoveryLeft, invincibleLeft, invincibleStartupLeft;
 	private int hitboxOffsetX;
-	protected String blocking = "not";
+	protected BlockHeight blocking = BlockHeight.NOT;
 	protected int meter;
 	private double kbFromEdge;
 	
-	public String getBlocking() {
+	public BlockHeight getBlockHeight() {
 		return blocking;
 	}
 
-	public void setBlocking(String blocking) {
+	public void setBlocking(BlockHeight blocking) {
 		this.blocking = blocking;
 	}
 
@@ -45,10 +47,19 @@ public abstract class Character extends Sprite {
 	public Character(Color color, int x, int y, int w, int h, int facing) {
 		super(color, x, y, w, h);
 		hitboxes = new ArrayList<Hitbox>();
+		projectiles = new ArrayList<Projectile>();
 		assert facing == 1 || facing == -1;
 		this.facing = facing;
 		absX = 800 + x;
 		meter = 0;
+	}
+
+	public boolean isAttackHit() {
+		return attackHit;
+	}
+
+	public ArrayList<Projectile> getProjectiles() {
+		return projectiles;
 	}
 
 	/**
@@ -162,7 +173,7 @@ public abstract class Character extends Sprite {
 	 *        hitbox
 	 * @param blockHeight: unused presently
 	 */
-	protected void addHitbox(int xOffset, int yOffset, int width, int height, int startup, int active, int recovery, int hitstun, int blockstun, double xKB, double yKB, String blockHeight) {
+	protected void addHitbox(int xOffset, int yOffset, int width, int height, int startup, int active, int recovery, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight) {
 		assert facing == 1 || facing == -1;
 		if (facing == 1)
 			hitboxOffsetX = getCharWidth();
@@ -183,10 +194,10 @@ public abstract class Character extends Sprite {
 		}
 		if (hitstunLeft > 0 || recoveryLeft > 0) {
 			g.noFill();
-			g.ellipseMode(g.CENTER);
+			g.ellipseMode(PConstants.CENTER);
 			g.ellipse(width / 2 + x, height / 2 + y, width / 4, height / 4);
 		}
-		if (!blocking.equals("not")) {
+		if (blocking != BlockHeight.NOT) {
 			g.fill(0);
 			g.triangle(x, y, x + width, y, x + width / 2, y + height / 2);
 		}
@@ -233,9 +244,12 @@ public abstract class Character extends Sprite {
 	{
 		return meter;
 	}
-	public void giveMeter(int m) 
+	public void adjustMeter(int m) 
 	{
 		meter += m;
+	}
+	public void setMeter(int m) {
+		meter = m;
 	}
 	
 	public ArrayList<Hitbox> getHitboxes() {

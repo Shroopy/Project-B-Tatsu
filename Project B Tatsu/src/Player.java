@@ -6,6 +6,7 @@ public class Player {
 	private Character character;
 	public final Integer MVLEFT, MVRIGHT, JUMP, CROUCH, A, B, C, ALTJUMP, FRONT, BACK;
 	private CheckDP checkDP;
+	private CheckQCF checkQCF;
 	private int hmm;
 	private ArrayList<ArrayList<Integer>> commandKeys;
 
@@ -18,6 +19,7 @@ public class Player {
 		assert playerNum == 1 || playerNum == 2;
 		commandKeys = new ArrayList<ArrayList<Integer>>();
 		checkDP = new CheckDP(this);
+		checkQCF = new CheckQCF(this);
 		if (playerNum == 1) {
 			MVLEFT = KeyEvent.VK_A;
 			MVRIGHT = KeyEvent.VK_D;
@@ -50,6 +52,7 @@ public class Player {
 	 */
 	public void act(ArrayList<Integer> keys) {
 		checkDP.run(keys);
+		checkQCF.run(keys);
 		
 		if(commandKeys.size() < 60)
 			commandKeys.add(keys);
@@ -77,12 +80,12 @@ public class Player {
 		
 		if(keys.contains(BACK) && character.controlState.equals("controllable") && character.isGrounded()) {
 			if(keys.contains(CROUCH))
-				character.setBlocking("low");
+				character.setBlocking(BlockHeight.LOW);
 			else
-				character.setBlocking("high");
+				character.setBlocking(BlockHeight.HIGH);
 		}
 		else
-			character.setBlocking("not");
+			character.setBlocking(BlockHeight.NOT);
 
 		if (keys.contains(JUMP) || keys.contains(ALTJUMP))
 			character.jump();
@@ -107,8 +110,13 @@ public class Player {
 				character.fiveb();
 		} else if (keys.contains(C)) {
 			if(character.isGrounded() && checkDP.isReady() && character.getMeter() >= 25) {
-				character.dpc();
-				character.giveMeter(-25);
+				if(checkDP.isReady())
+					character.dpc();
+				//else if(checkQCF.isReady()) {
+				//	character.qcfc();
+				//else
+				//	character.adjustMeter(25);
+				character.adjustMeter(-25);
 			}	
 			else if (!character.isGrounded())
 				character.jc();

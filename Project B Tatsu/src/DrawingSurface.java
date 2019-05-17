@@ -65,7 +65,7 @@ public class DrawingSurface extends PApplet {
 
 		fill(0);
 		textSize(100);
-		text("" + (60 - frameCount / 60), 325, 100);
+		text(60 - frameCount / 60, 325, 100);
 		textSize(20);
 		text("P1 Rounds: " + p1r, 50, 50);
 		text("P2 Rounds: " + p2r, 600, 50);
@@ -79,12 +79,15 @@ public class DrawingSurface extends PApplet {
 			rect(2400 - midscreen, 395 + Blue.HEIGHT, midscreen - 1200, DRAWING_HEIGHT - 395);
 		}
 		
-		fill(255,255,0);
-		rect(120, 500, player1char.getMeter()*2,50);
+		player1char.setMeter(100);
+		player2char.setMeter(100);
 		textSize(50);
+		float maxTextWidth = textWidth("100");
+		fill(255,255,0);
+		rect(20 + 10 + maxTextWidth, 500, player1char.getMeter()*2,50);
 		text(player1char.getMeter(),20,545);
-		rect(650-(player2char.getMeter()*2), 500, player2char.getMeter()*2,50);
-		text(player2char.getMeter(),670,545);
+		rect(DRAWING_WIDTH - 20 - maxTextWidth - 10 - (player2char.getMeter()*2), 500, player2char.getMeter()*2,50);
+		text(player2char.getMeter(),DRAWING_WIDTH - 20 - maxTextWidth,545);
 		
 		player1.draw(this);
 		player2.draw(this);
@@ -123,24 +126,8 @@ public class DrawingSurface extends PApplet {
 		Hitbox player1Hit = player2char.hitboxesIntersect(player1char);
 		Hitbox player2Hit = player1char.hitboxesIntersect(player2char);
 
-		if (player1Hit != null && player1Hit.getState().equals("active") && !player1char.isInvincible()) {
-			if(player1Hit.getBlockHeight().equals(player1char.getBlocking()) || (player1Hit.getBlockHeight().equals("mid") && !player1char.getBlocking().equals("not")))
-				player1char.blockHit(player1Hit.getBlockstun(), player1Hit.getxKB());
-			else	
-				player1char.takeHit(player1Hit.getHitstun(), player1Hit.getxKB(), player1Hit.getyKB());
-			
-			player2char.setvX(player2char.getFacing() * -1 * player1char.getKbFromEdge());
-			player2char.setAttackHit(true);
-		}
-		if (player2Hit != null && player2Hit.getState().equals("active") && !player2char.isInvincible()) {
-			if(player2Hit.getBlockHeight().equals(player2char.getBlocking()) || (player2Hit.getBlockHeight().equals("mid") && !player2char.getBlocking().equals("not")))
-				player2char.blockHit(player2Hit.getBlockstun(), player2Hit.getxKB());
-			else	
-				player2char.takeHit(player2Hit.getHitstun(), player2Hit.getxKB(), player2Hit.getyKB());
-			
-			player1char.setvX(player1char.getFacing() * -1 * player2char.getKbFromEdge());
-			player1char.setAttackHit(true);
-		}
+		checkPlayerHit(player1char, player2char, player1Hit);
+		checkPlayerHit(player2char, player1char, player2Hit);
 
 		checkPass();
 
@@ -196,6 +183,18 @@ public class DrawingSurface extends PApplet {
 			// System.out.println(player1char.getVX());
 		}
 	}
+	
+	private void checkPlayerHit(Character character1, Character character2, Hitbox hitbox) {
+		if (hitbox != null && hitbox.getState().equals("active") && !character1.isInvincible()) {
+			if(hitbox.getBlockHeight() == character1.getBlockHeight() || (hitbox.getBlockHeight() == BlockHeight.MID && character1.getBlockHeight() != BlockHeight.NOT))
+				character1.blockHit(hitbox.getBlockstun(), hitbox.getxKB());
+			else	
+				character1.takeHit(hitbox.getHitstun(), hitbox.getxKB(), hitbox.getyKB());
+			
+			character2.setvX(character2.getFacing() * -1 * character1.getKbFromEdge());
+			character2.setAttackHit(true);
+		}
+	}
 
 	/**
 	 * @param code: Code of a key to check if it was pressed
@@ -237,8 +236,8 @@ public class DrawingSurface extends PApplet {
 	}
 
 	public void spawnPlayers() {
-		player1char = new Blue(/* assets.get(0), */DRAWING_WIDTH / 4 - Blue.WIDTH / 2, 50, 1);
-		player2char = new Blue(/* assets.get(0), */DRAWING_WIDTH / 4 * 3 + Blue.WIDTH / 2, 50, -1);
+		player1char = new Blue(DRAWING_WIDTH / 4 - Blue.WIDTH / 2, 50, 1);
+		player2char = new Blue(DRAWING_WIDTH * 3 / 4 - Blue.WIDTH / 2, 50, -1);
 		player1 = new Player(1, player1char);
 		player2 = new Player(2, player2char);
 		midscreen = 1200;

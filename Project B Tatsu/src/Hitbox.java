@@ -3,9 +3,9 @@ import java.awt.Color;
 public class Hitbox extends Sprite {
 
 	private int xOffset, yOffset, startup, active, facing, hitstun, recovery, width, blockstun; // startup is frames before first active frame
-	double xKB, yKB;
+	private double xKB, yKB;
 	private String state;
-	private String blockHeight;
+	private BlockHeight blockHeight;
 
 	/**
 	 * Constructs a Hitbox object.
@@ -23,8 +23,8 @@ public class Hitbox extends Sprite {
 	 * @param yKB: Vertical movement of the opposing Character after struck by the hitbox
 	 * @param blockHeight: unused presently
 	 */
-	public Hitbox(int xOffset, int yOffset, int x, int y, int w, int h, int startup, int active, int recovery, int facing, int hitstun, int blockstun, double xKB, double yKB, String blockHeight) {
-		super(Color.YELLOW, x, y + yOffset, w, h);
+	public Hitbox(int xOffset, int yOffset, int x, int y, int w, int h, int startup, int active, int recovery, int facing, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight) {
+		super(Color.YELLOW, x + (xOffset * facing), y + yOffset, w, h);
 		assert facing == -1 || facing == 1;
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
@@ -58,7 +58,7 @@ public class Hitbox extends Sprite {
 		return active;
 	}
 
-	public String getBlockHeight() {
+	public BlockHeight getBlockHeight() {
 		return blockHeight;
 	}
 
