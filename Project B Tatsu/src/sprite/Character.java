@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import enums.BlockHeight;
 import enums.ControlState;
+import enums.HitboxState;
 import other.DrawingSurface;
 import processing.core.PApplet;
 import processing.core.PConstants;
@@ -391,7 +392,7 @@ public abstract class Character extends Sprite {
 				hitboxOffsetX = -1 * (int) h.getHitboxWidth();
 			h.adjustPosition((int) x + hitboxOffsetX, (int) y);
 			h.updateState();
-			if (h.getState().equals("inactive"))
+			if (h.getState() == HitboxState.INACTIVE)
 				hitboxes.remove(i);
 			if (hitboxes.size() == 0) {
 				controlState = ControlState.RECOVERY;

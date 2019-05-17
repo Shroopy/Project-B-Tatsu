@@ -2,12 +2,13 @@ package sprite;
 import java.awt.Color;
 
 import enums.BlockHeight;
+import enums.HitboxState;
 
 public class Hitbox extends Sprite {
 
 	private int xOffset, yOffset, startup, active, facing, hitstun, recovery, width, blockstun; // startup is frames before first active frame
 	private double xKB, yKB;
-	private String state;
+	private HitboxState state;
 	private BlockHeight blockHeight;
 
 	/**
@@ -41,7 +42,7 @@ public class Hitbox extends Sprite {
 		this.blockstun = blockstun;
 		this.yKB = yKB;
 		this.blockHeight = blockHeight;
-		state = "startup";
+		state = HitboxState.STARTUP;
 	}
 
 	public int getBlockstun() {
@@ -85,7 +86,7 @@ public class Hitbox extends Sprite {
 		return startup;
 	}
 
-	public String getState() {
+	public HitboxState getState() {
 		return state;
 	}
 
@@ -112,11 +113,11 @@ public class Hitbox extends Sprite {
 		if (startup > 0) {
 			startup--;
 		} else if (active > 0) {
-			state = "active";
+			state = HitboxState.ACTIVE;
 			color = Color.PINK;
 			active--;
 		} else
-			state = "inactive";
+			state = HitboxState.INACTIVE;
 	}
 
 }

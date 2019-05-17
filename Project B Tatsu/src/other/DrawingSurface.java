@@ -8,6 +8,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import enums.BlockHeight;
+import enums.HitboxState;
 import processing.core.PApplet;
 import processing.core.PImage;
 import sprite.Blue;
@@ -189,7 +190,7 @@ public class DrawingSurface extends PApplet {
 	}
 	
 	private void checkPlayerHit(Character character1, Character character2, Hitbox hitbox) {
-		if (hitbox != null && hitbox.getState().equals("active") && !character1.isInvincible()) {
+		if (hitbox != null && hitbox.getState() == HitboxState.ACTIVE && !character1.isInvincible()) {
 			if(hitbox.getBlockHeight() == character1.getBlockHeight() || (hitbox.getBlockHeight() == BlockHeight.MID && character1.getBlockHeight() != BlockHeight.NOT))
 				character1.blockHit(hitbox.getBlockstun(), hitbox.getxKB());
 			else	
