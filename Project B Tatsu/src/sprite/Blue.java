@@ -138,9 +138,10 @@ public class Blue extends Character {
 	@Override
 	public void dpa() {
 		if (controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
+			crouching = false;
 			vX = 0;
 			vY -= 6;
-			addHitbox(0, 0, 60, 80, 3, 10, 26, 1001, 10, 120 / 30, 6, BlockHeight.MID);
+			addHitbox(0, 0, 60, 80, 3, 10, 26, 1001, 10, 60 / 30, 6, BlockHeight.MID);
 			this.adjustMeter(10);
 		}
 	}
@@ -148,8 +149,10 @@ public class Blue extends Character {
 	@Override
 	public void dpb() {
 		if (controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
-			vY -= 12;
-			vX = 1 * facing;
+			crouching = false;
+			vY -= 10;
+			vX = 0.5 * facing;
+			addHitbox(0, 0, 60, 80, 1, 15, 33, 1001, 10, 90 / 30, 10, BlockHeight.MID);
 			this.adjustMeter(10);
 		}
 	}
@@ -157,19 +160,20 @@ public class Blue extends Character {
 	@Override
 	public void dpc() {
 		if (controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
+			crouching = false;
 			vY -= 12;
 			vX = 1 * facing;
 			addHitbox(0, 0, 60, 80, 1, 15, 33, 1001, 10, 120 / 30, 12, BlockHeight.MID);
+			adjustMeter(-25);
 		}
 	}
 	
 	@Override
 	public void qcfa() {
 		if (controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
-			addProjectile(Color.CYAN, 0, 20, 30, 40, 4, 14, DrawingSurface.DRAWING_WIDTH, facing, 25, 25, 60, 0, BlockHeight.MID);
+			crouching = false;
 			vX = 0;
-			recoveryLeft = 40;
-			controlState = ControlState.RECOVERY;
+			addProjectile(Color.CYAN.darker(), 0, 20, 50, 50, 4, 14, DrawingSurface.DRAWING_WIDTH, facing, 25, 25, 60 / 25, 0, BlockHeight.MID);
 		}
 	}
 }

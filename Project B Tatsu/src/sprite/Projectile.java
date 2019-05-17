@@ -33,9 +33,14 @@ public class Projectile extends Hitbox {
 		if (startup > 0) {
 			startup--;
 		} else if (distanceTraveled < maxDistance) {
-			state = HitboxState.ACTIVE;
+			if(state == HitboxState.STARTUP)
+				state = HitboxState.ACTIVE;
 			active--;
 		} else
 			state = HitboxState.INACTIVE;
+	}
+	
+	public void deactivate() {
+		state = HitboxState.INACTIVE;
 	}
 }

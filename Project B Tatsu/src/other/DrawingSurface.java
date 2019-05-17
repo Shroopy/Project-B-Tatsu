@@ -14,14 +14,16 @@ import processing.core.PImage;
 import sprite.Blue;
 import sprite.Character;
 import sprite.Hitbox;
+import sprite.Projectile;
 
 public class DrawingSurface extends PApplet {
 
 	public static final int DRAWING_WIDTH = 800;
 	public static final int DRAWING_HEIGHT = 600;
+	public static final int ENDZONE_WIDTH = 400;
+	public static final int STAGE_WIDTH = 2400;
+	public static final int FLOORY = 395 + Blue.HEIGHT, FLOORHEIGHT = DRAWING_HEIGHT - 395;
 	public static int midscreen = 1200;
-	public static final int CORNERL = 400;
-	public static final int CORNERR = 2000;
 	private int p1r, p2r;
 	private PImage background;
 
@@ -77,14 +79,11 @@ public class DrawingSurface extends PApplet {
 		text("P1 Rounds: " + p1r, 50, 50);
 		text("P2 Rounds: " + p2r, 600, 50);
 		fill(100);
-		rect(0, 395 + Blue.HEIGHT, DRAWING_WIDTH, DRAWING_HEIGHT - 395);	
+		rect(0, FLOORY, DRAWING_WIDTH, FLOORHEIGHT);	
 		
 		fill(255, 0, 0);
-		if (midscreen < 800) {
-			rect(0, 395 + Blue.HEIGHT, 800 - midscreen, DRAWING_HEIGHT - 395);
-		} else {
-			rect(2400 - midscreen, 395 + Blue.HEIGHT, midscreen - 1200, DRAWING_HEIGHT - 395);
-		}
+		rect(ENDZONE_WIDTH - midscreen, FLOORY, ENDZONE_WIDTH * 2 - midscreen, FLOORHEIGHT);
+		rect(STAGE_WIDTH - midscreen, FLOORY, ENDZONE_WIDTH, FLOORHEIGHT);
 		
 		textSize(50);
 		float maxTextWidth = textWidth("100");
@@ -104,17 +103,17 @@ public class DrawingSurface extends PApplet {
 			textSize(60);
 			fill(255, 0, 0);
 			text("ROUND OVER", 220, 250);
-			if ((2400 - player2char.getAbsX()) == player1char.getAbsX())
+			if ((STAGE_WIDTH - player2char.getAbsX()) == player1char.getAbsX())
 				text("TIE", 350, 400);
-			else if ((2400 - player2char.getAbsX()) < player1char.getAbsX())
+			else if ((STAGE_WIDTH - player2char.getAbsX()) < player1char.getAbsX())
 				text("Player One WINS", 180, 350);
 			else
 				text("Player Two WINS", 180, 350);
 		}
 		if (frameCount == 3840) {
-			if ((2400 - player2char.getAbsX()) < player1char.getAbsX())
+			if ((STAGE_WIDTH - player2char.getAbsX()) < player1char.getAbsX())
 				p1r++;
-			else if ((2400 - player2char.getAbsX()) > player1char.getAbsX())
+			else if ((STAGE_WIDTH - player2char.getAbsX()) > player1char.getAbsX())
 				p2r++;
 
 			frameCount = 0;
@@ -128,11 +127,17 @@ public class DrawingSurface extends PApplet {
 		player1.act(keys);
 		player2.act(keys);
 
-		Hitbox player1Hit = player2char.hitboxesIntersect(player1char);
-		Hitbox player2Hit = player1char.hitboxesIntersect(player2char);
+		Hitbox hitbox1 = player2char.hitboxesIntersect(player1char);
+		Hitbox hitbox2 = player1char.hitboxesIntersect(player2char);
 
-		checkPlayerHit(player1char, player2char, player1Hit);
-		checkPlayerHit(player2char, player1char, player2Hit);
+		checkPlayerHit(player1char, player2char, hitbox1);
+		checkPlayerHit(player2char, player1char, hitbox2);
+		
+		hitbox1 = player2char.projectilesIntersect(player1char);
+		hitbox2 = player1char.projectilesIntersect(player2char);
+
+		checkPlayerHit(player1char, player2char, hitbox1);
+		checkPlayerHit(player2char, player1char, hitbox2);
 
 		checkPass();
 
@@ -196,8 +201,14 @@ public class DrawingSurface extends PApplet {
 			else	
 				character1.takeHit(hitbox.getHitstun(), hitbox.getxKB(), hitbox.getyKB());
 			
-			character2.setvX(character2.getFacing() * -1 * character1.getKbFromEdge());
+			character2.addvX(character2.getFacing() * -1 * character1.getKbFromEdge());
 			character2.setAttackHit(true);
+		}
+		
+		if(hitbox instanceof Projectile) {
+			Projectile projectile = (Projectile)hitbox;
+			projectile.deactivate();
+			character2.setAttackHit(false);
 		}
 	}
 

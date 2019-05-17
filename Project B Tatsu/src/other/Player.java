@@ -97,45 +97,46 @@ public class Player {
 
 		if (keys.contains(A)) {
 			if(character.isGrounded()) {
-				if(checkQCF.isReady()) {
+				if(checkQCF.isReady())
 					character.qcfa();
-				}
 				else if(checkDP.isReady())
 					character.dpa();
+				else if (keys.contains(CROUCH))
+					character.twoa();
+				else
+					character.fivea();
 			}
-			else if (!character.isGrounded())
+			else
 				character.ja();
-			else if (keys.contains(CROUCH))
-				character.twoa();
-			else
-				character.fivea();
 		} else if (keys.contains(B)) {
-			if(character.isGrounded() && checkDP.isReady())
-				character.dpb();
-			else if (!character.isGrounded())
-				character.jb();
-			else if (keys.contains(CROUCH))
-				character.twob();
-			else
-				character.fiveb();
-		} else if (keys.contains(C)) {
-			if(character.isGrounded() && checkDP.isReady() && character.getMeter() >= 25) {
+			if(character.isGrounded()) {
 				if(checkDP.isReady())
-					character.dpc();
-				//else if(checkQCF.isReady()) {
-				//	character.qcfc();
-				//else
-				//	character.adjustMeter(25);
-				character.adjustMeter(-25);
-			}	
-			else if (!character.isGrounded())
-				character.jc();
-			else if (keys.contains(CROUCH))
-				character.twoc();
-			else if (keys.contains(FRONT))
-				character.sixc();
+					character.dpb();
+				else if (keys.contains(CROUCH))
+					character.twob();
+				else
+					character.fiveb();
+			}
 			else
-				character.fivec();
+				character.jb();
+			
+		} else if (keys.contains(C)) {
+			if(character.isGrounded()) {
+				if(checkDP.isReady()) {
+					if(character.getMeter() >= 25)
+						character.dpc();
+					else
+						character.dpb();
+				}
+				else if (keys.contains(CROUCH))
+					character.twoc();
+				else if (keys.contains(FRONT))
+					character.sixc();
+				else
+					character.fivec();
+			}	
+			else
+				character.jc();
 		}
 
 		character.act();

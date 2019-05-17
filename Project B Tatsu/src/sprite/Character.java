@@ -85,17 +85,17 @@ public abstract class Character extends Sprite {
 
 		if (absX < 0) {
 			moveByAmount(1, vY);
-			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
-		} else if (absX > 2400) {
+			absX = (int) (DrawingSurface.midscreen - DrawingSurface.ENDZONE_WIDTH + super.x);
+		} else if (absX > DrawingSurface.STAGE_WIDTH - getCharWidth()) {
 			moveByAmount(-1, vY);
-			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
+			absX = (int) (DrawingSurface.midscreen - DrawingSurface.ENDZONE_WIDTH + super.x);
 		} else if (grounded) {
 			moveByAmount(vX, vY);
-			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
+			absX = (int) (DrawingSurface.midscreen - DrawingSurface.ENDZONE_WIDTH + super.x);
 			// System.out.println("absX: " + absX + " - screenX: " + super.x);
 		} else {
 			moveByAmount(vX * 0.6, vY);
-			absX = (int) (DrawingSurface.midscreen - 400 + super.x);
+			absX = (int) (DrawingSurface.midscreen - DrawingSurface.ENDZONE_WIDTH + super.x);
 		}
 		fall();
 
@@ -194,7 +194,10 @@ public abstract class Character extends Sprite {
 			hitboxOffsetX = getCharWidth();
 		else
 			hitboxOffsetX = -width;
-		projectiles.add(new Projectile(color, (int)x + hitboxOffsetX, (int)y, width, height, vX, startup, maxDistance, facing, hitstun, blockstun, xKB, yKB, blockHeight));
+		projectiles.add(new Projectile(color, (int)x + hitboxOffsetX + xOffset, (int)y + yOffset, width, height, vX, startup, maxDistance, facing, hitstun, blockstun, xKB, yKB, blockHeight));
+		attackHit = false;
+		recoveryLeft = 40;
+		controlState = ControlState.RECOVERY;
 	}
 
 	/**
@@ -288,6 +291,14 @@ public abstract class Character extends Sprite {
 		}
 		return null;
 	}
+	
+	public Projectile projectilesIntersect(Rectangle2D.Float rect) {
+		for (Projectile p : projectiles) {
+			if (p.intersects(rect))
+				return p;
+		}
+		return null;
+	}
 
 	public boolean isCrouching() {
 		return crouching;
@@ -341,8 +352,8 @@ public abstract class Character extends Sprite {
 		if (absX - hitstun * xKB < 0) {
 			newXKB = absX / hitstun;
 			kbFromEdge = xKB - newXKB;
-		} else if (absX + hitstun * xKB > 2400) {
-			newXKB = (2400 - absX) / hitstun;
+		} else if (absX + hitstun * xKB > DrawingSurface.STAGE_WIDTH) {
+			newXKB = (DrawingSurface.STAGE_WIDTH - absX) / hitstun;
 			kbFromEdge = xKB - newXKB;
 		} else
 			newXKB = xKB;
@@ -355,7 +366,7 @@ public abstract class Character extends Sprite {
 		
 		if (absX - hitstun * xKB < 0) {
 			moveByAmount(1, vY);
-		} else if (absX + hitstun * xKB > 2400) {
+		} else if (absX + hitstun * xKB > DrawingSurface.STAGE_WIDTH) {
 			moveByAmount(-1, vY);
 		}
 	}
@@ -376,8 +387,8 @@ public abstract class Character extends Sprite {
 		if (absX - hitstun * xKB < 0) {
 			newXKB = absX / hitstun;
 			kbFromEdge = xKB - newXKB;
-		} else if (absX + hitstun * xKB > 2400) {
-			newXKB = (2400 - absX) / hitstun;
+		} else if (absX + hitstun * xKB > DrawingSurface.STAGE_WIDTH) {
+			newXKB = (DrawingSurface.STAGE_WIDTH - absX) / hitstun;
 			kbFromEdge = xKB - newXKB;
 		} else
 			newXKB = xKB;
@@ -391,8 +402,7 @@ public abstract class Character extends Sprite {
 	// public abstract void testAttack();
 
 	/**
-	 * Updates what hitboxes are on screen and which phase they are in(startup,
-	 * active, recovery)
+	 * Updates what hitboxes are on screen and which phase they are in(startup, active, recovery)
 	 */
 	protected void updateHitboxes() {
 		for (int i = 0; i < hitboxes.size(); i++) {
@@ -434,6 +444,10 @@ public abstract class Character extends Sprite {
 
 	public void setRecoveryLeft(int recoveryLeft) {
 		this.recoveryLeft = recoveryLeft;
+	}
+	
+	public void addvX(double vX) {
+		this.vX += vX;
 	}
 
 	// ATTACKS
