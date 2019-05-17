@@ -1,5 +1,6 @@
 import java.awt.Color;
 
+import enums.BlockHeight;
 import processing.core.PApplet;
 
 public class Projectile extends Sprite {

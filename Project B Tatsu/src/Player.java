@@ -1,6 +1,9 @@
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import enums.BlockHeight;
+import enums.ControlState;
+
 public class Player {
 
 	private Character character;
@@ -62,7 +65,7 @@ public class Player {
 		}
 		
 		if (keys.contains(CROUCH) && character.isGrounded()) {
-			if (character.getControlState().equals("controllable")) {
+			if (character.getControlState() == ControlState.CONTROLLABLE) {
 				character.setCrouching(true);
 				hmm++;
 			}
@@ -78,7 +81,7 @@ public class Player {
 		else
 			character.walk(0);
 		
-		if(keys.contains(BACK) && character.controlState.equals("controllable") && character.isGrounded()) {
+		if(keys.contains(BACK) && character.controlState == ControlState.CONTROLLABLE && character.isGrounded()) {
 			if(keys.contains(CROUCH))
 				character.setBlocking(BlockHeight.LOW);
 			else

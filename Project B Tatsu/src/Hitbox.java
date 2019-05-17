@@ -1,5 +1,7 @@
 import java.awt.Color;
 
+import enums.BlockHeight;
+
 public class Hitbox extends Sprite {
 
 	private int xOffset, yOffset, startup, active, facing, hitstun, recovery, width, blockstun; // startup is frames before first active frame

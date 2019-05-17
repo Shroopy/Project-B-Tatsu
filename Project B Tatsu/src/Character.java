@@ -3,6 +3,9 @@ import java.awt.Color;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+
+import enums.BlockHeight;
+import enums.ControlState;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
@@ -11,7 +14,7 @@ public abstract class Character extends Sprite {
 
 	// FIELDS
 	protected boolean grounded = false, invincible = false, crouching, lastCrouching, knockedDown, attackHit;
-	protected String controlState = "controllable";
+	protected ControlState controlState = ControlState.CONTROLLABLE;
 	protected ArrayList<Hitbox> hitboxes;
 	protected ArrayList<Projectile> projectiles;
 	// absolute position of character on the stage
@@ -99,7 +102,7 @@ public abstract class Character extends Sprite {
 				y = 335 + (float)getHeight();
 				
 				if (hitboxes.size() > 0) {
-					controlState = "recovery";
+					controlState = ControlState.RECOVERY;
 					recoveryLeft = hitboxes.get(hitboxes.size() - 1).getRecovery();
 					hitboxes.clear();
 				}
@@ -121,24 +124,24 @@ public abstract class Character extends Sprite {
 		if (hitboxes.size() > 0) {
 			if (grounded)
 				vX = 0;
-			controlState = "attacking";
-		} else if (controlState.equals("attacking")) {
-			controlState = "controllable";
+			controlState = ControlState.ATTACKING;
+		} else if (controlState == ControlState.ATTACKING) {
+			controlState = ControlState.CONTROLLABLE;
 		}
 
 		if (recoveryLeft > 0)
 			recoveryLeft--;
-		else if (controlState.equals("recovery")) {
-			controlState = "controllable";
+		else if (controlState == ControlState.RECOVERY) {
+			controlState = ControlState.CONTROLLABLE;
 			attackHit = false;
 		}
 
 		if (hitstunLeft > 0) {
 			if (!knockedDown)
 				hitstunLeft--;
-		} else if (controlState.equals("hitstun")) {
+		} else if (controlState == ControlState.HITSTUN) {
 			invincible = false;
-			controlState = "controllable";
+			controlState = ControlState.CONTROLLABLE;
 			vX = 0;
 		}
 
@@ -209,12 +212,12 @@ public abstract class Character extends Sprite {
 	public void changeState(int input) {
 		assert input == 0 || input == 1;
 		if (input == 0) {
-			controlState = "";
+			controlState = ControlState.NOT;
 			vX = 0;
 			vY = 0;
 			aX = 0;
 		} else
-			controlState = "controllable";
+			controlState = ControlState.CONTROLLABLE;
 
 	}
 
@@ -232,7 +235,7 @@ public abstract class Character extends Sprite {
 
 	public abstract int getCharWidth();
 
-	public String getControlState() {
+	public ControlState getControlState() {
 		return controlState;
 	}
 
@@ -283,7 +286,7 @@ public abstract class Character extends Sprite {
 	 * Causes the character being controlled to jump.
 	 */
 	public void jump() {
-		if (controlState.equals("controllable") && grounded)
+		if (controlState == ControlState.CONTROLLABLE && grounded)
 			vY = -12;
 	}
 
@@ -331,7 +334,7 @@ public abstract class Character extends Sprite {
 		vX = newXKB * -1 * facing;
 		
 		vY = -yKB;
-		controlState = "hitstun";
+		controlState = ControlState.HITSTUN;
 		hitboxes.clear();
 		recoveryLeft = 0;
 		
@@ -365,7 +368,7 @@ public abstract class Character extends Sprite {
 			newXKB = xKB;
 		vX = newXKB * -1 * facing;
 		
-		controlState = "hitstun";
+		controlState = ControlState.HITSTUN;
 		hitboxes.clear();
 		recoveryLeft = 0;
 	}
@@ -389,7 +392,7 @@ public abstract class Character extends Sprite {
 			if (h.getState().equals("inactive"))
 				hitboxes.remove(i);
 			if (hitboxes.size() == 0) {
-				controlState = "recovery";
+				controlState = ControlState.RECOVERY;
 				recoveryLeft = h.getRecovery();
 			}
 		}
@@ -402,7 +405,7 @@ public abstract class Character extends Sprite {
 	 *        or right.
 	 */
 	public void walk(int dir) {
-		if (controlState.equals("controllable") && grounded && !crouching)
+		if (controlState == ControlState.CONTROLLABLE && grounded && !crouching)
 			vX = dir * 4;
 	}
 

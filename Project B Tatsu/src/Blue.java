@@ -2,6 +2,8 @@
 import java.awt.*;
 import java.util.*;
 
+import enums.BlockHeight;
+import enums.ControlState;
 import processing.core.PImage;
 
 public class Blue extends Character {
@@ -57,19 +59,19 @@ public class Blue extends Character {
 //	 * Produces a hitbox 30 pixels wide and 80 hitboxes tall Has 2 startup, 1 active, 2 recovery, and hits mid
 //	 */
 //	public void testAttack() {
-//		if (controlState.equals("controllable"))
+//		if (controlState == ControlState.CONTROLLABLE)
 //			addHitbox(0, 0, 30, 80, 2, 1, 2, 8, 4, 30 / 8, 0, BlockHeight.MID);
 //	}
 
 	@Override
 	public void fivea() {
-		if (controlState.equals("controllable"))
+		if (controlState == ControlState.CONTROLLABLE)
 			addHitbox(0, 20, 60, 10, 2, 1, 2, 8, 4, 60 / 8, 0, BlockHeight.MID);
 	}
 
 	@Override
 	public void fiveb() {
-		if (controlState.equals("controllable")) {
+		if (controlState == ControlState.CONTROLLABLE) {
 			moveByAmount(20 * facing, 0);
 			addHitbox(0, 20, 50, 40, 4, 4, 10, 20, 15, 70 / 20, 0, BlockHeight.MID);
 		}
@@ -77,47 +79,47 @@ public class Blue extends Character {
 
 	@Override
 	public void fivec() {
-		if (controlState.equals("controllable"))
+		if (controlState == ControlState.CONTROLLABLE)
 			addHitbox(-30, -40, 90, 60, 9, 5, 16, 18, 14, 120 / 18, 0, BlockHeight.MID);
 	}
 
 	@Override
 	public void sixc() {
-		if (controlState.equals("controllable"))
+		if (controlState == ControlState.CONTROLLABLE)
 			addHitbox(0, 20, 60, 40, 20, 8, 6, 17, 14, 90 / 17, 0, BlockHeight.HIGH);
 
 	}
 
 	@Override
 	public void twoa() {
-		if (controlState.equals("controllable"))
+		if (controlState == ControlState.CONTROLLABLE)
 			addHitbox(0, (int) ((getHeight() - 30)), 60, 30, 3, 2, 4, 10, 6, 40 / 10, 0, BlockHeight.LOW);
 
 	}
 
 	@Override
 	public void twob() {
-		if (controlState.equals("controllable"))
+		if (controlState == ControlState.CONTROLLABLE)
 			addHitbox(0, (int) ((getHeight() - 30)), 80, 30, 5, 4, 10, 18, 14, 60 / 18, 0, BlockHeight.LOW);
 
 	}
 
 	@Override
 	public void twoc() {
-		if (controlState.equals("controllable"))
+		if (controlState == ControlState.CONTROLLABLE)
 			addHitbox(0, (int) ((getHeight() - 30)), 70, 30, 7, 3, 25, 1001, 19, 30 / 14, 3, BlockHeight.LOW);
 	}
 
 	@Override
 	public void ja() {
-		if (controlState.equals("controllable"))
+		if (controlState == ControlState.CONTROLLABLE)
 			addHitbox(0, (int)(getHeight()), 30, 30, 3, 1001, 2, 9, 7, 30 / 9, 0, BlockHeight.HIGH);
 		
 	}
 
 	@Override
 	public void jb() {
-		if (controlState.equals("controllable")) {
+		if (controlState == ControlState.CONTROLLABLE) {
 			addHitbox(0, -40, 30, 60, 9, 3, 10, 9, 7, 30 / 18, 0, BlockHeight.HIGH); //second
 			addHitbox(0, 10, 60, 40, 5, 3, 0, 11, 9, 80 / 18, 0, BlockHeight.HIGH); //first
 		}
@@ -126,14 +128,14 @@ public class Blue extends Character {
 
 	@Override
 	public void jc() {
-		if (controlState.equals("controllable"))
+		if (controlState == ControlState.CONTROLLABLE)
 			addHitbox(0, (int) ((getHeight() - 30)), 80, 40, 9, 8, 18, 16, 14, 30 / 16, 0, BlockHeight.HIGH);
 		
 	}
 	
 	@Override
 	public void dpa() {
-		if (controlState.equals("controllable") || (controlState.equals("recovery") && attackHit)) {
+		if (controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
 			vX = 0;
 			vY -= 6;
 			addHitbox(0, 0, 60, 80, 3, 10, 26, 1001, 10, 120 / 30, 6, BlockHeight.MID);
@@ -143,16 +145,15 @@ public class Blue extends Character {
 	
 	@Override
 	public void dpb() {
-		if (controlState.equals("controllable") || (controlState.equals("recovery") && attackHit)) {
+		if (controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
 			vY -= 12;
 			vX = 1 * facing;
-			addHitbox(0, 0, 60, 80, 6, 15, 33, 1001, 10, 120 / 30, 12, BlockHeight.MID);
 			this.adjustMeter(10);
 		}
 	}
 	
 	public void dpc() {
-		if (controlState.equals("controllable") || (controlState.equals("recovery") && attackHit)) {
+		if (controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
 			vY -= 12;
 			vX = 1 * facing;
 			addHitbox(0, 0, 60, 80, 1, 15, 33, 1001, 10, 120 / 30, 12, BlockHeight.MID);
