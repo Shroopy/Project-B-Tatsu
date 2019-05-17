@@ -96,8 +96,13 @@ public class Player {
 			character.jump();
 
 		if (keys.contains(A)) {
-			if(character.isGrounded() && checkDP.isReady())
-				character.dpa();
+			if(character.isGrounded()) {
+				if(checkQCF.isReady()) {
+					character.qcfa();
+				}
+				else if(checkDP.isReady())
+					character.dpa();
+			}
 			else if (!character.isGrounded())
 				character.ja();
 			else if (keys.contains(CROUCH))

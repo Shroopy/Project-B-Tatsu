@@ -154,7 +154,7 @@ public class DrawingSurface extends PApplet {
 			}
 		}
 
-		
+		// TODO give projectiles absolute x value
 	}
 
 	public void checkPass() {

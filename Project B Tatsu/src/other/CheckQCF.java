@@ -32,7 +32,7 @@ public class CheckQCF {
 
 		switch (state) {
 			case INITIAL:
-				if (keys.contains(player.CROUCH)) {
+				if (!keys.contains(player.FRONT) && keys.contains(player.CROUCH)) {
 					state = State.AFTERDOWN;
 				}
 				break;
@@ -44,11 +44,14 @@ public class CheckQCF {
 				break;
 				
 			case AFTERDOWNFORWARD:
-				if (keys.contains(player.FRONT)) {
+				if (keys.contains(player.FRONT) && !keys.contains(player.CROUCH)) {
 					state = State.READY;
 				}
 				break;
 			case READY:
+				if(keys.contains(player.CROUCH))
+					reset();
+				
 		}
 	}
 }

@@ -6,9 +6,9 @@ import enums.HitboxState;
 
 public class Hitbox extends Sprite {
 
-	private int xOffset, yOffset, startup, active, facing, hitstun, recovery, width, blockstun; // startup is frames before first active frame
+	protected int xOffset, yOffset, startup, active, facing, hitstun, recovery, width, blockstun; // startup is frames before first active frame
 	private double xKB, yKB;
-	private HitboxState state;
+	protected HitboxState state;
 	private BlockHeight blockHeight;
 
 	/**

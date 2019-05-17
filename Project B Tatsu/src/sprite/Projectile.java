@@ -1,24 +1,41 @@
 package sprite;
+
 import java.awt.Color;
 
 import enums.BlockHeight;
+import enums.HitboxState;
 import processing.core.PApplet;
 
 public class Projectile extends Hitbox {
-	private int distanceTraveled;
-	
-	public Projectile(Color color, int x, int y, int w, int h, int distance, int facing, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight) {
-		super(0, 0, x, y, w, h, 0, distance, 0, facing, hitstun, blockstun, xKB, yKB, blockHeight);
+	private int distanceTraveled, maxDistance;
+
+	public Projectile(Color color, int x, int y, int w, int h, double vX, int startup, int maxDistance, int facing, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight) {
+		super(0, 0, x, y, w, h, startup, 0, 0, facing, hitstun, blockstun, xKB, yKB, blockHeight);
 		this.color = color;
+		this.vX = vX;
 		distanceTraveled = 0;
+		this.maxDistance = maxDistance;
 	}
-	
+
 	public void adjustPosition() {
-		moveByAmount(vX * getFacing(), vY);
-		distanceTraveled += vX;
+		if (state == HitboxState.ACTIVE) {
+			moveByAmount(vX * getFacing(), vY);
+			distanceTraveled += vX;
+		}
+	}
+
+	public void draw(PApplet g) {
+		if (state == HitboxState.ACTIVE)
+			super.draw(g);
 	}
 
 	public void updateState() {
-		// TODO
+		if (startup > 0) {
+			startup--;
+		} else if (distanceTraveled < maxDistance) {
+			state = HitboxState.ACTIVE;
+			active--;
+		} else
+			state = HitboxState.INACTIVE;
 	}
 }

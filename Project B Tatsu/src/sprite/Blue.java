@@ -5,6 +5,7 @@ import java.util.*;
 
 import enums.BlockHeight;
 import enums.ControlState;
+import other.DrawingSurface;
 import processing.core.PImage;
 
 public class Blue extends Character {
@@ -121,8 +122,8 @@ public class Blue extends Character {
 	@Override
 	public void jb() {
 		if (controlState == ControlState.CONTROLLABLE) {
-			addHitbox(0, -40, 30, 60, 9, 3, 10, 9, 7, 30 / 18, 0, BlockHeight.HIGH); //second
-			addHitbox(0, 10, 60, 40, 5, 3, 0, 11, 9, 80 / 18, 0, BlockHeight.HIGH); //first
+			addHitbox(0, -40, 30, 60, 9, 3, 10, 9, 7, 30 / 9, 0, BlockHeight.HIGH); //second
+			addHitbox(0, 10, 60, 40, 5, 3, 0, 11, 9, 80 / 11, 0, BlockHeight.HIGH); //first
 		}
 		
 	}
@@ -153,6 +154,7 @@ public class Blue extends Character {
 		}
 	}
 	
+	@Override
 	public void dpc() {
 		if (controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
 			vY -= 12;
@@ -160,5 +162,14 @@ public class Blue extends Character {
 			addHitbox(0, 0, 60, 80, 1, 15, 33, 1001, 10, 120 / 30, 12, BlockHeight.MID);
 		}
 	}
-
+	
+	@Override
+	public void qcfa() {
+		if (controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
+			addProjectile(Color.CYAN, 0, 20, 30, 40, 4, 14, DrawingSurface.DRAWING_WIDTH, facing, 25, 25, 60, 0, BlockHeight.MID);
+			vX = 0;
+			recoveryLeft = 40;
+			controlState = ControlState.RECOVERY;
+		}
+	}
 }

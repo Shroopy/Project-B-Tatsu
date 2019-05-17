@@ -187,6 +187,15 @@ public abstract class Character extends Sprite {
 			hitboxOffsetX = -width;
 		hitboxes.add(new Hitbox(xOffset, yOffset, (int) x + hitboxOffsetX, (int) y, width, height, startup, active, recovery, facing, hitstun, blockstun, xKB, yKB, blockHeight));
 	}
+	
+	protected void addProjectile(Color color, int xOffset, int yOffset, int width, int height, double vX, int startup, int maxDistance, int facing, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight) {
+		assert facing == 1 || facing == -1;
+		if (facing == 1)
+			hitboxOffsetX = getCharWidth();
+		else
+			hitboxOffsetX = -width;
+		projectiles.add(new Projectile(color, (int)x + hitboxOffsetX, (int)y, width, height, vX, startup, maxDistance, facing, hitstun, blockstun, xKB, yKB, blockHeight));
+	}
 
 	/**
 	 * Draws the next frame of the game. Calls Sprite's version of draw.
@@ -197,6 +206,9 @@ public abstract class Character extends Sprite {
 		super.draw(g);
 		for (Hitbox h : hitboxes) {
 			h.draw(g);
+		}
+		for (Projectile p : projectiles) {
+			p.draw(g);
 		}
 		if (hitstunLeft > 0 || recoveryLeft > 0) {
 			g.noFill();
@@ -399,6 +411,14 @@ public abstract class Character extends Sprite {
 				recoveryLeft = h.getRecovery();
 			}
 		}
+		
+		for (int i = 0; i < projectiles.size(); i++) {
+			Projectile p = projectiles.get(i);
+			p.adjustPosition();
+			p.updateState();
+			if (p.getState() == HitboxState.INACTIVE)
+				projectiles.remove(i);
+		}
 	}
 
 	/**
@@ -410,6 +430,10 @@ public abstract class Character extends Sprite {
 	public void walk(int dir) {
 		if (controlState == ControlState.CONTROLLABLE && grounded && !crouching)
 			vX = dir * 4;
+	}
+
+	public void setRecoveryLeft(int recoveryLeft) {
+		this.recoveryLeft = recoveryLeft;
 	}
 
 	// ATTACKS
@@ -438,6 +462,8 @@ public abstract class Character extends Sprite {
 	public abstract void dpb();
 	
 	public abstract void dpc();
+	
+	public abstract void qcfa();
 
 	public void setAttackHit(boolean attackHit) {
 		this.attackHit = attackHit;
