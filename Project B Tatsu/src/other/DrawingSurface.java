@@ -1,3 +1,4 @@
+package other;
 
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -9,6 +10,9 @@ import java.util.ArrayList;
 import enums.BlockHeight;
 import processing.core.PApplet;
 import processing.core.PImage;
+import sprite.Blue;
+import sprite.Character;
+import sprite.Hitbox;
 
 public class DrawingSurface extends PApplet {
 

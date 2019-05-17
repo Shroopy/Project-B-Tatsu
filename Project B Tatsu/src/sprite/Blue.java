@@ -1,3 +1,4 @@
+package sprite;
 
 import java.awt.*;
 import java.util.*;

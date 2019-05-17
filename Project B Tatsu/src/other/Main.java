@@ -1,3 +1,4 @@
+package other;
 import javax.swing.*;
 
 import processing.awt.PSurfaceAWT;

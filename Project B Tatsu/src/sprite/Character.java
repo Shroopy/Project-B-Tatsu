@@ -1,3 +1,4 @@
+package sprite;
 
 import java.awt.Color;
 import java.awt.Shape;
@@ -6,6 +7,7 @@ import java.util.ArrayList;
 
 import enums.BlockHeight;
 import enums.ControlState;
+import other.DrawingSurface;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;

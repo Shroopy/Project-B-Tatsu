@@ -1,8 +1,10 @@
+package other;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import enums.BlockHeight;
 import enums.ControlState;
+import sprite.Character;
 
 public class Player {
 
@@ -81,7 +83,7 @@ public class Player {
 		else
 			character.walk(0);
 		
-		if(keys.contains(BACK) && character.controlState == ControlState.CONTROLLABLE && character.isGrounded()) {
+		if(keys.contains(BACK) && character.getControlState() == ControlState.CONTROLLABLE && character.isGrounded()) {
 			if(keys.contains(CROUCH))
 				character.setBlocking(BlockHeight.LOW);
 			else
