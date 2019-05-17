@@ -8,13 +8,15 @@ import processing.core.PApplet;
 
 public class Projectile extends Hitbox {
 	private int distanceTraveled, maxDistance;
+	private boolean transcendent;
 
-	public Projectile(Color color, int x, int y, int w, int h, double vX, int startup, int maxDistance, int facing, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight) {
+	public Projectile(Color color, int x, int y, int w, int h, double vX, int startup, int maxDistance, int facing, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight, boolean transcendent) {
 		super(0, 0, x, y, w, h, startup, 0, 0, facing, hitstun, blockstun, xKB, yKB, blockHeight);
 		this.color = color;
 		this.vX = vX;
 		distanceTraveled = 0;
 		this.maxDistance = maxDistance;
+		this.transcendent = transcendent;
 	}
 
 	public void adjustPosition() {
@@ -42,5 +44,9 @@ public class Projectile extends Hitbox {
 	
 	public void deactivate() {
 		state = HitboxState.INACTIVE;
+	}
+	
+	public boolean isTranscendent() {
+		return transcendent;
 	}
 }

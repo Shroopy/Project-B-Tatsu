@@ -155,6 +155,8 @@ public abstract class Character extends Sprite {
 		} else {
 			invincible = false;
 		}
+		
+		
 
 	}
 
@@ -188,15 +190,15 @@ public abstract class Character extends Sprite {
 		hitboxes.add(new Hitbox(xOffset, yOffset, (int) x + hitboxOffsetX, (int) y, width, height, startup, active, recovery, facing, hitstun, blockstun, xKB, yKB, blockHeight));
 	}
 	
-	protected void addProjectile(Color color, int xOffset, int yOffset, int width, int height, double vX, int startup, int maxDistance, int facing, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight) {
+	protected void addProjectile(Color color, int xOffset, int yOffset, int width, int height, double vX, int startup, int maxDistance, int recovery, int facing, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight, boolean transcendent) {
 		assert facing == 1 || facing == -1;
 		if (facing == 1)
 			hitboxOffsetX = getCharWidth();
 		else
 			hitboxOffsetX = -width;
-		projectiles.add(new Projectile(color, (int)x + hitboxOffsetX + xOffset, (int)y + yOffset, width, height, vX, startup, maxDistance, facing, hitstun, blockstun, xKB, yKB, blockHeight));
+		projectiles.add(new Projectile(color, (int)x + hitboxOffsetX + xOffset, (int)y + yOffset, width, height, vX, startup, maxDistance, facing, hitstun, blockstun, xKB, yKB, blockHeight, transcendent));
 		attackHit = false;
-		recoveryLeft = 40;
+		recoveryLeft = recovery;
 		controlState = ControlState.RECOVERY;
 	}
 
@@ -221,6 +223,10 @@ public abstract class Character extends Sprite {
 		if (blocking != BlockHeight.NOT) {
 			g.fill(0);
 			g.triangle(x, y, x + width, y, x + width / 2, y + height / 2);
+		}
+		if (invincibleLeft > 0) {
+			g.fill(0);
+			g.triangle(x, y + height, x + width, y + height, x + width / 2, y + height / 2);
 		}
 	}
 
@@ -317,9 +323,11 @@ public abstract class Character extends Sprite {
 	}
 
 	public void setCrouching(boolean crouching) {
-		if (crouching)
-			vX = 0;
-		this.crouching = crouching;
+		if(controlState == ControlState.CONTROLLABLE) {
+			if (crouching)
+				vX = 0;
+			this.crouching = crouching;
+		}
 	}
 
 	public void setGrounded(boolean grounded) {
@@ -478,6 +486,10 @@ public abstract class Character extends Sprite {
 	public abstract void dpc();
 	
 	public abstract void qcfa();
+	
+	public abstract void qcfb();
+	
+	public abstract void qcfc();
 
 	public void setAttackHit(boolean attackHit) {
 		this.attackHit = attackHit;

@@ -152,6 +152,25 @@ public class DrawingSurface extends PApplet {
 
 		checkPlayerHit(player1char, player2char, hitbox1);
 		checkPlayerHit(player2char, player1char, hitbox2);
+		
+		for(Projectile p1 : player1char.getProjectiles()) {
+			if(p1.getState() != HitboxState.ACTIVE)
+				continue;
+			for(Projectile p2 : player2char.getProjectiles()) {
+				if(p2.getState() != HitboxState.ACTIVE)
+					continue;
+				if(p1.intersects(p2)) {
+					if((p1.isTranscendent() && p2.isTranscendent()) || (!p1.isTranscendent() && !p2.isTranscendent())) {
+						p1.deactivate();
+						p2.deactivate();
+					}
+					else if(p1.isTranscendent() && !p2.isTranscendent())
+						p2.deactivate();
+					else
+						p1.deactivate();
+				}
+			}
+		}
 
 		checkPass();
 

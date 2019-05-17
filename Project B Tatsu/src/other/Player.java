@@ -110,7 +110,9 @@ public class Player {
 				character.ja();
 		} else if (keys.contains(B)) {
 			if(character.isGrounded()) {
-				if(checkDP.isReady())
+				if(checkQCF.isReady())
+					character.qcfa();
+				else if(checkDP.isReady())
 					character.dpb();
 				else if (keys.contains(CROUCH))
 					character.twob();
@@ -122,7 +124,13 @@ public class Player {
 			
 		} else if (keys.contains(C)) {
 			if(character.isGrounded()) {
-				if(checkDP.isReady()) {
+				if(checkQCF.isReady()) {
+					if(character.getMeter() >= 25)
+						character.qcfc();
+					else
+						character.qcfb();
+				}
+				else if(checkDP.isReady()) {
 					if(character.getMeter() >= 25)
 						character.dpc();
 					else
