@@ -79,8 +79,6 @@ public class DrawingSurface extends PApplet {
 			rect(2400 - midscreen, 395 + Blue.HEIGHT, midscreen - 1200, DRAWING_HEIGHT - 395);
 		}
 		
-		player1char.setMeter(100);
-		player2char.setMeter(100);
 		textSize(50);
 		float maxTextWidth = textWidth("100");
 		fill(255,255,0);
