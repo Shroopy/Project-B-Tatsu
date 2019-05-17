@@ -82,8 +82,22 @@ public class DrawingSurface extends PApplet {
 		rect(0, FLOORY, DRAWING_WIDTH, FLOORHEIGHT);	
 		
 		fill(255, 0, 0);
-		rect(ENDZONE_WIDTH - midscreen, FLOORY, ENDZONE_WIDTH * 2 - midscreen, FLOORHEIGHT);
+		rect(ENDZONE_WIDTH - midscreen, FLOORY, ENDZONE_WIDTH, FLOORHEIGHT);
 		rect(STAGE_WIDTH - midscreen, FLOORY, ENDZONE_WIDTH, FLOORHEIGHT);
+		
+		fill(255);
+		noStroke();
+//		for(int i = 0; i <= 2400; i += 75)
+//			drawMarker(i + 400 - midscreen, 2);
+		for(int i = 0; i <= 2400; i += 150)
+			drawMarker(i + 400 - midscreen, 4);
+		for(int i = 0; i <= 2400; i += 300)
+			drawMarker(i + 400 - midscreen, 8);
+		for(int i = 0; i <= 2400; i += 600)
+			drawMarker(i + 400 - midscreen, 16);
+		for(int i = 0; i <= 2400; i += 1200)
+			drawMarker(i + 400 - midscreen, 32);
+		stroke(1);
 		
 		textSize(50);
 		float maxTextWidth = textWidth("100");
@@ -218,6 +232,10 @@ public class DrawingSurface extends PApplet {
 	 */
 	public boolean isPressed(Integer code) {
 		return keys.contains(code);
+	}
+	
+	private void drawMarker(int x, int width) {
+		rect(x - width/2, FLOORY, width, FLOORHEIGHT);
 	}
 
 	/**
