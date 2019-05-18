@@ -281,6 +281,7 @@ public class DrawingSurface extends PApplet {
 		/* assets.add(loadImage("mario.png")); */
 
 		image = loadImage("lib/hmm.png");
+		Sounds.init(this);
 
 		spawnPlayers();
 	}

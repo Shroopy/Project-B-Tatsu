@@ -66,6 +66,13 @@ public abstract class Character extends Sprite {
 	public ArrayList<Projectile> getProjectiles() {
 		return projectiles;
 	}
+	
+	public void updateCrouching() {
+		if (crouching != lastCrouching)
+			y += height - getCharHeight();
+		height = getCharHeight();
+		lastCrouching = crouching;
+	}
 
 	/**
 	 * This is the method that advances the game. Moves the characters based on the
@@ -73,10 +80,7 @@ public abstract class Character extends Sprite {
 	 */
 	public void act() {
 
-		if (crouching != lastCrouching)
-			y += height - getCharHeight();
-		height = getCharHeight();
-		lastCrouching = crouching;
+		updateCrouching();
 
 		if(meter > 100)
 			meter = 100;
@@ -186,6 +190,7 @@ public abstract class Character extends Sprite {
 			hitboxOffsetX = getCharWidth();
 		else
 			hitboxOffsetX = -width;
+		updateCrouching();
 		hitboxes.add(new Hitbox(xOffset, yOffset, (int) x + hitboxOffsetX, (int) y, width, height, startup, active, recovery, facing, hitstun, blockstun, xKB, yKB, blockHeight));
 	}
 	
@@ -195,6 +200,7 @@ public abstract class Character extends Sprite {
 			hitboxOffsetX = getCharWidth();
 		else
 			hitboxOffsetX = -width;
+		updateCrouching();
 		projectiles.add(new Projectile(color, (int)x + hitboxOffsetX + xOffset, (int)y + yOffset, width, height, vX, startup, maxDistance, facing, hitstun, blockstun, xKB, yKB, blockHeight, transcendent));
 		attackHit = false;
 		recoveryLeft = recovery;

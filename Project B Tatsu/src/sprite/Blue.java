@@ -6,6 +6,7 @@ import java.util.*;
 import enums.BlockHeight;
 import enums.ControlState;
 import other.DrawingSurface;
+import other.Sounds;
 import processing.core.PImage;
 
 public class Blue extends Character {
@@ -181,6 +182,7 @@ public class Blue extends Character {
 			vX = 0;
 			addProjectile(Color.CYAN.darker(), 0, 20, 50, 50, 4, 14, DrawingSurface.DRAWING_WIDTH, 40, facing, 25, 25, 60 / 25, 0, BlockHeight.MID, false);
 			this.adjustMeter(5);
+			Sounds.hadouken();
 		}
 	}
 	
@@ -191,6 +193,7 @@ public class Blue extends Character {
 			vX = 0;
 			addProjectile(Color.CYAN.darker(), 0, 20, 50, 50, 6, 11, DrawingSurface.DRAWING_WIDTH, 42, facing, 25, 25, 80 / 25, 0, BlockHeight.MID, false);
 			this.adjustMeter(5);
+			Sounds.hadouken();
 		}
 	}
 	
@@ -201,6 +204,7 @@ public class Blue extends Character {
 			vX = 0;
 			addProjectile(Color.CYAN.brighter(), 0, 20, 50, 50, 8, 5, DrawingSurface.DRAWING_WIDTH, 30, facing, 1001, 15, 100 / 15, 12, BlockHeight.MID, true);
 			this.adjustMeter(-25);
+			Sounds.hadouken();
 		}
 	}
 }
