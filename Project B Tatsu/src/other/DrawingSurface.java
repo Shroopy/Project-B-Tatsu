@@ -112,7 +112,7 @@ public class DrawingSurface extends PApplet {
 			player1char.changeState(false);
 			player2char.changeState(false);
 		}
-		if (frameCount > 3600 && frameCount < 3840) {
+		else if (frameCount > 3600 && frameCount < 3840) {
 			textSize(60);
 			fill(255, 0, 0);
 			text("ROUND OVER", 220, 250);
@@ -123,7 +123,7 @@ public class DrawingSurface extends PApplet {
 			else
 				text("Player Two WINS", 180, 350);
 		}
-		if (frameCount == 3840) {
+		else if (frameCount == 3840) {
 			if ((STAGE_WIDTH - player2char.getAbsX()) < player1char.getAbsX())
 				p1r++;
 			else if ((STAGE_WIDTH - player2char.getAbsX()) > player1char.getAbsX())
