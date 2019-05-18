@@ -8,6 +8,7 @@ public class Sprite extends Rectangle2D.Float {
 
 	protected Color color;
 	protected double vX, vY, aX = 0;
+	protected int absX;
 
 	/**
 	 * Constructs a Sprite object
@@ -20,6 +21,10 @@ public class Sprite extends Rectangle2D.Float {
 	public Sprite(Color color, int x, int y, int w, int h) {
 		super(x, y, w, h);
 		this.color = color;
+	}
+	
+	public int getAbsX() {
+		return absX;
 	}
 
 	/**

@@ -21,7 +21,6 @@ public abstract class Character extends Sprite {
 	protected ArrayList<Hitbox> hitboxes;
 	protected ArrayList<Projectile> projectiles;
 	// absolute position of character on the stage
-	protected int absX;
 	protected int hitstunLeft, recoveryLeft, invincibleLeft, invincibleStartupLeft, tatsuLeft, tatsuStartupLeft;
 	private int hitboxOffsetX;
 	protected BlockHeight blocking = BlockHeight.NOT;
@@ -233,9 +232,8 @@ public abstract class Character extends Sprite {
 	/**
 	 * 
 	 */
-	public void changeState(int input) {
-		assert input == 0 || input == 1;
-		if (input == 0) {
+	public void changeState(boolean input) {
+		if (input) {
 			controlState = ControlState.NOT;
 			vX = 0;
 			vY = 0;
@@ -246,10 +244,6 @@ public abstract class Character extends Sprite {
 	}
 
 	protected abstract void fall();
-
-	public int getAbsX() {
-		return absX;
-	}
 
 	public boolean isInvincible() {
 		return invincible;

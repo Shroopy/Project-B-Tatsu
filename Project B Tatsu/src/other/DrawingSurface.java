@@ -109,8 +109,8 @@ public class DrawingSurface extends PApplet {
 		player1.draw(this);
 		player2.draw(this);
 		if (frameCount == 3600) {
-			player1char.changeState(0);
-			player2char.changeState(0);
+			player1char.changeState(false);
+			player2char.changeState(false);
 		}
 		if (frameCount > 3600 && frameCount < 3840) {
 			textSize(60);
@@ -190,8 +190,6 @@ public class DrawingSurface extends PApplet {
 				midscreen += (prevX2 + player2char.getCharWidth() - DRAWING_WIDTH);
 			}
 		}
-
-		// TODO give projectiles absolute x value
 	}
 
 	public void checkPass() {

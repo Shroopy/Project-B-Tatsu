@@ -111,7 +111,7 @@ public class Player {
 		} else if (keys.contains(B)) {
 			if(character.isGrounded()) {
 				if(checkQCF.isReady())
-					character.qcfa();
+					character.qcfb();
 				else if(checkDP.isReady())
 					character.dpb();
 				else if (keys.contains(CROUCH))
