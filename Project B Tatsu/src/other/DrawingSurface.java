@@ -85,18 +85,18 @@ public class DrawingSurface extends PApplet {
 		rect(ENDZONE_WIDTH - midscreen, FLOORY, ENDZONE_WIDTH, FLOORHEIGHT);
 		rect(STAGE_WIDTH - midscreen, FLOORY, ENDZONE_WIDTH, FLOORHEIGHT);
 		
-		fill(255);
+		fill(50);
 		noStroke();
-//		for(int i = 0; i <= 2400; i += 75)
-//			drawMarker(i + 400 - midscreen, 2);
-//		for(int i = 0; i <= 2400; i += 150)
-//			drawMarker(i + 400 - midscreen, 4);
+		for(int i = 0; i <= 2400; i += 15)
+			drawMarker(i + 400 - midscreen, FLOORHEIGHT / 24);
+		for(int i = 0; i <= 2400; i += 150)
+			drawMarker(i + 400 - midscreen, FLOORHEIGHT / 10);
 		for(int i = 0; i <= 2400; i += 300)
-			drawMarker(i + 400 - midscreen, 8);
+			drawMarker(i + 400 - midscreen, FLOORHEIGHT / 8);
 		for(int i = 0; i <= 2400; i += 600)
-			drawMarker(i + 400 - midscreen, 16);
+			drawMarker(i + 400 - midscreen, FLOORHEIGHT / 6);
 		for(int i = 0; i <= 2400; i += 1200)
-			drawMarker(i + 400 - midscreen, 32);
+			drawMarker(i + 400 - midscreen, FLOORHEIGHT / 4);
 		stroke(1);
 		
 		textSize(50);
@@ -237,7 +237,6 @@ public class DrawingSurface extends PApplet {
 			if(hitbox instanceof Projectile) {
 				Projectile projectile = (Projectile)hitbox;
 				projectile.deactivate();
-				character2.setAttackHit(false);
 			}
 			else {
 				character2.setAttackHit(true);
@@ -254,8 +253,8 @@ public class DrawingSurface extends PApplet {
 		return keys.contains(code);
 	}
 	
-	private void drawMarker(int x, int width) {
-		rect(x - width/2, FLOORY, width, FLOORHEIGHT);
+	private void drawMarker(int x, int height) {
+		rect(x - 1, FLOORY, 2, height);
 	}
 
 	/**

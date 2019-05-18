@@ -22,7 +22,7 @@ public abstract class Character extends Sprite {
 	protected ArrayList<Projectile> projectiles;
 	// absolute position of character on the stage
 	protected int absX;
-	protected int hitstunLeft, recoveryLeft, invincibleLeft, invincibleStartupLeft;
+	protected int hitstunLeft, recoveryLeft, invincibleLeft, invincibleStartupLeft, tatsuLeft, tatsuStartupLeft;
 	private int hitboxOffsetX;
 	protected BlockHeight blocking = BlockHeight.NOT;
 	protected int meter;
