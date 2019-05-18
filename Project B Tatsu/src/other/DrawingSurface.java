@@ -58,12 +58,6 @@ public class DrawingSurface extends PApplet {
 	public void draw() {
 
 		// drawing stuff
-		
-		if(player2.checkHmm())
-			image(image, 0, 0, width, 600);
-		else
-			background(0, 255, 255);
-
 		pushMatrix();
 
 		float ratioX = (float) width / DRAWING_WIDTH;
@@ -71,6 +65,11 @@ public class DrawingSurface extends PApplet {
 
 		// System.out.println(midscreen);
 		scale(ratioX, ratioY);
+		
+		if(player2.checkHmm() && player2char.getAbsX() + player2char.getCharWidth() <= ENDZONE_WIDTH)
+			image(image, 0, 0, DRAWING_WIDTH, DRAWING_HEIGHT - FLOORHEIGHT + 100);
+		else
+			background(0, 255, 255);
 
 		fill(0);
 		textSize(100);
