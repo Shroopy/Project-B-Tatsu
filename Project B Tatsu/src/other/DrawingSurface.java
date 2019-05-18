@@ -89,8 +89,8 @@ public class DrawingSurface extends PApplet {
 		noStroke();
 //		for(int i = 0; i <= 2400; i += 75)
 //			drawMarker(i + 400 - midscreen, 2);
-		for(int i = 0; i <= 2400; i += 150)
-			drawMarker(i + 400 - midscreen, 4);
+//		for(int i = 0; i <= 2400; i += 150)
+//			drawMarker(i + 400 - midscreen, 4);
 		for(int i = 0; i <= 2400; i += 300)
 			drawMarker(i + 400 - midscreen, 8);
 		for(int i = 0; i <= 2400; i += 600)
@@ -234,14 +234,15 @@ public class DrawingSurface extends PApplet {
 			else	
 				character1.takeHit(hitbox.getHitstun(), hitbox.getxKB(), hitbox.getyKB());
 			
-			character2.addvX(character2.getFacing() * -1 * character1.getKbFromEdge());
-			character2.setAttackHit(true);
-		}
-		
-		if(hitbox instanceof Projectile) {
-			Projectile projectile = (Projectile)hitbox;
-			projectile.deactivate();
-			character2.setAttackHit(false);
+			if(hitbox instanceof Projectile) {
+				Projectile projectile = (Projectile)hitbox;
+				projectile.deactivate();
+				character2.setAttackHit(false);
+			}
+			else {
+				character2.setAttackHit(true);
+				character2.addvX(character2.getFacing() * -1 * character1.getKbFromEdge());
+			}
 		}
 	}
 
