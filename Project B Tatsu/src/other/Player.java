@@ -100,7 +100,7 @@ public class Player {
 
 		if (keys.contains(A)) {
 			if(character.isGrounded()) {
-				if(checkQCF.isReady())
+				if(checkQCF.isReady() && character.getProjectiles().size() < 2 && character.getProjectiles().size() < 2)
 					character.qcfa();
 				else if(checkDP.isReady())
 					character.dpa();
@@ -115,7 +115,7 @@ public class Player {
 				character.ja();
 		} else if (keys.contains(B)) {
 			if(character.isGrounded()) {
-				if(checkQCF.isReady())
+				if(checkQCF.isReady() && character.getProjectiles().size() < 2)
 					character.qcfb();
 				else if(checkDP.isReady())
 					character.dpb();
@@ -131,7 +131,7 @@ public class Player {
 			
 		} else if (keys.contains(C)) {
 			if(character.isGrounded()) {
-				if(checkQCF.isReady()) {
+				if(checkQCF.isReady() && character.getProjectiles().size() < 2) {
 					if(character.getMeter() >= 25)
 						character.qcfc();
 					else
