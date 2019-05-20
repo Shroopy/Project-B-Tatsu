@@ -86,7 +86,7 @@ public class Player {
 		else
 			character.walk(0);
 		
-		if(keys.contains(BACK) && character.getControlState() == ControlState.CONTROLLABLE && character.isGrounded()) {
+		if(keys.contains(BACK) && (character.getControlState() == ControlState.CONTROLLABLE || character.getControlState() == ControlState.HITSTUN) && character.isGrounded()) {
 			if(keys.contains(CROUCH))
 				character.setBlocking(BlockHeight.LOW);
 			else
