@@ -12,6 +12,7 @@ public class Player {
 	public final Integer MVLEFT, MVRIGHT, JUMP, CROUCH, A, B, C, ALTJUMP, FRONT, BACK;
 	private CheckDP checkDP;
 	private CheckQCF checkQCF;
+	private CheckQCB checkQCB;
 	private int hmm;
 	private ArrayList<ArrayList<Integer>> commandKeys;
 
@@ -25,6 +26,7 @@ public class Player {
 		commandKeys = new ArrayList<ArrayList<Integer>>();
 		checkDP = new CheckDP(this);
 		checkQCF = new CheckQCF(this);
+		checkQCB = new CheckQCB(this);
 		if (playerNum == 1) {
 			MVLEFT = KeyEvent.VK_A;
 			MVRIGHT = KeyEvent.VK_D;
@@ -58,6 +60,7 @@ public class Player {
 	public void act(ArrayList<Integer> keys) {
 		checkDP.run(keys);
 		checkQCF.run(keys);
+		checkQCB.run(keys);
 		
 		if(commandKeys.size() < 60)
 			commandKeys.add(keys);
@@ -101,6 +104,8 @@ public class Player {
 					character.qcfa();
 				else if(checkDP.isReady())
 					character.dpa();
+				else if(checkQCB.isReady())
+					character.qcba();
 				else if (keys.contains(CROUCH))
 					character.twoa();
 				else
@@ -114,6 +119,8 @@ public class Player {
 					character.qcfb();
 				else if(checkDP.isReady())
 					character.dpb();
+				else if(checkQCB.isReady())
+					character.qcbb();
 				else if (keys.contains(CROUCH))
 					character.twob();
 				else
@@ -135,6 +142,12 @@ public class Player {
 						character.dpc();
 					else
 						character.dpb();
+				}
+				else if(checkQCB.isReady()) {
+					if(character.getMeter() >= 25)
+						character.qcbc();
+					else
+						character.qcbb();
 				}
 				else if (keys.contains(CROUCH))
 					character.twoc();

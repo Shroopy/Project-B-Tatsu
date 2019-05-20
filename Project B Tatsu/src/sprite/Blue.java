@@ -207,4 +207,31 @@ public class Blue extends Character {
 			Sounds.hadouken();
 		}
 	}
+	
+	public void qcba() 
+	{
+		if(controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
+			crouching = false;
+			vX = facing * 5;
+			vY = 0;
+		}
+	}
+	
+	public void qcbb() 
+	{
+		if(controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
+			crouching = false;
+			vX = facing * 5;
+			vY = 0;
+		}
+	}
+	
+	public void qcbc() 
+	{
+		if(controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
+			crouching = false;
+			vX = facing * 5;
+			vY = 0;
+		}
+	}
 }

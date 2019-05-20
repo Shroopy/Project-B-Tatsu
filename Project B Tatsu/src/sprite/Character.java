@@ -67,6 +67,9 @@ public abstract class Character extends Sprite {
 		return projectiles;
 	}
 	
+	/**
+	 * Changes the height and y position of the character based on whether they were crouching or not.
+	 */
 	public void updateCrouching() {
 		if (crouching != lastCrouching)
 			y += height - getCharHeight();
@@ -236,7 +239,8 @@ public abstract class Character extends Sprite {
 	}
 
 	/**
-	 * 
+	 * Changes the state of the character between CONTROLLABLE or NOT.
+	 * @param input: true if the character should not be controllable, false if they should be controllable
 	 */
 	public void changeState(boolean input) {
 		if (input) {
@@ -298,6 +302,11 @@ public abstract class Character extends Sprite {
 		return null;
 	}
 	
+	/**
+	 * Checks if the Projectiles produced by this character intersects with a Rectangle2D.Float
+	 * @param rect: The Rectangle2D.Float checked for intersection
+	 * @return The Projectile if it makes contact with the Rectangle2D.Float
+	 */
 	public Projectile projectilesIntersect(Rectangle2D.Float rect) {
 		for (Projectile p : projectiles) {
 			if (p.intersects(rect))
@@ -490,6 +499,12 @@ public abstract class Character extends Sprite {
 	public abstract void qcfb();
 	
 	public abstract void qcfc();
+	
+	public abstract void qcba();
+	
+	public abstract void qcbb();
+	
+	public abstract void qcbc();
 
 	public void setAttackHit(boolean attackHit) {
 		this.attackHit = attackHit;
