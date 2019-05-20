@@ -162,7 +162,23 @@ public abstract class Character extends Sprite {
 			invincible = false;
 		}
 		
-		
+		if(tatsuStartupLeft > 0) {
+			tatsuStartupLeft--;
+			if(this.getY() < 375) {
+				y = 295 + (float)getHeight();
+			}
+			else {
+				vY = -6;
+			}
+		} else if(tatsuStartupLeft > 0) {
+			tatsuLeft--;
+			if(this.getY() < 375) {
+				y = 295 + (float)getHeight();
+			}
+			else {
+				y -= (295 + (float)getHeight()) / tatsuStartupLeft;
+			}
+		}
 
 	}
 
@@ -381,11 +397,11 @@ public abstract class Character extends Sprite {
 		hitboxes.clear();
 		recoveryLeft = 0;
 		
-		if (absX - hitstun * xKB < 0) {
-			moveByAmount(1, vY);
-		} else if (absX + hitstun * xKB > DrawingSurface.STAGE_WIDTH) {
-			moveByAmount(-1, vY);
-		}
+//		if (absX - hitstun * xKB < 0) {
+//			moveByAmount(1, vY);
+//		} else if (absX + hitstun * xKB > DrawingSurface.STAGE_WIDTH) {
+//			moveByAmount(-1, vY);
+//		}
 	}
 
 	/**

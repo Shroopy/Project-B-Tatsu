@@ -212,8 +212,9 @@ public class Blue extends Character {
 	{
 		if(controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
 			crouching = false;
+			grounded = false;
 			vX = facing * 5;
-			vY = 0;
+			//vY = 0;
 		}
 	}
 	
@@ -221,8 +222,16 @@ public class Blue extends Character {
 	{
 		if(controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
 			crouching = false;
+			grounded = false;
 			vX = facing * 5;
-			vY = 0;
+			//vY = 0;
+			//addHitbox(0, -40, 30, 60, 9, 3, 10, 9, 7, 30 / 9, 0, BlockHeight.HIGH); //third
+			//addHitbox(0, -40, 30, 60, 9, 3, 10, 9, 7, 30 / 9, 0, BlockHeight.HIGH); //second
+			addHitbox(0, (int)(getHeight()), 30, 30, 3, 1001, 2, 9, 7, 30 / 9, 0, BlockHeight.MID); //first
+			
+			tatsuStartupLeft = 9;
+			tatsuLeft = 22;
+			y--;
 		}
 	}
 	
@@ -230,8 +239,9 @@ public class Blue extends Character {
 	{
 		if(controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
 			crouching = false;
+			grounded = false;
 			vX = facing * 5;
-			vY = 0;
+			//vY = 0;
 		}
 	}
 }
