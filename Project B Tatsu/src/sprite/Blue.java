@@ -142,8 +142,9 @@ public class Blue extends Character {
 			crouching = false;
 			vX = 0;
 			vY -= 6;
-			addHitbox(0, 0, 60, 80, 3, 10, 26, 1001, 10, 60 / 30, 6, BlockHeight.MID);
+			addHitbox(0, -20, 60, 75, 3, 10, 26, 1001, 10, 90 / 30, 6, BlockHeight.MID);
 			this.adjustMeter(10);
+			Sounds.srk();
 			invincibleStartupLeft = 4;
 			invincibleLeft = 11;
 		}
@@ -155,8 +156,9 @@ public class Blue extends Character {
 			crouching = false;
 			vY -= 10;
 			vX = 0.5 * facing;
-			addHitbox(0, 0, 60, 80, 1, 15, 33, 1001, 10, 90 / 30, 10, BlockHeight.MID);
+			addHitbox(0, -20, 60, 90, 1, 15, 33, 1001, 10, 90 / 30, 10, BlockHeight.MID);
 			this.adjustMeter(10);
+			Sounds.srk();
 			invincibleStartupLeft = 0;
 			invincibleLeft = 15;
 		}
@@ -168,8 +170,9 @@ public class Blue extends Character {
 			crouching = false;
 			vY -= 12;
 			vX = 1 * facing;
-			addHitbox(0, 0, 60, 80, 1, 15, 33, 1001, 10, 120 / 30, 12, BlockHeight.MID);
+			addHitbox(0, -40, 60, 110, 1, 15, 33, 1001, 10, 120 / 30, 12, BlockHeight.MID);
 			adjustMeter(-25);
+			Sounds.srk();
 			invincibleStartupLeft = 0;
 			invincibleLeft = 19;
 		}
@@ -214,7 +217,13 @@ public class Blue extends Character {
 			crouching = false;
 			grounded = false;
 			vX = facing * 5;
+			addHitbox(-20, (int)(getHeight())-20, 80, 40, 9, 3, 16, 6, 6, 10, 0, BlockHeight.MID);
 			//vY = 0;
+			this.adjustMeter(10);
+			Sounds.tatsu();
+			tatsuStartupLeft = 9;
+			tatsuLeft = 13;
+			y--;
 		}
 	}
 	
@@ -225,12 +234,14 @@ public class Blue extends Character {
 			grounded = false;
 			vX = facing * 5;
 			//vY = 0;
-			addHitbox(0, (int)(getHeight()), 40, 30, 9 + 3 + 6 + 5 + 4, 4, 18, 18, 14, 50 / 18, 0, BlockHeight.HIGH); //third
-			addHitbox(0, 0, 30, 80, 9 + 3 + 6, 5, 0, 4, 4, 5, 0, BlockHeight.MID); //second
-			addHitbox(0, (int)(getHeight()), 30, 30, 9, 3, 0, 6, 6, 5, 0, BlockHeight.MID); //first
+			addHitbox(-20, (int)(getHeight())-20, 80, 40, 9, 3, 0, 6, 6, 10, 0, BlockHeight.MID); //first
+			addHitbox(-20, 0, 50, 80, 9 + 3 + 6, 5, 0, 4, 4, 10, 0, BlockHeight.MID); //second
+			addHitbox(-20, (int)(getHeight()), 60, 30, 9 + 3 + 6 + 5 + 4, 4, 18, 18, 14, 5, 0, BlockHeight.HIGH); //third
 			
+			this.adjustMeter(5);
+			Sounds.tatsu();
 			tatsuStartupLeft = 9;
-			tatsuLeft = 22;
+			tatsuLeft = 13;
 			y--;
 		}
 	}
@@ -240,8 +251,16 @@ public class Blue extends Character {
 		if(controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
 			crouching = false;
 			grounded = false;
-			vX = facing * 5;
+			vX = facing * 10;
+			addHitbox(-20, (int)(getHeight())-20, 80, 40, 5, 1, 0, 6, 6, 10, 0, BlockHeight.MID); //first
+			addHitbox(-20, 0, 50, 80, 5 + 2 + 1, 1, 0, 4, 4, 10, 0, BlockHeight.MID); //second
+			addHitbox(-20, (int)(getHeight()), 60, 30, 5 + 2 + 1 + 2 + 1, 1, 18, 18, 14, 5, 0, BlockHeight.HIGH); 
 			//vY = 0;
+			this.adjustMeter(-25);
+			Sounds.tatsu();
+			tatsuStartupLeft = 5;
+			tatsuLeft = 13;
+			y--;
 		}
 	}
 }

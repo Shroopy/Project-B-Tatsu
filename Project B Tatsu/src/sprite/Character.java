@@ -170,13 +170,13 @@ public abstract class Character extends Sprite {
 			else {
 				vY = -6;
 			}
-		} else if(tatsuStartupLeft > 0) {
+		} else if(tatsuLeft > 0) {
 			tatsuLeft--;
 			if(this.getY() < 375) {
 				y = 295 + (float)getHeight();
 			}
 			else {
-				y -= (295 + (float)getHeight()) / tatsuStartupLeft;
+				vY = -6;
 			}
 		}
 
@@ -312,8 +312,10 @@ public abstract class Character extends Sprite {
 	 */
 	public Hitbox hitboxesIntersect(Rectangle2D.Float rect) {
 		for (Hitbox h : hitboxes) {
-			if (h.intersects(rect))
+			if (h.intersects(rect)) {
+				System.out.println(h.toString());
 				return h;
+			}
 		}
 		return null;
 	}
