@@ -231,11 +231,8 @@ public class DrawingSurface extends PApplet {
 			else	
 				character1.takeHit(hitbox.getHitstun(), hitbox.getxKB(), hitbox.getyKB());
 			
-			if(hitbox instanceof Projectile) {
-				Projectile projectile = (Projectile)hitbox;
-				projectile.deactivate();
-			}
-			else {
+			hitbox.deactivate();
+			if(!(hitbox instanceof Projectile)) {
 				character2.setAttackHit(true);
 				character2.addvX(character2.getFacing() * -1 * character1.getKbFromEdge());
 			}

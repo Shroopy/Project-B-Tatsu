@@ -113,11 +113,16 @@ public class Hitbox extends Sprite {
 		if (startup > 0) {
 			startup--;
 		} else if (active > 0) {
-			state = HitboxState.ACTIVE;
+			if(state == HitboxState.STARTUP)
+				state = HitboxState.ACTIVE;
 			color = Color.PINK;
 			active--;
 		} else
 			state = HitboxState.INACTIVE;
+	}
+	
+	public void deactivate() {
+		state = HitboxState.INACTIVE;
 	}
 
 }

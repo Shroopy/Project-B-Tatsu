@@ -94,10 +94,6 @@ public class Projectile extends Hitbox {
 			state = HitboxState.INACTIVE;
 	}
 	
-	public void deactivate() {
-		state = HitboxState.INACTIVE;
-	}
-	
 	public boolean isTranscendent() {
 		return transcendent;
 	}
