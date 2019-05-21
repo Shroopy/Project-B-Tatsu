@@ -225,9 +225,9 @@ public class Blue extends Character {
 			grounded = false;
 			vX = facing * 5;
 			//vY = 0;
-			//addHitbox(0, -40, 30, 60, 9, 3, 10, 9, 7, 30 / 9, 0, BlockHeight.HIGH); //third
-			//addHitbox(0, -40, 30, 60, 9, 3, 10, 9, 7, 30 / 9, 0, BlockHeight.HIGH); //second
-			addHitbox(0, (int)(getHeight()), 30, 30, 3, 1001, 2, 9, 7, 30 / 9, 0, BlockHeight.MID); //first
+			addHitbox(0, (int)(getHeight()), 40, 30, 9 + 3 + 6 + 5 + 4, 4, 18, 18, 14, 50 / 18, 0, BlockHeight.HIGH); //third
+			addHitbox(0, 0, 30, 80, 9 + 3 + 6, 5, 0, 4, 4, 5, 0, BlockHeight.MID); //second
+			addHitbox(0, (int)(getHeight()), 30, 30, 9, 3, 0, 6, 6, 5, 0, BlockHeight.MID); //first
 			
 			tatsuStartupLeft = 9;
 			tatsuLeft = 22;
