@@ -203,24 +203,24 @@ public abstract class Character extends Sprite {
 	 *        hitbox
 	 * @param blockHeight: unused presently
 	 */
-	protected void addHitbox(int xOffset, int yOffset, int width, int height, int startup, int active, int recovery, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight) {
+	protected void addHitbox(int xOffset, int yOffset, int width, int height, int startup, int active, int recovery, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight, boolean ko) {
 		assert facing == 1 || facing == -1;
 		if (facing == 1)
 			hitboxOffsetX = getCharWidth();
 		else
 			hitboxOffsetX = -width;
 		updateCrouching();
-		hitboxes.add(new Hitbox(xOffset, yOffset, (int) x + hitboxOffsetX, (int) y, width, height, startup, active, recovery, facing, hitstun, blockstun, xKB, yKB, blockHeight));
+		hitboxes.add(new Hitbox(xOffset, yOffset, (int) x + hitboxOffsetX, (int) y, width, height, startup, active, recovery, facing, hitstun, blockstun, xKB, yKB, blockHeight, ko));
 	}
 	
-	protected void addProjectile(Color color, int xOffset, int yOffset, int width, int height, double vX, int startup, int maxDistance, int recovery, int facing, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight, boolean transcendent) {
+	protected void addProjectile(Color color, int xOffset, int yOffset, int width, int height, double vX, int startup, int maxDistance, int recovery, int facing, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight, boolean transcendent, boolean ko) {
 		assert facing == 1 || facing == -1;
 		if (facing == 1)
 			hitboxOffsetX = getCharWidth();
 		else
 			hitboxOffsetX = -width;
 		updateCrouching();
-		projectiles.add(new Projectile(color, (int)x + hitboxOffsetX + xOffset, (int)y + yOffset, width, height, vX, startup, maxDistance, facing, hitstun, blockstun, xKB, yKB, blockHeight, transcendent));
+		projectiles.add(new Projectile(color, (int)x + hitboxOffsetX + xOffset, (int)y + yOffset, width, height, vX, startup, maxDistance, facing, hitstun, blockstun, xKB, yKB, blockHeight, transcendent, ko));
 		attackHit = false;
 		recoveryLeft = recovery;
 		controlState = ControlState.RECOVERY;
@@ -373,8 +373,19 @@ public abstract class Character extends Sprite {
 	 * @param xKB: Horizontal knockback inflicted by the opposing attack.
 	 * @param yKB: Vertical knockback inflicted by the opposing attack.
 	 */
-	public void takeHit(int hitstun, double xKB, double yKB) {
+	public boolean takeHit(int hitstun, double xKB, double yKB, boolean ko) {
 		meter += xKB * 0.5;
+		if(ko) 
+		{
+			if(facing == 1 && absX < 400) 
+			{
+				return true;
+			}
+			else if(facing == -1 && absX > 2000) 
+			{
+				return true;
+			}
+		}		
 		if (hitstun == 1001) {
 			hitstun = 30;
 			hitstunLeft = 30;
@@ -399,6 +410,7 @@ public abstract class Character extends Sprite {
 		hitboxes.clear();
 		recoveryLeft = 0;
 		
+		return false;
 //		if (absX - hitstun * xKB < 0) {
 //			moveByAmount(1, vY);
 //		} else if (absX + hitstun * xKB > DrawingSurface.STAGE_WIDTH) {
@@ -484,7 +496,7 @@ public abstract class Character extends Sprite {
 	public void addvX(double vX) {
 		this.vX += vX;
 	}
-
+	
 	// ATTACKS
 	public abstract void fivea();
 

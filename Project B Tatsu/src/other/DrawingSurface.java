@@ -226,15 +226,19 @@ public class DrawingSurface extends PApplet {
 	
 	private void checkPlayerHit(Character character1, Character character2, Hitbox hitbox) {
 		if (hitbox != null && hitbox.getState() == HitboxState.ACTIVE && !character1.isInvincible()) {
+			boolean KOd = false;
 			if(hitbox.getBlockHeight() == character1.getBlockHeight() || (hitbox.getBlockHeight() == BlockHeight.MID && character1.getBlockHeight() != BlockHeight.NOT))
 				character1.blockHit(hitbox.getBlockstun(), hitbox.getxKB());
 			else	
-				character1.takeHit(hitbox.getHitstun(), hitbox.getxKB(), hitbox.getyKB());
-			
+				KOd = character1.takeHit(hitbox.getHitstun(), hitbox.getxKB(), hitbox.getyKB(), hitbox.getKO());
 			hitbox.deactivate();
 			if(!(hitbox instanceof Projectile)) {
 				character2.setAttackHit(true);
 				character2.addvX(character2.getFacing() * -1 * character1.getKbFromEdge());
+			}
+			if(KOd) 
+			{
+				frameCount = 3599;
 			}
 		}
 	}

@@ -69,62 +69,62 @@ public class Blue extends Character {
 	@Override
 	public void fivea() {
 		if (controlState == ControlState.CONTROLLABLE)
-			addHitbox(0, 20, 60, 10, 2, 1, 2, 8, 4, 60 / 8, 0, BlockHeight.MID);
+			addHitbox(0, 20, 60, 10, 2, 1, 2, 8, 4, 60 / 8, 0, BlockHeight.MID, false);
 	}
 
 	@Override
 	public void fiveb() {
 		if (controlState == ControlState.CONTROLLABLE) {
 			moveByAmount(20 * facing, 0);
-			addHitbox(0, 20, 50, 40, 4, 4, 10, 20, 15, 70 / 20, 0, BlockHeight.MID);
+			addHitbox(0, 20, 50, 40, 4, 4, 10, 20, 15, 70 / 20, 0, BlockHeight.MID, false);
 		}
 	}
 
 	@Override
 	public void fivec() {
 		if (controlState == ControlState.CONTROLLABLE)
-			addHitbox(-30, -40, 90, 60, 9, 5, 16, 18, 14, 120 / 18, 0, BlockHeight.MID);
+			addHitbox(-30, -40, 90, 60, 9, 5, 16, 18, 14, 120 / 18, 0, BlockHeight.MID, false);
 	}
 
 	@Override
 	public void sixc() {
 		if (controlState == ControlState.CONTROLLABLE)
-			addHitbox(0, 20, 60, 40, 20, 8, 6, 17, 14, 90 / 17, 0, BlockHeight.HIGH);
+			addHitbox(0, 20, 60, 40, 20, 8, 6, 17, 14, 90 / 17, 0, BlockHeight.HIGH, false);
 
 	}
 
 	@Override
 	public void twoa() {
 		if (controlState == ControlState.CONTROLLABLE)
-			addHitbox(0, (int) ((getHeight() - 30)), 60, 30, 3, 2, 4, 10, 6, 40 / 10, 0, BlockHeight.LOW);
+			addHitbox(0, (int) ((getHeight() - 30)), 60, 30, 3, 2, 4, 10, 6, 40 / 10, 0, BlockHeight.LOW, false);
 
 	}
 
 	@Override
 	public void twob() {
 		if (controlState == ControlState.CONTROLLABLE)
-			addHitbox(0, (int) ((getHeight() - 30)), 80, 30, 5, 4, 10, 18, 14, 60 / 18, 0, BlockHeight.LOW);
+			addHitbox(0, (int) ((getHeight() - 30)), 80, 30, 5, 4, 10, 18, 14, 60 / 18, 0, BlockHeight.LOW, false);
 
 	}
 
 	@Override
 	public void twoc() {
 		if (controlState == ControlState.CONTROLLABLE)
-			addHitbox(0, (int) ((getHeight() - 30)), 70, 30, 7, 3, 25, 1001, 19, 30 / 14, 3, BlockHeight.LOW);
+			addHitbox(0, (int) ((getHeight() - 30)), 70, 30, 7, 3, 25, 1001, 19, 30 / 14, 3, BlockHeight.LOW, false);
 	}
 
 	@Override
 	public void ja() {
 		if (controlState == ControlState.CONTROLLABLE)
-			addHitbox(0, (int)(getHeight()), 30, 30, 3, 1001, 2, 9, 7, 30 / 9, 0, BlockHeight.HIGH);
+			addHitbox(0, (int)(getHeight()), 30, 30, 3, 1001, 2, 9, 7, 30 / 9, 0, BlockHeight.HIGH, false);
 		
 	}
 
 	@Override
 	public void jb() {
 		if (controlState == ControlState.CONTROLLABLE) {
-			addHitbox(0, -40, 30, 60, 9, 3, 10, 9, 7, 30 / 9, 0, BlockHeight.HIGH); //second
-			addHitbox(0, 10, 60, 40, 5, 3, 0, 11, 9, 80 / 11, 0, BlockHeight.HIGH); //first
+			addHitbox(0, -40, 30, 60, 9, 3, 10, 9, 7, 30 / 9, 0, BlockHeight.HIGH, false); //second
+			addHitbox(0, 10, 60, 40, 5, 3, 0, 11, 9, 80 / 11, 0, BlockHeight.HIGH, false); //first
 		}
 		
 	}
@@ -132,7 +132,7 @@ public class Blue extends Character {
 	@Override
 	public void jc() {
 		if (controlState == ControlState.CONTROLLABLE)
-			addHitbox(0, (int) ((getHeight() - 30)), 80, 40, 9, 8, 18, 16, 14, 30 / 16, 0, BlockHeight.HIGH);
+			addHitbox(0, (int) ((getHeight() - 30)), 80, 40, 9, 8, 18, 16, 14, 30 / 16, 0, BlockHeight.HIGH, false);
 		
 	}
 	
@@ -142,7 +142,7 @@ public class Blue extends Character {
 			crouching = false;
 			vX = 0;
 			vY -= 6;
-			addHitbox(0, -20, 60, 75, 3, 10, 26, 1001, 10, 90 / 30, 6, BlockHeight.MID);
+			addHitbox(0, -20, 60, 75, 3, 10, 26, 1001, 10, 90 / 30, 6, BlockHeight.MID, false);
 			this.adjustMeter(10);
 			Sounds.srk();
 			invincibleStartupLeft = 4;
@@ -156,7 +156,7 @@ public class Blue extends Character {
 			crouching = false;
 			vY -= 10;
 			vX = 0.5 * facing;
-			addHitbox(0, -20, 60, 90, 1, 15, 33, 1001, 10, 90 / 30, 10, BlockHeight.MID);
+			addHitbox(0, -20, 60, 90, 1, 15, 33, 1001, 10, 90 / 30, 10, BlockHeight.MID, false);
 			this.adjustMeter(10);
 			Sounds.srk();
 			invincibleStartupLeft = 0;
@@ -170,7 +170,7 @@ public class Blue extends Character {
 			crouching = false;
 			vY -= 12;
 			vX = 1 * facing;
-			addHitbox(0, -40, 60, 110, 1, 15, 33, 1001, 10, 120 / 30, 12, BlockHeight.MID);
+			addHitbox(0, -40, 60, 110, 1, 15, 33, 1001, 10, 120 / 30, 12, BlockHeight.MID, true);
 			adjustMeter(-25);
 			Sounds.srk();
 			invincibleStartupLeft = 0;
@@ -183,7 +183,7 @@ public class Blue extends Character {
 		if (controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
 			crouching = false;
 			vX = 0;
-			addProjectile(Color.CYAN.darker(), 0, 20, 50, 50, 4, 14, DrawingSurface.DRAWING_WIDTH, 40, facing, 25, 25, 60 / 25, 0, BlockHeight.MID, false);
+			addProjectile(Color.CYAN.darker(), 0, 20, 50, 50, 4, 14, DrawingSurface.DRAWING_WIDTH, 40, facing, 25, 25, 60 / 25, 0, BlockHeight.MID, false, false);
 			this.adjustMeter(5);
 			Sounds.hadouken();
 		}
@@ -194,7 +194,7 @@ public class Blue extends Character {
 		if (controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
 			crouching = false;
 			vX = 0;
-			addProjectile(Color.CYAN.darker(), 0, 20, 50, 50, 6, 11, DrawingSurface.DRAWING_WIDTH, 42, facing, 25, 25, 80 / 25, 0, BlockHeight.MID, false);
+			addProjectile(Color.CYAN.darker(), 0, 20, 50, 50, 6, 11, DrawingSurface.DRAWING_WIDTH, 42, facing, 25, 25, 80 / 25, 0, BlockHeight.MID, false, false);
 			this.adjustMeter(5);
 			Sounds.hadouken();
 		}
@@ -205,7 +205,7 @@ public class Blue extends Character {
 		if (controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
 			crouching = false;
 			vX = 0;
-			addProjectile(Color.CYAN.brighter(), 0, 20, 50, 50, 8, 5, DrawingSurface.DRAWING_WIDTH, 30, facing, 1001, 15, 100 / 15, 12, BlockHeight.MID, true);
+			addProjectile(Color.CYAN.brighter(), 0, 20, 50, 50, 8, 5, DrawingSurface.DRAWING_WIDTH, 30, facing, 1001, 15, 100 / 15, 12, BlockHeight.MID, true, true);
 			this.adjustMeter(-25);
 			Sounds.hadouken();
 		}
@@ -217,7 +217,7 @@ public class Blue extends Character {
 			crouching = false;
 			grounded = false;
 			vX = facing * 5;
-			addHitbox(-20, (int)(getHeight())-20, 80, 40, 9, 3, 16, 6, 6, 10, 0, BlockHeight.MID);
+			addHitbox(-20, (int)(getHeight())-20, 80, 40, 9, 3, 16, 6, 6, 10, 0, BlockHeight.MID, false);
 			//vY = 0;
 			this.adjustMeter(10);
 			Sounds.tatsu();
@@ -234,9 +234,9 @@ public class Blue extends Character {
 			grounded = false;
 			vX = facing * 5;
 			//vY = 0;
-			addHitbox(-20, (int)(getHeight())-20, 80, 40, 9, 3, 0, 6, 6, 10, 0, BlockHeight.MID); //first
-			addHitbox(-20, 0, 50, 80, 9 + 3 + 6, 5, 0, 4, 4, 10, 0, BlockHeight.MID); //second
-			addHitbox(-20, (int)(getHeight()), 60, 30, 9 + 3 + 6 + 5 + 4, 4, 18, 18, 14, 5, 0, BlockHeight.HIGH); //third
+			addHitbox(-20, (int)(getHeight())-20, 80, 40, 9, 3, 0, 6, 6, 10, 0, BlockHeight.MID, false); //first
+			addHitbox(-20, 0, 50, 80, 9 + 3 + 6, 5, 0, 4, 4, 10, 0, BlockHeight.MID, false); //second
+			addHitbox(-20, (int)(getHeight()), 60, 30, 9 + 3 + 6 + 5 + 4, 4, 18, 18, 14, 5, 0, BlockHeight.HIGH, false); //third
 			
 			this.adjustMeter(5);
 			Sounds.tatsu();
@@ -252,9 +252,9 @@ public class Blue extends Character {
 			crouching = false;
 			grounded = false;
 			vX = facing * 10;
-			addHitbox(-20, (int)(getHeight())-20, 80, 40, 5, 1, 0, 6, 6, 10, 0, BlockHeight.MID); //first
-			addHitbox(-20, 0, 50, 80, 5 + 2 + 1, 1, 0, 4, 4, 10, 0, BlockHeight.MID); //second
-			addHitbox(-20, (int)(getHeight()), 60, 30, 5 + 2 + 1 + 2 + 1, 1, 18, 18, 14, 5, 0, BlockHeight.HIGH); 
+			addHitbox(-20, (int)(getHeight())-20, 80, 40, 5, 1, 0, 6, 6, 10, 0, BlockHeight.MID, true); //first
+			addHitbox(-20, 0, 50, 80, 5 + 2 + 1, 1, 0, 4, 4, 10, 0, BlockHeight.MID, true); //second
+			addHitbox(-20, (int)(getHeight()), 60, 30, 5 + 2 + 1 + 2 + 1, 1, 18, 18, 14, 5, 0, BlockHeight.HIGH, true); 
 			//vY = 0;
 			this.adjustMeter(-25);
 			Sounds.tatsu();
