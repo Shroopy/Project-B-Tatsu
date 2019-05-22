@@ -27,6 +27,8 @@ public abstract class Character extends Sprite {
 	protected int meter;
 	private double kbFromEdge;
 	
+	protected int comboCounter = 0;
+	
 	public BlockHeight getBlockHeight() {
 		return blocking;
 	}
@@ -84,7 +86,9 @@ public abstract class Character extends Sprite {
 	public void act() {
 
 		updateCrouching();
-
+		if(controlState != ControlState.HITSTUN) 
+			comboCounter = 0;
+		
 		if(meter > 100)
 			meter = 100;
 		// FALL (and stop when a platform is hit)
@@ -379,6 +383,11 @@ public abstract class Character extends Sprite {
 	 */
 	public boolean takeHit(int hitstun, double xKB, double yKB, boolean ko) {
 		meter += xKB * 0.25;
+		if(comboCounter == 0) 
+			comboCounter++;
+		if(hitstunLeft > 0) 
+			comboCounter++;
+		
 		if(ko) 
 		{
 			if(facing == 1 && absX < 400) 
@@ -505,6 +514,11 @@ public abstract class Character extends Sprite {
 	public ControlState getControlS() 
 	{
 		return controlState;
+	}
+	
+	public int getCombo() 
+	{
+		return comboCounter;
 	}
 	
 	// ATTACKS
