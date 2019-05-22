@@ -5,7 +5,6 @@ import java.awt.Shape;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.net.URL;
 import java.util.ArrayList;
 
 import enums.ControlState;
@@ -27,6 +26,7 @@ public class DrawingSurface extends PApplet {
 	public static final int FLOORY = 395 + Blue.HEIGHT, FLOORHEIGHT = DRAWING_HEIGHT - 395;
 	public static int midscreen = 1200;
 	private int p1r, p2r;
+	private PImage background;
 
 	private Rectangle screenRect;
 
@@ -67,9 +67,9 @@ public class DrawingSurface extends PApplet {
 		// System.out.println(midscreen);
 		scale(ratioX, ratioY);
 		
-//		if(player2.checkHmm() && player2char.getAbsX() + player2char.getCharWidth() <= ENDZONE_WIDTH)
-//			image(image, 0, 0, DRAWING_WIDTH, DRAWING_HEIGHT - FLOORHEIGHT + 100);
-//		else
+		if(player2.checkHmm() && player2char.getAbsX() + player2char.getCharWidth() <= ENDZONE_WIDTH)
+			image(image, 0, 0, DRAWING_WIDTH, DRAWING_HEIGHT - FLOORHEIGHT + 100);
+		else
 			background(0, 255, 255);
 
 		fill(0);
@@ -300,10 +300,8 @@ public class DrawingSurface extends PApplet {
 		frameRate(60);
 		// size(0,0,PApplet.P3D);
 		/* assets.add(loadImage("mario.png")); */
-		
-//		URL url = getClass().getResource("hmm.png");
-//		System.out.println(url);
-//		image = loadImage(url.toString());
+
+		image = loadImage("lib/hmm.png");
 		Sounds.init(this);
 
 		spawnPlayers();
