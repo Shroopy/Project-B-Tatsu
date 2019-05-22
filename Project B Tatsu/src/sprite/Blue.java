@@ -171,7 +171,7 @@ public class Blue extends Character {
 			vY -= 12;
 			vX = 1 * facing;
 			addHitbox(0, -40, 60, 110, 1, 15, 33, 1001, 10, 120 / 30, 12, BlockHeight.MID, true);
-			adjustMeter(-25);
+			adjustMeter(-33);
 			Sounds.srk();
 			invincibleStartupLeft = 0;
 			invincibleLeft = 19;
@@ -206,7 +206,7 @@ public class Blue extends Character {
 			crouching = false;
 			vX = 0;
 			addProjectile(Color.CYAN.brighter(), 0, 20, 50, 50, 8, 5, DrawingSurface.DRAWING_WIDTH, 30, facing, 1001, 15, 100 / 15, 12, BlockHeight.MID, true, true);
-			this.adjustMeter(-25);
+			this.adjustMeter(-33);
 			Sounds.hadouken();
 		}
 	}
@@ -256,11 +256,38 @@ public class Blue extends Character {
 			addHitbox(-20, 0, 50, 80, 5 + 2 + 1, 1, 0, 4, 4, 10, 0, BlockHeight.MID, true); //second
 			addHitbox(-20, (int)(getHeight()), 60, 30, 5 + 2 + 1 + 2 + 1, 1, 18, 18, 14, 5, 0, BlockHeight.HIGH, true); 
 			//vY = 0;
-			this.adjustMeter(-25);
+			this.adjustMeter(-33);
 			Sounds.tatsu();
 			tatsuStartupLeft = 5;
 			tatsuLeft = 13;
 			y--;
+		}
+	}
+
+	public void dda() {
+		if(controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
+			crouching = false;
+			moveByAmount(15 * facing, 0);
+			addHitbox(0, 0, 80, 50, 12, 5, 22, 30, 12, 12, 5, BlockHeight.MID, true); //first
+			this.adjustMeter(15);
+		}
+	}
+
+	public void ddb() {
+		if(controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
+			crouching = false;
+			moveByAmount(30 * facing, 0);
+			addHitbox(0, 0, 80, 50, 15, 5, 27, 30, 12, 15, 5, BlockHeight.MID, true); //first
+			this.adjustMeter(15);
+		}
+	}
+
+	public void ddc() {
+		if(controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
+			crouching = false;
+			moveByAmount(60 * facing, 0);
+			addHitbox(0, 0, 80, 50, 8, 5, 18, 30, 12, 18, 5, BlockHeight.MID, true); //first
+			this.adjustMeter(-33);
 		}
 	}
 }

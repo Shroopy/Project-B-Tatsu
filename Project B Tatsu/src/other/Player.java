@@ -13,6 +13,7 @@ public class Player {
 	private CheckDP checkDP;
 	private CheckQCF checkQCF;
 	private CheckQCB checkQCB;
+	private CheckDD checkDD;
 	private int hmm;
 	private ArrayList<ArrayList<Integer>> commandKeys;
 
@@ -27,6 +28,7 @@ public class Player {
 		checkDP = new CheckDP(this);
 		checkQCF = new CheckQCF(this);
 		checkQCB = new CheckQCB(this);
+		checkDD = new CheckDD(this);
 		if (playerNum == 1) {
 			MVLEFT = KeyEvent.VK_A;
 			MVRIGHT = KeyEvent.VK_D;
@@ -61,6 +63,7 @@ public class Player {
 		checkDP.run(keys);
 		checkQCF.run(keys);
 		checkQCB.run(keys);
+		checkDD.run(keys);
 		
 		if(commandKeys.size() < 60)
 			commandKeys.add(keys);
@@ -106,6 +109,9 @@ public class Player {
 					character.dpa();
 				else if(checkQCB.isReady())
 					character.qcba();
+				else if(checkDD.isReady()) {
+					character.dda();
+				}	
 				else if (keys.contains(CROUCH))
 					character.twoa();
 				else
@@ -121,6 +127,8 @@ public class Player {
 					character.dpb();
 				else if(checkQCB.isReady())
 					character.qcbb();
+				else if(checkDD.isReady())
+					character.ddb();
 				else if (keys.contains(CROUCH))
 					character.twob();
 				else
@@ -132,22 +140,28 @@ public class Player {
 		} else if (keys.contains(C)) {
 			if(character.isGrounded()) {
 				if(checkQCF.isReady() && character.getProjectiles().size() < 2) {
-					if(character.getMeter() >= 25)
+					if(character.getMeter() >= 33)
 						character.qcfc();
 					else
 						character.qcfb();
 				}
 				else if(checkDP.isReady()) {
-					if(character.getMeter() >= 25)
+					if(character.getMeter() >= 33)
 						character.dpc();
 					else
 						character.dpb();
 				}
 				else if(checkQCB.isReady()) {
-					if(character.getMeter() >= 25)
+					if(character.getMeter() >= 33)
 						character.qcbc();
 					else
 						character.qcbb();
+				}
+				else if(checkDD.isReady()) {
+					if(character.getMeter() >= 33)
+						character.ddc();
+					else
+						character.ddb();
 				}
 				else if (keys.contains(CROUCH))
 					character.twoc();

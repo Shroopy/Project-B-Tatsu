@@ -312,10 +312,8 @@ public abstract class Character extends Sprite {
 	 */
 	public Hitbox hitboxesIntersect(Rectangle2D.Float rect) {
 		for (Hitbox h : hitboxes) {
-			if (h.intersects(rect)) {
-				System.out.println(h.toString());
+			if (h.intersects(rect))
 				return h;
-			}
 		}
 		return null;
 	}
@@ -535,6 +533,12 @@ public abstract class Character extends Sprite {
 	public abstract void qcbb();
 	
 	public abstract void qcbc();
+
+	public abstract void dda();
+	
+	public abstract void ddb();
+	
+	public abstract void ddc();
 
 	public void setAttackHit(boolean attackHit) {
 		this.attackHit = attackHit;
