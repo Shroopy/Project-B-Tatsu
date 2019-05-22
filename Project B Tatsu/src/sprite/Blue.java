@@ -142,7 +142,7 @@ public class Blue extends Character {
 			crouching = false;
 			vX = 0;
 			vY -= 6;
-			addHitbox(0, -20, 60, 75, 3, 10, 26, 1001, 10, 90 / 30, 6, BlockHeight.MID, false);
+			addHitbox(0, -20, 60, 75, 3, 10, 26, 1001, 10, 90 / 30, 8, BlockHeight.MID, false);
 			this.adjustMeter(10);
 			//Sounds.srk();
 			invincibleStartupLeft = 4;
@@ -216,8 +216,8 @@ public class Blue extends Character {
 		if(controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
 			crouching = false;
 			grounded = false;
-			vX = facing * 5;
-			addHitbox(-20, (int)(getHeight())-20, 80, 40, 9, 3, 16, 6, 6, 10, 0, BlockHeight.MID, false);
+			tatsuV = facing * 5;
+			addHitbox(-20, (int)(getHeight())-20, 80, 40, 9, 3, 16, 16, 14, 5, 0, BlockHeight.MID, false);
 			//vY = 0;
 			this.adjustMeter(10);
 			//Sounds.tatsu();
@@ -232,7 +232,7 @@ public class Blue extends Character {
 		if(controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
 			crouching = false;
 			grounded = false;
-			vX = facing * 5;
+			tatsuV = facing * 5;
 			//vY = 0;
 			addHitbox(-20, (int)(getHeight())-20, 80, 40, 9, 3, 0, 6, 6, 10, 0, BlockHeight.MID, false); //first
 			addHitbox(-20, 0, 50, 80, 9 + 3 + 6, 5, 0, 4, 4, 10, 0, BlockHeight.MID, false); //second
@@ -251,10 +251,10 @@ public class Blue extends Character {
 		if(controlState == ControlState.CONTROLLABLE || (controlState == ControlState.RECOVERY && attackHit)) {
 			crouching = false;
 			grounded = false;
-			vX = facing * 10;
+			tatsuV = facing * 10;
 			addHitbox(-20, (int)(getHeight())-20, 80, 40, 5, 1, 0, 6, 6, 10, 0, BlockHeight.MID, true); //first
 			addHitbox(-20, 0, 50, 80, 5 + 2 + 1, 1, 0, 4, 4, 10, 0, BlockHeight.MID, true); //second
-			addHitbox(-20, (int)(getHeight()), 60, 30, 5 + 2 + 1 + 2 + 1, 1, 18, 18, 14, 5, 0, BlockHeight.HIGH, true); 
+			addHitbox(-20, (int)(getHeight()), 60, 30, 5 + 2 + 1 + 2 + 1, 1, 18, 1001, 14, 5, 2, BlockHeight.HIGH, true); 
 			//vY = 0;
 			this.adjustMeter(-33);
 			//Sounds.tatsu();
