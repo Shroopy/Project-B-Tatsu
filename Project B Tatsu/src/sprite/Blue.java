@@ -144,7 +144,7 @@ public class Blue extends Character {
 			vY -= 6;
 			addHitbox(0, -20, 60, 75, 3, 10, 26, 1001, 10, 90 / 30, 8, BlockHeight.MID, false);
 			this.adjustMeter(10);
-			//Sounds.srk();
+			Sounds.srk();
 			invincibleStartupLeft = 4;
 			invincibleLeft = 11;
 		}
@@ -158,7 +158,7 @@ public class Blue extends Character {
 			vX = 0.5 * facing;
 			addHitbox(0, -20, 60, 90, 1, 15, 33, 1001, 10, 90 / 30, 10, BlockHeight.MID, false);
 			this.adjustMeter(10);
-			//Sounds.srk();
+			Sounds.srk();
 			invincibleStartupLeft = 0;
 			invincibleLeft = 15;
 		}
@@ -172,7 +172,7 @@ public class Blue extends Character {
 			vX = 1 * facing;
 			addHitbox(0, -40, 60, 110, 1, 15, 33, 1001, 10, 120 / 30, 12, BlockHeight.MID, true);
 			adjustMeter(-33);
-			//Sounds.srk();
+			Sounds.srk();
 			invincibleStartupLeft = 0;
 			invincibleLeft = 19;
 		}
@@ -220,7 +220,7 @@ public class Blue extends Character {
 			addHitbox(-20, (int)(getHeight())-20, 80, 40, 9, 3, 16, 16, 14, 5, 0, BlockHeight.MID, false);
 			//vY = 0;
 			this.adjustMeter(10);
-			//Sounds.tatsu();
+			Sounds.tatsu();
 			tatsuStartupLeft = 9;
 			tatsuLeft = 13;
 			y--;
@@ -239,7 +239,7 @@ public class Blue extends Character {
 			addHitbox(-20, (int)(getHeight()), 60, 30, 9 + 3 + 6 + 5 + 4, 4, 18, 18, 14, 5, 0, BlockHeight.HIGH, false); //third
 			
 			this.adjustMeter(5);
-			//Sounds.tatsu();
+			Sounds.tatsu();
 			tatsuStartupLeft = 9;
 			tatsuLeft = 13;
 			y--;
@@ -257,7 +257,7 @@ public class Blue extends Character {
 			addHitbox(-20, (int)(getHeight()), 60, 30, 5 + 2 + 1 + 2 + 1, 1, 18, 1001, 14, 5, 2, BlockHeight.HIGH, true); 
 			//vY = 0;
 			this.adjustMeter(-33);
-			//Sounds.tatsu();
+			Sounds.tatsu();
 			tatsuStartupLeft = 5;
 			tatsuLeft = 13;
 			y--;
