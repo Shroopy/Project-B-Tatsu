@@ -32,7 +32,6 @@ public class Sounds {
 			ais = AudioSystem.getAudioInputStream(stream);
 			srk = AudioSystem.getClip();
 			srk.open(ais);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
