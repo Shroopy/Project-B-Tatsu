@@ -7,6 +7,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+import enums.ControlState;
 import enums.BlockHeight;
 import enums.HitboxState;
 import processing.core.PApplet;
@@ -218,8 +219,10 @@ public class DrawingSurface extends PApplet {
 				//System.out.println(-Math.abs(diff - player1char.getCharWidth() - 0.6 * diffv) / 2);
 				//System.out.println(Math.abs(diff - player1char.getCharWidth() + diffv) / 2);
 			}
-			player1char.zeroVX();
-			player2char.zeroVX();
+			if(player1char.getControlS() == ControlState.CONTROLLABLE)
+				player1char.zeroVX();
+			if(player2char.getControlS() == ControlState.CONTROLLABLE)
+				player2char.zeroVX();
 			// System.out.println(player1char.getVX());
 		}
 	}

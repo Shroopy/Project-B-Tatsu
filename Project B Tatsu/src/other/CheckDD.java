@@ -44,7 +44,7 @@ public class CheckDD {
 	 */
 	public void run(ArrayList<Integer> keys) {
 		frames++;
-		if (frames > 60)
+		if (frames > 60 || keys.contains(player.BACK))
 			reset();
 
 		switch (state) {

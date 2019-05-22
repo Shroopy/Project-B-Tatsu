@@ -21,7 +21,7 @@ public abstract class Character extends Sprite {
 	protected ArrayList<Hitbox> hitboxes;
 	protected ArrayList<Projectile> projectiles;
 	// absolute position of character on the stage
-	protected int hitstunLeft, recoveryLeft, invincibleLeft, invincibleStartupLeft, tatsuLeft, tatsuStartupLeft;
+	protected int hitstunLeft, recoveryLeft, invincibleLeft, invincibleStartupLeft, tatsuLeft, tatsuStartupLeft, tatsuV;
 	private int hitboxOffsetX;
 	protected BlockHeight blocking = BlockHeight.NOT;
 	protected int meter;
@@ -119,6 +119,8 @@ public abstract class Character extends Sprite {
 					vX = 0;
 				if (knockedDown) {
 					knockedDown = false;
+					invincibleLeft = 40;
+					invincible = true;
 					vX = 0;
 				}
 
@@ -155,14 +157,17 @@ public abstract class Character extends Sprite {
 		}
 
 		if (invincibleStartupLeft > 0) {
+			//System.out.println(invincibleStartupLeft + " : invincibleSL");
 			invincibleStartupLeft--;
 		} else if (invincibleLeft > 0) {
 			invincibleLeft--;
+			//System.out.println(invincibleLeft + " : invincibleLeft");
 		} else {
 			invincible = false;
 		}
 		
 		if(tatsuStartupLeft > 0) {
+			vX = tatsuV;
 			tatsuStartupLeft--;
 			if(this.getY() < 375) {
 				y = 295 + (float)getHeight();
@@ -171,6 +176,7 @@ public abstract class Character extends Sprite {
 				vY = -6;
 			}
 		} else if(tatsuLeft > 0) {
+			vX = tatsuV;
 			tatsuLeft--;
 			if(this.getY() < 375) {
 				y = 295 + (float)getHeight();
@@ -372,7 +378,7 @@ public abstract class Character extends Sprite {
 	 * @param yKB: Vertical knockback inflicted by the opposing attack.
 	 */
 	public boolean takeHit(int hitstun, double xKB, double yKB, boolean ko) {
-		meter += xKB * 0.5;
+		meter += xKB * 0.25;
 		if(ko) 
 		{
 			if(facing == 1 && absX < 400) 
@@ -386,8 +392,9 @@ public abstract class Character extends Sprite {
 		}		
 		if (hitstun == 1001) {
 			hitstun = 30;
-			hitstunLeft = 30;
+			hitstunLeft = 40;
 			invincible = true;
+			//invincibleLeft = 40;
 			knockedDown = true;
 		} else
 			hitstunLeft = hitstun;
@@ -424,7 +431,7 @@ public abstract class Character extends Sprite {
 	 * @param xKB: Horizontal knockback inflicted by the opposing attack normally.
 	 */
 	public void blockHit(int hitstun, double xKB) {
-		meter += xKB * 0.25;
+		meter += xKB * 0.1;
 		hitstunLeft = hitstun;
 		
 		xKB = xKB * 3 / 4;
@@ -493,6 +500,11 @@ public abstract class Character extends Sprite {
 	
 	public void addvX(double vX) {
 		this.vX += vX;
+	}
+	
+	public ControlState getControlS() 
+	{
+		return controlState;
 	}
 	
 	// ATTACKS
