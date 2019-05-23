@@ -2,7 +2,7 @@ package other;
 import java.util.ArrayList;
 
 /**
- * State machine that checks to see if a forwards-neutral-forwards input has been inputted within a time limit
+ * State machine that checks to see if a down-neutral-down input has been inputted within a time limit
  */
 public class CheckDD {
 	private int frames;
@@ -18,7 +18,7 @@ public class CheckDD {
 	private Player player;
 
 	/**
-	 * Creates a new CheckDP
+	 * Creates a new CheckDD
 	 * @param player the player that this checker belongs to
 	 */
 	public CheckDD(Player player) {
