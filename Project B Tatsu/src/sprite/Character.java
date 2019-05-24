@@ -207,11 +207,13 @@ public abstract class Character extends Sprite {
 	 *        stopped being active
 	 * @param hitstun: How long the opposing Character cannot move after struck by
 	 *        the hitbox
+	 * @param blockstun: How long the opposing Character cannot move after being struck by the hitbox while blocking
 	 * @param xKB: Horizontal movement of the opposing Character after struck by the
 	 *        hitbox
 	 * @param yKB: Vertical movement of the opposing Character after struck by the
 	 *        hitbox
-	 * @param blockHeight: unused presently
+	 * @param blockHeight: What height the opposing Character must block at to block this attack
+	 * @param ko: Whether the move knocks out in the corner
 	 */
 	protected void addHitbox(int xOffset, int yOffset, int width, int height, int startup, int active, int recovery, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight, boolean ko) {
 		assert facing == 1 || facing == -1;
@@ -377,9 +379,11 @@ public abstract class Character extends Sprite {
 	 * Called when a hitbox intersects this character, inflicts hitstun and
 	 * knockback based on the attack the opponent has hit with.
 	 * 
+	 * @return Whether the character has been knocked out
 	 * @param hitstun: Hitstun inflicted by the opposing attack.
 	 * @param xKB: Horizontal knockback inflicted by the opposing attack.
 	 * @param yKB: Vertical knockback inflicted by the opposing attack.
+	 * @param ko: Whether the move this Character is being hit by knocks out in the corner
 	 */
 	public boolean takeHit(int hitstun, double xKB, double yKB, boolean ko) {
 		meter += xKB * 0.25;
