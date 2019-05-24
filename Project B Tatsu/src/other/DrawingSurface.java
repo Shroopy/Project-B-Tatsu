@@ -72,6 +72,13 @@ public class DrawingSurface extends PApplet {
 		else
 			background(0, 255, 255);
 
+		fill(150,150,150);
+		rect(100, 100, 600, 30);
+		fill(255,0,0);
+		rect(100, 100, (player1char.getAbsX() + player1char.width)/4,30);
+		fill(0,0,255);
+		rect(player2char.getAbsX()/4 + 100, 100, 600 - player2char.getAbsX()/4,30);
+		
 		fill(0);
 		textSize(100);
 		text(60 - frameCount / 60, 325, 100);
@@ -106,6 +113,7 @@ public class DrawingSurface extends PApplet {
 		text(player1char.getMeter(),20,545);
 		rect(DRAWING_WIDTH - 20 - maxTextWidth - 10 - (player2char.getMeter()*2), 500, player2char.getMeter()*2,50);
 		text(player2char.getMeter(),DRAWING_WIDTH - 20 - maxTextWidth,545);
+
 		
 		if(player1char.getCombo() > 1) 
 		{
