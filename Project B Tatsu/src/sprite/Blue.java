@@ -142,7 +142,7 @@ public class Blue extends Character {
 			crouching = false;
 			vX = 0;
 			vY -= 6;
-			addHitbox(0, -20, 60, 75, 3, 10, 26, 1001, 10, 90 / 30, 8, BlockHeight.MID, false);
+			addHitbox(0, -20, 60, 75, 3, 10, 26, 1001, 10, 90 / 30, 7, BlockHeight.MID, false);
 			this.adjustMeter(10);
 			Sounds.srk();
 			invincibleStartupLeft = 4;
@@ -234,8 +234,8 @@ public class Blue extends Character {
 			grounded = false;
 			tatsuV = facing * 5;
 			//vY = 0;
-			addHitbox(-20, (int)(getHeight())-20, 80, 40, 9, 3, 0, 6, 6, 10, 0, BlockHeight.MID, false); //first
-			addHitbox(-20, 0, 50, 80, 9 + 3 + 6, 5, 0, 4, 4, 10, 0, BlockHeight.MID, false); //second
+			addHitbox(-20, (int)(getHeight())-20, 80, 40, 9, 3, 0, 12, 10, 10, 0, BlockHeight.MID, false); //first
+			addHitbox(-20, 0, 50, 80, 9 + 3 + 6, 5, 0, 10, 8, 10, 0, BlockHeight.MID, false); //second
 			addHitbox(-20, (int)(getHeight()), 60, 30, 9 + 3 + 6 + 5 + 4, 4, 18, 18, 14, 5, 0, BlockHeight.HIGH, false); //third
 			
 			this.adjustMeter(5);

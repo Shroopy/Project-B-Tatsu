@@ -23,10 +23,13 @@ public class Hitbox extends Sprite {
 	 * @param startup: How long the hitbox takes to become active
 	 * @param active: How long the hitbox remains active
 	 * @param recovery: How long the Character cannot move after the hitbox has stopped being active
+	 * @param facing: Which direction the character this hitbox belongs to is facing
 	 * @param hitstun: How long the opposing Character cannot move after struck by the hitbox
+	 * @param blockstun: How long the opposing Character cannot move after being struck by the hitbox while blocking
 	 * @param xKB: Horizontal movement of the opposing Character after struck by the hitbox
 	 * @param yKB: Vertical movement of the opposing Character after struck by the hitbox
-	 * @param blockHeight: unused presently
+	 * @param blockHeight: What height the opposing Character must block at to block this attack
+	 * @param ko: Whether the move knocks out in the corner
 	 */
 	public Hitbox(int xOffset, int yOffset, int x, int y, int w, int h, int startup, int active, int recovery, int facing, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight, boolean ko) {
 		super(Color.YELLOW, x + (xOffset * facing), y + yOffset, w, h);

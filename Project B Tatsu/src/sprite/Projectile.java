@@ -29,6 +29,7 @@ public class Projectile extends Hitbox {
 	 * @param yKB: The amount of vertical knockback inflicted on the opponent by getting hit by this Projectile.
 	 * @param blockHeight: Which way this Projectile needs to be blocked
 	 * @param transcendent: True if it should not interact with other projectiles, false if it should. 
+	 * @param ko: Whether the move knocks out in the corner
 	 */
 	public Projectile(Color color, int x, int y, int w, int h, double vX, int startup, int maxDistance, int facing, int hitstun, int blockstun, double xKB, double yKB, BlockHeight blockHeight, boolean transcendent, boolean ko) {
 		super(0, 0, 0, y, w, h, startup, 0, 0, facing, hitstun, blockstun, xKB, yKB, blockHeight, ko);
