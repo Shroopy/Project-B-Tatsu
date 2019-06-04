@@ -23,7 +23,7 @@ public class DrawingSurface extends PApplet {
 	public static final int DRAWING_HEIGHT = 600;
 	public static final int ENDZONE_WIDTH = 400;
 	public static final int STAGE_WIDTH = 2400;
-	public static final int FLOORY = 395 + Blue.HEIGHT, FLOORHEIGHT = DRAWING_HEIGHT - 395;
+	public static final int FLOORY = 485, FLOORHEIGHT = DRAWING_HEIGHT - 395;
 	public static int midscreen = 1200;
 	private int p1r, p2r;
 	private PImage background;

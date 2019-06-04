@@ -109,10 +109,10 @@ public abstract class Character extends Sprite {
 		}
 		fall();
 
-		if (this.getY() >= 415) {
+		if (this.getY() + getHeight() >= 505) {
 			vY = 0;
 			if (!grounded) {
-				y = 335 + (float)getHeight();
+				y = 505 - (float)getHeight();
 				
 				if (hitboxes.size() > 0) {
 					controlState = ControlState.RECOVERY;
