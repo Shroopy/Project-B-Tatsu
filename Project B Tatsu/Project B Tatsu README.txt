@@ -71,15 +71,15 @@ Class Design
 
 
 Credit:
-Design Ideas and Concepts - Joshua
-Character Movement, Attacks and Hit Detection - Ian
-Projectiles - Ian
-Enums - Ian
-HUD (Score, Timer, Meter, Combo Counter) - Joshua
+Design Ideas and Concepts - jkim222
+Character Movement, Attacks and Hit Detection - Shroopy
+Projectiles - Shroopy
+Enums - Shroopy
+HUD (Score, Timer, Meter, Combo Counter) - jkim222
 Special Attack Interpreter - Both
-Screen Scrolling and Position - Joshua
+Screen Scrolling and Position - jkim222
 ReadME - Both
-UML and Javadocs - Joshua 
+UML and Javadocs - jkim222 
 Special Attack Interpreter Model - Rich Rauenzahn
 Advice to Use Enumerations - Rich Rauenzahn
 General Program Design Advice - Rich Rauenzahn
