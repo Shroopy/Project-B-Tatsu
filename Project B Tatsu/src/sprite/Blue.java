@@ -69,7 +69,7 @@ public class Blue extends Character {
 	@Override
 	public void fivea() {
 		if (controlState == ControlState.CONTROLLABLE)
-			addHitbox(0, 20, 60, 10, 2, 1, 2, 8, 4, 60 / 8, 0, BlockHeight.MID, false);
+			addHitbox(0, 20, 40, 20, 2, 1, 2, 8, 4, 60 / 8, 0, BlockHeight.MID, false);
 	}
 
 	@Override
