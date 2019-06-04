@@ -67,7 +67,11 @@ public class Projectile extends Hitbox {
 	 * @return True if the Projectile is intersecting the Rectangle2D, false if not
 	 */
 	public boolean intersects(Rectangle2D r) {
-		return new Rectangle2D.Float((float)absX + DrawingSurface.ENDZONE_WIDTH - DrawingSurface.midscreen, (float) y, (float)width, (float) height).intersects(r);
+		return new Rectangle2D.Float((float)absX + DrawingSurface.ENDZONE_WIDTH - DrawingSurface.midscreen, (float)y, (float)width, (float)height).intersects(r);
+	}
+	
+	public boolean intersects(Sprite r) {
+		return new Rectangle2D.Float((float)absX + DrawingSurface.ENDZONE_WIDTH - DrawingSurface.midscreen, (float)y, (float)width, (float) height).intersects(new Rectangle2D.Float((float)r.absX + DrawingSurface.ENDZONE_WIDTH - DrawingSurface.midscreen, (float)r.y, (float)r.width, (float)r.height));
 	}
 
 	/**
@@ -78,7 +82,7 @@ public class Projectile extends Hitbox {
 		if (state == HitboxState.ACTIVE)
 			g.stroke(0);
 			g.fill(color.getRed(), color.getGreen(), color.getBlue());
-			g.rect((float)absX + DrawingSurface.ENDZONE_WIDTH - DrawingSurface.midscreen, (float) y, (float)width, (float) height);
+			g.rect((float)absX + DrawingSurface.ENDZONE_WIDTH - DrawingSurface.midscreen, (float)y, (float)width, (float)height);
 	}
 
 	/**
