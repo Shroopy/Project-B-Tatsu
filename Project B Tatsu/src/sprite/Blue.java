@@ -132,7 +132,7 @@ public class Blue extends Character {
 	@Override
 	public void jc() {
 		if (controlState == ControlState.CONTROLLABLE)
-			addHitbox(0, (int) ((getHeight() - 30)), 80, 40, 9, 8, 18, 16, 14, 30 / 16, 0, BlockHeight.HIGH, false);
+			addHitbox(0, (int) ((getHeight() - 20)), 80, 40, 6, 8, 18, 16, 14, 30 / 16, 0, BlockHeight.HIGH, false);
 		
 	}
 	
