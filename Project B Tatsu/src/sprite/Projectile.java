@@ -70,6 +70,10 @@ public class Projectile extends Hitbox {
 		return new Rectangle2D.Float((float)absX + DrawingSurface.ENDZONE_WIDTH - DrawingSurface.midscreen, (float)y, (float)width, (float)height).intersects(r);
 	}
 	
+	/**
+	 * @param r: The Sprite that is being checked for intersection
+	 * @return True if the Projectile is intersecting the Sprite, false if not
+	 */
 	public boolean intersects(Sprite r) {
 		return new Rectangle2D.Float((float)absX + DrawingSurface.ENDZONE_WIDTH - DrawingSurface.midscreen, (float)y, (float)width, (float) height).intersects(new Rectangle2D.Float((float)r.absX + DrawingSurface.ENDZONE_WIDTH - DrawingSurface.midscreen, (float)r.y, (float)r.width, (float)r.height));
 	}

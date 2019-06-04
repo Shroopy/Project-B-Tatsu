@@ -17,14 +17,14 @@ The game is controlled with 4 directional buttons and 3 attacking buttons: A(Lig
     U - C(Heavy) attack
     G - Optional jump
 2P: (Default controls)
-    Up arrow - Jump
-    Left arrow - Left
-    Down arrow - Crouch
-    Right arrow - Right
-    num7 - A(Light) Attack
-    num8 - B(Medium) Attack
-    num9 - C(Heavy) Attack
-    num4 - Optional Jump
+    L - Jump
+    , - Left
+    . - Crouch
+    / - Right
+    Left Arrow - A(Light) Attack
+    Down Arrow - B(Medium) Attack
+    Right Arrow - C(Heavy) Attack
+    Up Arrow - Optional Jump
 
 
 Features:

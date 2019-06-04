@@ -41,14 +41,14 @@ public class Player {
 			FRONT = MVRIGHT;
 			BACK = MVLEFT;
 		} else {
-			MVLEFT = KeyEvent.VK_LEFT;
-			MVRIGHT = KeyEvent.VK_RIGHT;
-			JUMP = KeyEvent.VK_UP;
-			CROUCH = KeyEvent.VK_DOWN;
-			A = KeyEvent.VK_NUMPAD7;
-			B = KeyEvent.VK_NUMPAD8;
-			C = KeyEvent.VK_NUMPAD9;
-			ALTJUMP = KeyEvent.VK_NUMPAD4;
+			MVLEFT = KeyEvent.VK_COMMA;
+			MVRIGHT = KeyEvent.VK_SLASH;
+			JUMP = KeyEvent.VK_L;
+			CROUCH = KeyEvent.VK_PERIOD;
+			A = KeyEvent.VK_LEFT;
+			B = KeyEvent.VK_DOWN;
+			C = KeyEvent.VK_RIGHT;
+			ALTJUMP = KeyEvent.VK_UP;
 			FRONT = MVLEFT;
 			BACK = MVRIGHT;
 		}
