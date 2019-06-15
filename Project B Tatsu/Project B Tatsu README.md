@@ -1,5 +1,6 @@
 ﻿Project B-Tatsu
 
+Presentation Materials: https://tinyurl.com/y6sg2sh8
 
 Introduction:
 This game is a fighting game(think Street Fighter or Mortal Kombat) in which the primary objective is not to deplete your opponent’s life, but to take over territory by pushing your opponent’s character back with attacks. All the space behind your character is considered yours. The goal is to have the most space behind you at the end of 60 seconds. Alternatively, hitting your opponent with a move that has a “knockout” property in the corner will win you the round instantly. The game will be mostly inspired by the gameplay of Super Street Fighter 2 Turbo, with inspiration drawn from other fighting games such as Guilty Gear and Street Fighter 3: Third Strike.
